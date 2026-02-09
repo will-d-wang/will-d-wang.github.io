@@ -15,13 +15,13 @@ const baseUrl = "/";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Anonyknight's Life Journey",
+  title: "Will D. Wang's Life Journey",
   tagline:
     "Life is short. Cherish everyday, learning everyday, enjoy everyday!",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://anonyknight.github.io/",
+  url: "https://Will-D-Wang.github.io/",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl,
@@ -29,7 +29,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "Gatech", // Usually your GitHub org/user name.
-  projectName: "anonyknight", // Usually your repo name.
+  projectName: "Will-D-Wang", // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -51,7 +51,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: `https://github.com/anonyknight${baseUrl}/edit/master/`,
+          editUrl: `https://github.com/Will-D-Wang${baseUrl}/edit/master/`,
           showLastUpdateTime: true,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
@@ -62,7 +62,7 @@ const config = {
             defaultReadingTime({ content, options: { wordsPerMinute: 220 } }),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: `https://github.com/anonyknight/${baseUrl}/edit/master/`,
+          editUrl: `https://github.com/Will-D-Wang/${baseUrl}/edit/master/`,
           blogSidebarCount: "ALL",
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
@@ -95,9 +95,9 @@ const config = {
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: "Anonyknight",
+        title: "Will-D-Wang",
         logo: {
-          alt: "Anonyknight",
+          alt: "Will-D-Wang",
           src: "img/logo.webp",
         },
         items: [
@@ -122,7 +122,7 @@ const config = {
           },
           { to: "/about_me", label: "About Me" },
           {
-            href: "https://github.com/anonyknight",
+            href: "https://github.com/Will-D-Wang",
             label: "GitHub",
           },
         ],
@@ -149,12 +149,12 @@ const config = {
         //     items: [
         //       {
         //         label: "GitHub",
-        //         href: "https://github.com/anonyknight",
+        //         href: "https://github.com/Will-D-Wang",
         //       },
         //     ],
         //   },
         // ],
-        copyright: `Copyright © ${new Date().getFullYear()} Anonyknight, Dingan(Will) Wang, built with <a href="https://docusaurus.io/">Docusaurus</a>`,
+        copyright: `Copyright © ${new Date().getFullYear()} Will-D-Wang, Dingan(Will) Wang, built with <a href="https://docusaurus.io/">Docusaurus</a>`,
       },
       prism: {
         theme: lightCodeTheme,

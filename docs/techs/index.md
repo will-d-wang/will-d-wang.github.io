@@ -19,7 +19,7 @@ Happy coding! Happy life!
 
 ## My skill sets
 
-```mermaid
+```javascript
 mindmap
   root((skills))
     Programming
