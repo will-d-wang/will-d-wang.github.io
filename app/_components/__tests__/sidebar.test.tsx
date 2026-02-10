@@ -302,6 +302,56 @@ describe("Sidebar Component", () => {
       expect(screen.queryByText("Blog")).not.toBeInTheDocument();
     });
 
+    it("should show Algorithms section when on /docs/Algorithms page", () => {
+      mockUsePathname.mockReturnValue("/docs/Algorithms");
+
+      const pageMap: PageMapItem[] = [
+        {
+          name: "Algorithms",
+          route: "/docs/Algorithms",
+          children: [
+            {
+              name: "DP",
+              route: "/docs/Algorithms/dp_maximum_subarray_kadane_algorithm",
+            },
+            {
+              name: "Greedy",
+              route: "/docs/Algorithms/greedy_vs_dp",
+            },
+          ],
+        } as any,
+      ];
+
+      render(<Sidebar pageMap={pageMap} />);
+
+      // Should show the Algorithms section
+      expect(screen.getByText("Algorithms")).toBeInTheDocument();
+      expect(screen.getByText("DP")).toBeInTheDocument();
+      expect(screen.getByText("Greedy")).toBeInTheDocument();
+    });
+
+    it("should show content routes without /docs prefix when in docs section", () => {
+      mockUsePathname.mockReturnValue("/docs/Algorithms/sorting");
+
+      const pageMap: PageMapItem[] = [
+        {
+          name: "Algorithms",
+          route: "/docs/Algorithms",
+          children: [
+            {
+              name: "Sorting",
+              route: "/docs/Algorithms/sorting",
+            },
+          ],
+        } as any,
+      ];
+
+      render(<Sidebar pageMap={pageMap} />);
+
+      expect(screen.getByText("Algorithms")).toBeInTheDocument();
+      expect(screen.getByText("Sorting")).toBeInTheDocument();
+    });
+
     it("should show all routes when not in /docs section", () => {
       mockUsePathname.mockReturnValue("/");
 

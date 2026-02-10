@@ -30,8 +30,10 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
   const renderSubItem = (item: PageMapItem): JSX.Element => {
     const itemAny = item as any;
     let route = itemAny.route || itemAny.href || "";
-    // Prepend /docs/ to content routes that don't already have it
-    if (route && !route.startsWith("/")) {
+    // Routes starting with /docs are already correct, don't modify them
+    // Only add /docs prefix to routes that need it
+    if (!route.startsWith("/")) {
+      // Relative paths get /docs/ prefix
       route = "/docs/" + route;
     } else if (
       route.startsWith("/") &&
@@ -39,6 +41,7 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
       !route.startsWith("/blog") &&
       route !== "/"
     ) {
+      // Absolute paths (except /blog and /) get /docs prefix
       route = "/docs" + route;
     }
     const isActive = pathname === route;
