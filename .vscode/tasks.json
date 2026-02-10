@@ -1,13 +1,22 @@
 {
-	"version": "2.0.0",
-	"tasks": [
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Dev",
+      "type": "shell",
+      "group": {
+        "kind": "build"
+      },
+      "detail": "Next.js dev",
+      "command": "pnpm run dev"
+    },
     {
       "label": "Start",
       "type": "shell",
       "group": {
-        "kind": "build",
+        "kind": "build"
       },
-      "detail": "docusaurus start",
+      "detail": "Next.js start",
       "command": "pnpm run start"
     },
     {
@@ -17,7 +26,7 @@
         "kind": "build",
         "isDefault": true
       },
-      "detail": "docusaurus build",
+      "detail": "Next.js build",
       "command": "pnpm run build"
     }
   ]

@@ -1,0 +1,219 @@
+.nextra-theme {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.nextra-navbar {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.nextra-navbar-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 60px;
+}
+
+.nextra-logo {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #1f2937;
+}
+
+.nextra-nav-items {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+.nextra-nav-items li a {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nextra-nav-items li a:hover {
+  color: #1f2937;
+}
+
+.nextra-nav-items li.active a {
+  color: #3b82f6;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 3px;
+}
+
+.nextra-nav-github a {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nextra-nav-github a:hover {
+  color: #1f2937;
+}
+
+.nextra-container {
+  display: flex;
+  flex: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.nextra-sidebar {
+  width: 250px;
+  border-right: 1px solid #e5e7eb;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
+  position: sticky;
+  top: 60px;
+}
+
+.nextra-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nextra-sidebar-item {
+  margin-bottom: 0.5rem;
+}
+
+.nextra-sidebar-summary {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  color: #4b5563;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.nextra-sidebar-summary:hover {
+  background: #f3f4f6;
+}
+
+.nextra-sidebar-nested {
+  list-style: none;
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin: 0;
+  border-left: 2px solid #e5e7eb;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+}
+
+.nextra-sidebar-link {
+  display: block;
+  padding: 0.5rem;
+  color: #6b7280;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.nextra-sidebar-link:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.nextra-sidebar-item.active > .nextra-sidebar-link {
+  background: #eff6ff;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.nextra-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.nextra-content h1 {
+  color: #1f2937;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.nextra-content h2 {
+  color: #374151;
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.nextra-footer {
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.nextra-footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.nextra-footer-content a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.nextra-footer-content a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .nextra-navbar-content {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.5rem 1rem;
+  }
+
+  .nextra-nav-items {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    gap: 1rem;
+  }
+
+  .nextra-container {
+    flex-direction: column;
+  }
+
+  .nextra-sidebar {
+    width: 100%;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    position: static;
+    padding: 1rem;
+  }
+
+  .nextra-content {
+    padding: 1rem;
+  }
+}
