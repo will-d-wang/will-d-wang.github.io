@@ -14,9 +14,29 @@ export const Sidebar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
     route: pathname,
   });
 
+  // Filter to show docs-specific pages when in /docs section
+  const isInDocsSection = pathname.startsWith("/docs");
+  const sidebarItems = isInDocsSection
+    ? docsDirectories.filter(
+        (item: any) =>
+          item.route?.startsWith("/docs") || item.href?.startsWith("/docs"),
+      )
+    : docsDirectories;
+
   const renderItem = (item: PageMapItem): JSX.Element => {
     const itemAny = item as any;
-    const route = itemAny.route || itemAny.href || "";
+    let route = itemAny.route || itemAny.href || "";
+    // Prepend /docs/ to content routes that don't already have it
+    if (route && !route.startsWith("/")) {
+      route = "/docs/" + route;
+    } else if (
+      route.startsWith("/") &&
+      !route.startsWith("/docs") &&
+      !route.startsWith("/blog") &&
+      route !== "/"
+    ) {
+      route = "/docs" + route;
+    }
     const title = itemAny.title || itemAny.name || "Page";
     const isActive = pathname === route;
 
@@ -28,7 +48,7 @@ export const Sidebar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
       >
         <summary className="nextra-sidebar-summary">{title}</summary>
         <ul className="nextra-sidebar-nested">
-          {item.children.map((child) => renderItem(child))}
+          {itemAny.children?.map((child: PageMapItem) => renderItem(child))}
         </ul>
       </details>
     ) : (
@@ -46,7 +66,7 @@ export const Sidebar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
   return (
     <aside className="nextra-sidebar">
       <ul className="nextra-sidebar-list">
-        {docsDirectories.map((item) => renderItem(item))}
+        {sidebarItems.map((item) => renderItem(item))}
       </ul>
     </aside>
   );

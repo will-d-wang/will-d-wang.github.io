@@ -6,10 +6,6 @@ const withNextra = nextra({
     codeblocks: false,
   },
   defaultShowCopyCode: true,
-  // Optional: Use contentDirBasePath if you want to serve content from a different path
-  // For example: contentDirBasePath: '/docs' would serve content from app/docs/[[...mdxPath]]/page.jsx
-  // Currently using the default app directory structure (app/page.mdx, app/blog/page.mdx, etc.)
-  // contentDirBasePath: '/docs',
 });
 
 export default withNextra({

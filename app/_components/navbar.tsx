@@ -29,7 +29,18 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
 
   const renderSubItem = (item: PageMapItem): JSX.Element => {
     const itemAny = item as any;
-    const route = itemAny.route || itemAny.href || "";
+    let route = itemAny.route || itemAny.href || "";
+    // Prepend /docs/ to content routes that don't already have it
+    if (route && !route.startsWith("/")) {
+      route = "/docs/" + route;
+    } else if (
+      route.startsWith("/") &&
+      !route.startsWith("/docs") &&
+      !route.startsWith("/blog") &&
+      route !== "/"
+    ) {
+      route = "/docs" + route;
+    }
     const isActive = pathname === route;
     const title = itemAny.title || itemAny.name || "Page";
 
@@ -70,7 +81,7 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
               <Anchor href="/">Home</Anchor>
             </li>
             <li>
-              <Anchor href="/docs">Documentation</Anchor>
+              <Anchor href="/docs">Docs</Anchor>
             </li>
             <li>
               <Anchor href="/blog">Blog</Anchor>
