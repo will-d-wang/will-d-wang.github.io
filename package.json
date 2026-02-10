@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
@@ -25,6 +26,7 @@
     "@next/mdx": "^16.1.6",
     "next": "^15",
     "nextra": "^4.6.1",
+    "nextra-theme-blog": "^4.6.1",
     "nextra-theme-docs": "^4.6.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -44,6 +46,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.3.0",
     "markdownlint-cli2": "^0.11.0",
+    "pagefind": "^1.4.0",
     "prettier": "3.1.1",
     "typescript": "~5.9.3"
   },

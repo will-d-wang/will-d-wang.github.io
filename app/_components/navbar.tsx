@@ -17,9 +17,10 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
 
   // Determine current section and its children
   const currentSection = pathname.split("/")[1] || "index";
-  const currentSectionItem = pageMap.find(
+  const currentSectionItem = topLevelNavbarItems.find(
     (item) =>
-      item.route === `/${currentSection}` || item.name === currentSection,
+      (item as any).route === `/${currentSection}` ||
+      (item as any).name === currentSection,
   );
   const sectionChildren =
     currentSectionItem && "children" in currentSectionItem
@@ -27,12 +28,14 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
       : [];
 
   const renderSubItem = (item: PageMapItem): JSX.Element => {
-    const route = item.route || ("href" in item ? (item.href as string) : "");
+    const itemAny = item as any;
+    const route = itemAny.route || itemAny.href || "";
     const isActive = pathname === route;
+    const title = itemAny.title || itemAny.name || "Page";
 
     return "children" in item ? (
       <div key={route} className="nextra-dropdown-group">
-        <span className="nextra-dropdown-label">{item.title}</span>
+        <span className="nextra-dropdown-label">{title}</span>
         <ul className="nextra-dropdown-nested">
           {item.children.map((child) => renderSubItem(child))}
         </ul>
@@ -40,7 +43,7 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
     ) : (
       <li key={route} className={isActive ? "active" : ""}>
         <Anchor href={route} className="nextra-dropdown-link">
-          {item.title}
+          {title}
         </Anchor>
       </li>
     );
@@ -55,8 +58,8 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
               <Image
                 src="/logo.webp"
                 alt="Logo"
-                width={32}
-                height={32}
+                width={48}
+                height={48}
                 className="nextra-logo-image"
               />
               <span>Will D. Wang</span>
@@ -86,15 +89,17 @@ export const Navbar: FC<{ pageMap: PageMapItem[] }> = ({ pageMap }) => {
       </nav>
 
       {/* Secondary navbar for section pages */}
-      {sectionChildren.length > 0 && currentSection !== "index" && (
-        <nav className="nextra-secondary-navbar">
-          <div className="nextra-secondary-content">
-            <ul className="nextra-section-items">
-              {sectionChildren.map((item) => renderSubItem(item))}
-            </ul>
-          </div>
-        </nav>
-      )}
+      {sectionChildren &&
+        sectionChildren.length > 0 &&
+        currentSection !== "index" && (
+          <nav className="nextra-secondary-navbar">
+            <div className="nextra-secondary-content">
+              <ul className="nextra-section-items">
+                {sectionChildren.map((item) => renderSubItem(item))}
+              </ul>
+            </div>
+          </nav>
+        )}
     </>
   );
 };
