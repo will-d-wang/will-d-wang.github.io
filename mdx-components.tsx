@@ -1,13 +1,14 @@
-import { useMDXComponents as getNextraComponents } from "nextra/mdx-components";
-import type { ComponentType } from "react";
+import { useMDXComponents as getThemeComponents } from "nextra-theme-docs";
+import { Callout, FileTree } from "nextra/components";
 
-type MDXComponents = Record<string, ComponentType<any>>;
+// Get the default MDX components
+const themeComponents = getThemeComponents();
 
-const defaultComponents = getNextraComponents({});
-
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+// Merge components
+export function useMDXComponents() {
   return {
-    ...defaultComponents,
-    ...components,
+    ...themeComponents,
+    Callout: Callout,
+    FileTree: FileTree,
   };
 }

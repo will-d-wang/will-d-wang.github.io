@@ -1,47 +1,33 @@
-# Website
+# README
 
-This website is built using [Docusaurus](https://docusaurus.io/),
-a modern static website generator.
+## Quick Start
 
-## Installation
+You can deploy this template on Vercel by clicking the button below
 
-Install [pnpm](https://pnpm.io/installation#on-posix-systems)
-
-```bash
-pnpm install
-```
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fphucbm%2Fnextra-docs-starter)
 
 ## Local Development
 
-```bash
-pnpm run start
-```
+### Clone this repository
 
-This command starts a local development server and opens up a browser window.
-Most changes are reflected live without having to restart the server.
-
-## Build
+Using the GitHub CLI:
 
 ```bash
-pnpm run build
+gh repo clone phucbm/nextra-docs-starter
 ```
 
-This command generates static content into the `build` directory and can be
-served using any static contents hosting service.
-
-## Deployment
-
-Using SSH:
+### Install
 
 ```bash
-USE_SSH=true pnpm deploy
+pnpm i
 ```
 
-Not using SSH:
+### Run the development server
 
 ```bash
-GIT_USER=<Your GitHub username> pnpm deploy
+pnpm dev
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way
-to build the website and push to the `gh-pages` branch.
+## Reference
+
+Based on the templates of https://github.com/phucbm/nextra-docs-starter
