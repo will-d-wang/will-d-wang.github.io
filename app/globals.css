@@ -1,15 +1,13 @@
-@import "tailwindcss";
-
-/* Optional: import Nextra theme styles */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap");
 @import "nextra-theme-docs/style.css";
 @import "tw-animate-css";
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 @variant dark (&:where(.dark *));
 
 @theme inline {
-
   --radius-sm: calc(var(--radius) - 4px);
 
   --radius-md: calc(var(--radius) - 2px);
@@ -82,7 +80,6 @@
 }
 
 :root {
-
   --radius: 0.625rem;
 
   --background: oklch(1 0 0);
@@ -149,7 +146,6 @@
 }
 
 .dark {
-
   --background: oklch(0.145 0 0);
 
   --foreground: oklch(0.985 0 0);
@@ -219,5 +215,295 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes home-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-page {
+  --home-ink: #102a2f;
+  --home-muted: #4b5563;
+  --home-accent: #0f766e;
+  --home-accent-soft: #e0f2f1;
+  --home-card: #ffffff;
+  --home-border: #d6e4df;
+  --home-shadow: 0 24px 60px rgba(15, 118, 110, 0.12);
+  color: var(--home-ink);
+  font-family: "Source Sans 3", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #fbf7ef 0%, #eef8f4 45%, #f5fbff 100%);
+  border: 1px solid var(--home-border);
+  border-radius: 28px;
+  padding: clamp(2rem, 3vw, 3.5rem) clamp(1.5rem, 4vw, 3.75rem);
+  margin: 2rem auto 3rem;
+  box-shadow: var(--home-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-page::before,
+.home-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.home-page::before {
+  width: 320px;
+  height: 320px;
+  top: -120px;
+  right: -140px;
+  background: radial-gradient(
+    circle,
+    rgba(15, 118, 110, 0.18),
+    transparent 70%
+  );
+}
+
+.home-page::after {
+  width: 260px;
+  height: 260px;
+  bottom: -140px;
+  left: -100px;
+  background: radial-gradient(
+    circle,
+    rgba(14, 116, 144, 0.16),
+    transparent 70%
+  );
+}
+
+.home-page h1,
+.home-page h2,
+.home-page h3 {
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.home-title {
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  letter-spacing: -0.02em;
+  text-align: center;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  margin-bottom: 1.25rem;
+  color: #102a2f;
+  display: block;
+}
+
+.home-page h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+
+.home-page h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-top: 0;
+}
+
+.home-page h3 {
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+}
+
+.home-page p {
+  color: var(--home-muted);
+  line-height: 1.75;
+  text-align: center;
+}
+
+.home-page a {
+  color: var(--home-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.home-page a:hover {
+  color: #0b5f58;
+  text-decoration: underline;
+}
+
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.home-avatar {
+  width: min(200px, 60vw);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  box-shadow: 0 20px 40px rgba(16, 42, 47, 0.15);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.home-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+}
+
+.home-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-social-link {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(16, 42, 47, 0.12);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-social-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--home-accent);
+  box-shadow: 0 16px 30px rgba(15, 118, 110, 0.2);
+  text-decoration: none;
+}
+
+.home-social-link img {
+  width: 22px;
+  height: 22px;
+}
+
+.home-social-badge img {
+  height: 30px;
+}
+
+.home-section {
+  margin-top: 2.5rem;
+  animation: home-fade-up 0.6s ease both;
+}
+
+.home-section:nth-of-type(2) {
+  animation-delay: 0.05s;
+}
+
+.home-section:nth-of-type(3) {
+  animation-delay: 0.1s;
+}
+
+.home-section:nth-of-type(4) {
+  animation-delay: 0.15s;
+}
+
+.home-section:nth-of-type(5) {
+  animation-delay: 0.2s;
+}
+
+.home-culture {
+  margin-top: 2rem;
+  color: var(--home-ink);
+  text-align: center;
+}
+
+.home-page ul {
+  padding-left: 0;
+  margin-top: 0.75rem;
+  color: var(--home-muted);
+  text-align: center;
+  list-style-position: inside;
+}
+
+.home-page ul li {
+  margin-bottom: 0.5rem;
+}
+
+.home-page ul ul {
+  margin-top: 0.5rem;
+}
+
+.home-tech {
+  text-align: center;
+}
+
+.home-tech-heart {
+  font-size: 2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.home-tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.home-tech-row a {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 18px;
+  padding: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 24px rgba(16, 42, 47, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-tech-row a:hover {
+  transform: translateY(-2px);
+  border-color: var(--home-accent);
+  box-shadow: 0 18px 30px rgba(15, 118, 110, 0.2);
+  text-decoration: none;
+}
+
+.home-tech-row img {
+  width: 56px;
+  height: 56px;
+}
+
+.home-page pre {
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 18px 40px rgba(16, 42, 47, 0.1);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .home-page {
+    margin: 1.5rem 1rem 2rem;
+  }
+
+  .home-page h1 {
+    font-size: 2rem;
+  }
+
+  .home-tech-row img {
+    width: 48px;
+    height: 48px;
   }
 }

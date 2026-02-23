@@ -6,6 +6,8 @@ build
 
 # Generated files
 _pagefind
+next-env.d.ts
 
 .next
 out
+
