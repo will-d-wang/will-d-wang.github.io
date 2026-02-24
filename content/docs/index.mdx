@@ -2,8 +2,6 @@
 title: Introduction
 ---
 
-import { Steps, Cards } from "nextra/components";
-
 Welcome to my home on the internet!!! Here are my notes about Techs/Computer Sciences.
 
 I've marked down my grinding journey as a software developer,
@@ -16,42 +14,87 @@ The software engineer journey is a pursuit of
 
 ## My skill sets Map
 
-```mermaid
-mindmap
-  root((skills))
-    Programming
-      C
-      Java
-      Golang
-      Python
-      JavaScript
-      Groovy
-      Kotlin
-      Bash
-    DevOps
-      Docker
-      Kubernetes
-      Jenkins
-      Github
-      Teamcity
-      Gerrit
-    Cloud
-      GCP
-      AWS
-      Azure
-    Libraries
-      Pytest
-      Pytorch
-      gRPC
-      Numpy
-      Pandas
-      Scikit-learn
-      Pytorch
-    Tool
-      VSCode
-      Git
-      Oh My Zsh
-      VIM
-      Gradle
-      C4-UML
-```
+<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem", marginTop: "2rem" }}>
+  <div style={{ padding: "1.5rem", background: "var(--home-card)", border: "1px solid var(--home-border)", borderRadius: "0.75rem" }}>
+    <h3 style={{ marginTop: 0 }}>💻 Programming</h3>
+    <p style={{ marginBottom: 0, fontSize: "0.95rem", lineHeight: 1.6, color: "var(--home-muted)" }}>
+      C, Java, Golang, Python, JavaScript, Groovy, Kotlin, Bash
+    </p>
+  </div>
+
+{" "}
+
+<div
+  style={{
+    padding: "1.5rem",
+    background: "var(--home-card)",
+    border: "1px solid var(--home-border)",
+    borderRadius: "0.75rem",
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>⚙️ DevOps</h3>
+  <p
+    style={{
+      marginBottom: 0,
+      fontSize: "0.95rem",
+      lineHeight: 1.6,
+      color: "var(--home-muted)",
+    }}
+  >
+    Docker, Kubernetes, Jenkins, Github, Teamcity, Gerrit
+  </p>
+</div>
+
+{" "}
+
+<div
+  style={{
+    padding: "1.5rem",
+    background: "var(--home-card)",
+    border: "1px solid var(--home-border)",
+    borderRadius: "0.75rem",
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>☁️ Cloud</h3>
+  <p
+    style={{
+      marginBottom: 0,
+      fontSize: "0.95rem",
+      lineHeight: 1.6,
+      color: "var(--home-muted)",
+    }}
+  >
+    GCP, AWS, Azure
+  </p>
+</div>
+
+{" "}
+
+<div
+  style={{
+    padding: "1.5rem",
+    background: "var(--home-card)",
+    border: "1px solid var(--home-border)",
+    borderRadius: "0.75rem",
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>📚 Libraries</h3>
+  <p
+    style={{
+      marginBottom: 0,
+      fontSize: "0.95rem",
+      lineHeight: 1.6,
+      color: "var(--home-muted)",
+    }}
+  >
+    Pytest, Pytorch, gRPC, Numpy, Pandas, Scikit-learn
+  </p>
+</div>
+
+  <div style={{ padding: "1.5rem", background: "var(--home-card)", border: "1px solid var(--home-border)", borderRadius: "0.75rem" }}>
+    <h3 style={{ marginTop: 0 }}>🛠️ Tools</h3>
+    <p style={{ marginBottom: 0, fontSize: "0.95rem", lineHeight: 1.6, color: "var(--home-muted)" }}>
+      VSCode, Git, Oh My Zsh, VIM, Gradle, C4-UML
+    </p>
+  </div>
+</div>
