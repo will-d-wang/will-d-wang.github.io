@@ -61,6 +61,14 @@ jobs:
         env:
           PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
 
+      - name: List out directory contents
+        run: |
+          echo "Contents of ./out directory:"
+          ls -la ./out
+          echo ""
+          echo "Contents of ./out/_pagefind directory:"
+          ls -la ./out/_pagefind || echo "No _pagefind directory found"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
