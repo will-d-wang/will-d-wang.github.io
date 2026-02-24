@@ -30,4 +30,6 @@ pnpm dev
 
 ## Reference
 
-Based on the templates of https://github.com/phucbm/nextra-docs-starter
+[Next.js Nextra templates](https://github.com/phucbm/nextra-docs-starter)
+
+[Devicon Icons](https://devicon.dev/)

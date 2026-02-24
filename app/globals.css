@@ -493,6 +493,104 @@
   margin: 0;
 }
 
+.home-timeline {
+  margin: 2rem 0;
+}
+
+.home-timeline-item {
+  margin-bottom: 2.5rem;
+  padding-left: 2rem;
+  border-left: 3px solid var(--home-accent);
+  position: relative;
+}
+
+.home-timeline-item::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: var(--home-accent);
+  border-radius: 50%;
+  position: absolute;
+  left: -9.5px;
+  top: 0;
+  box-shadow: 0 0 0 4px var(--home-card);
+}
+
+.home-timeline-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.home-timeline-header h3 {
+  margin: 0;
+  color: var(--home-ink);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+}
+
+.home-timeline-duration {
+  background: var(--home-accent-soft);
+  color: var(--home-accent);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.home-timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-timeline-period {
+  padding: 1.25rem;
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(16, 42, 47, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.home-timeline-period strong {
+  color: var(--home-accent);
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+.home-timeline-period ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: var(--home-muted);
+  width: 100%;
+}
+
+.home-timeline-period ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-timeline-period ul li img {
+  display: flex;
+  align-items: center;
+  margin-right: 8px !important;
+  margin-bottom: 0 !important;
+  flex-shrink: 0;
+}
+
 @media (max-width: 640px) {
   .home-page {
     margin: 1.5rem 1rem 2rem;
@@ -505,5 +603,19 @@
   .home-tech-row img {
     width: 48px;
     height: 48px;
+  }
+
+  .home-timeline-item {
+    padding-left: 1.5rem;
+  }
+
+  .home-timeline-item::before {
+    left: -11px;
+  }
+
+  .home-timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 }

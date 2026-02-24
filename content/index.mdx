@@ -5,20 +5,6 @@ description: A streamlined starter template for Nextra documentation sites
 
 <div className="home-page">
 
-## About Me👋
-
-<div className="flex flex-wrap justify-center">
-  <div className="px-4" style={{ maxWidth: "150px" }}>
-    <img
-      src="/images/DinganWang.jpg"
-      alt="Dingan Wang"
-      height="320"
-      width="320"
-      className="shadow-lg rounded-full max-w-full h-auto align-middle border-none"
-    />
-  </div>
-</div>
-
 <div className="home-social">
   <a
     href="https://github.com/Will-D-Wang"
@@ -48,6 +34,18 @@ description: A streamlined starter template for Nextra documentation sites
   </div>
 </div>
 
+<div className="flex flex-wrap justify-center">
+  <div className="px-4" style={{ maxWidth: "150px" }}>
+    <img
+      src="/images/DinganWang.jpg"
+      alt="Dingan Wang"
+      height="320"
+      width="320"
+      className="shadow-lg rounded-full max-w-full h-auto align-middle border-none"
+    />
+  </div>
+</div>
+
 ## My Career Journey
 
 Welcome!👋! I've marked down my career journey as a software engineer,
@@ -57,30 +55,26 @@ The software engineer journey is a pursuit of
 [craftsmanship](https://manifesto.softwarecraftsmanship.org/) spirit.
 Software engineers normally read more, grind more technologies and then use less and elegant code in work.
 
-Computer programming is ultimately an form of art, that was the great insight from [Donald Knuth](https://en.wikipedia.org/wiki/Donald_Knuth), who even wrote a book to emphasize this point:
+Computer programming is ultimately an form of art, that was the great insight from
+[Donald Knuth](https://en.wikipedia.org/wiki/Donald_Knuth), who even wrote a book to emphasize this point:
 [The Art of Computer Programming](https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming).
 
 ### Current status
 
-- 🔭 I'm working with
+🔭 I'm working with
 
-  - [Python](https://www.python.org/)
-  - [Golang](https://golang.org/)
-  - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-  - [Jenkins CI/CD](https://www.jenkins.io/doc/book/pipeline/),
-  - [Teamcity](https://www.jetbrains.com/help/teamcity/teamcity-documentation.html)
-  - [Terraform](https://www.terraform.io/)
-  - [Kubernetes](https://kubernetes.io/)
-  - [Docker](https://www.docker.com/)
-
+- [Python](https://www.python.org/)
+- [Golang](https://golang.org/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Jenkins CI/CD](https://www.jenkins.io/doc/book/pipeline/),
+- [Teamcity](https://www.jetbrains.com/help/teamcity/teamcity-documentation.html)
+- [Terraform](https://www.terraform.io/)
+- [Kubernetes](https://kubernetes.io/)
+- [Docker](https://www.docker.com/)
 - 🎵️🎶️ I'm playing with backend, micro-service, system design, DevOps, CI/CD, Teamcity, data visualization.
-
 - 🌱🌳️ I'm learning history, psychology, philosophy, management.
-
 - 🍻️🥂️ I'm looking to collaborate on more interesting open source projects.
-
 - 💬🗒️ Ask me about test automation, philosophy, python.
-
 - ☯️❤️ Fun fact: Life is the most precious journey, only once in the universe, enjoy it everyday.
 
 <h3>
@@ -272,43 +266,281 @@ Computer programming is ultimately an form of art, that was the great insight fr
   </div>
 </div>
 
-## My Career Path
+## My Career Path and Tech Stack Evolution
 
-```mermaid
-timeline
-  section Software Engineer <br> (3+ years)
-    2014.5-2017.3
-      : C <br> Distributed system development
-      : Python <br> Integration tests
-      : Agile Development
-      : System Performance and Profiling
-    2017.4-2018.2
-      : C <br> SSD Firmware Development
-      : Python <br> System testing
-  section SDET <br> (2+ years)
-    2018.3-2019.9
-      : Python <br> System testing
-      : Python <br> Workflow automation
-      : CICD <br> Teamcity
-      : TDD <br> Test automation system
-    2019.10-2020.12
-      : Python <br> System testing
-      : Docker <br> Test agent containerization
-      : Jenkins <br> CI/CD
-      : Log & Reporting <br> ELK(Elasticsearch, Logstash, Kibana)
-      : Groovy <br> Jenkins Pipeline development
-  section Platform Engineer <br> (5+ years)
-    2021.1-Present
-      : Python <br> System testing
-      : Terraform <br> Resources management
-      : Cloud <br> GCP, Azure, AWS
-      : Kubernetes <br> SAAS application orchestration
-      : Teamcity <br> CICD
-      : Docker <br> Tasks containerization
-      : DevSecOps <br> Pipeline designs, Cloud security enhancement
-      : Golang <br> installer development
-      : JavaScript&Typescript <br> Backend development with REST API
-      : SRE <br> System monitoring, alerting, incident response
-```
+<div className="home-timeline">
+  <div className="home-timeline-item">
+    <div className="home-timeline-header">
+      <h3>Platform Engineer</h3>
+      <span className="home-timeline-duration">
+        {(() => {
+          const start = new Date(2024, 0, 1); // January 2024
+          const now = new Date();
+          const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+          const years = Math.floor(months / 12);
+          const remainingMonths = months % 12;
+
+          if (years > 0) {
+            return remainingMonths > 0 ? `${years}y ${remainingMonths}m` : `${years}+ years`;
+          } else {
+            return `${months} months`;
+          }
+        })()}
+      </span>
+    </div>
+    <div className="home-timeline-content">
+      <div className="home-timeline-period">
+        <strong>January 2024 - Present</strong>
+        <ul>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+              alt="Python"
+              width="20"
+              height="20"
+            />{" "}
+            Python - System testing & analysis
+          </li>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
+              alt="JavaScript"
+              width="20"
+              height="20"
+            />{" "}
+            JavaScript & Typescript - Backend development with REST API
+          </li>
+          <li>🔍 SRE - System monitoring, alerting, incident response</li>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg"
+              alt="GCP"
+              width="20"
+              height="20"
+            />{" "}
+            Cloud Architecture - GCP, Azure, AWS optimization
+          </li>
+          <li>⚙️ Platform reliability engineering</li>
+          <li>🔐 Advanced DevSecOps practices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+{" "}
+
+<div className="home-timeline-item">
+  <div className="home-timeline-header">
+    <h3>DevOps Engineer</h3>
+    <span className="home-timeline-duration">3 years</span>
+  </div>
+  <div className="home-timeline-content">
+    <div className="home-timeline-period">
+      <strong>January 2021 - December 2023</strong>
+      <ul>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg"
+            alt="Terraform"
+            width="20"
+            height="20"
+          />{" "}
+          Terraform - Infrastructure as Code & resources management
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg"
+            alt="Kubernetes"
+            width="20"
+            height="20"
+          />{" "}
+          Kubernetes - SAAS application orchestration
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg"
+            alt="Docker"
+            width="20"
+            height="20"
+          />{" "}
+          Docker - Tasks containerization
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg"
+            alt="GCP"
+            width="20"
+            height="20"
+          />{" "}
+          Cloud - GCP, Azure, AWS platform management
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg"
+            alt="Jenkins"
+            width="20"
+            height="20"
+          />{" "}
+          Teamcity & Jenkins - CICD pipeline design and implementation
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+            alt="Python"
+            width="20"
+            height="20"
+          />{" "}
+          Python - System testing & automation
+        </li>
+        <li>🔐 DevSecOps - Pipeline designs, Cloud security enhancement</li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg"
+            alt="Golang"
+            width="20"
+            height="20"
+          />{" "}
+          Golang - Installer development
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{" "}
+
+<div className="home-timeline-item">
+  <div className="home-timeline-header">
+    <h3>SDET (Software Development Engineer in Test)</h3>
+    <span className="home-timeline-duration">2+ years</span>
+  </div>
+  <div className="home-timeline-content">
+    <div className="home-timeline-period">
+      <strong>October 2019 - December 2020</strong>
+      <ul>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+            alt="Python"
+            width="20"
+            height="20"
+          />{" "}
+          Python - System testing
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg"
+            alt="Docker"
+            width="20"
+            height="20"
+          />{" "}
+          Docker - Test agent containerization
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg"
+            alt="Jenkins"
+            width="20"
+            height="20"
+          />{" "}
+          Jenkins - CI/CD
+        </li>
+        <li>📊 Log & Reporting - ELK (Elasticsearch, Logstash, Kibana)</li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/groovy/groovy-original.svg"
+            alt="Groovy"
+            width="20"
+            height="20"
+          />{" "}
+          Groovy - Jenkins Pipeline development
+        </li>
+      </ul>
+    </div>
+    <div className="home-timeline-period">
+      <strong>March 2018 - September 2019</strong>
+      <ul>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+            alt="Python"
+            width="20"
+            height="20"
+          />{" "}
+          Python - System testing
+        </li>
+        <li>
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+            alt="Python"
+            width="20"
+            height="20"
+          />{" "}
+          Python - Workflow automation
+        </li>
+        <li>⚙️ CICD - Teamcity</li>
+        <li>🧪 TDD - Test automation system</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div className="home-timeline-item">
+    <div className="home-timeline-header">
+      <h3>Software Engineer</h3>
+      <span className="home-timeline-duration">3+ years</span>
+    </div>
+    <div className="home-timeline-content">
+      <div className="home-timeline-period">
+        <strong>April 2017 - February 2018</strong>
+        <ul>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"
+              alt="C"
+              width="20"
+              height="20"
+            />{" "}
+            C - SSD Firmware Development
+          </li>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+              alt="Python"
+              width="20"
+              height="20"
+            />{" "}
+            Python - System testing
+          </li>
+        </ul>
+      </div>
+      <div className="home-timeline-period">
+        <strong>May 2014 - March 2017</strong>
+        <ul>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"
+              alt="C"
+              width="20"
+              height="20"
+            />{" "}
+            C - Distributed system development
+          </li>
+          <li>
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+              alt="Python"
+              width="20"
+              height="20"
+            />{" "}
+            Python - Integration tests
+          </li>
+          <li>📋 Agile Development</li>
+          <li>⚡ System Performance and Profiling</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
