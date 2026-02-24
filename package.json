@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "module",
-    "url": "https://github.com/will-d-wang/will-d-wang.github.io"
+    "url": "https://github.com/will-d-wang/wdwang"
   },
   "author": "Will D. Wang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/will-d-wang/will-d-wang.github.io/issues"
+    "url": "https://github.com/will-d-wang/wdwang/issues"
   },
-  "homepage": "https://github.com/will-d-wang/will-d-wang.github.io#readme",
+  "homepage": "https://github.com/will-d-wang/wdwang#readme",
   "lint-staged": {
     "*.{js,mjs,cjs,jsx,ts,tsx}": "pnpm run eslint-pre-commit",
     "*.{md,mdx}": "pnpm run mdlint-pre-commit"

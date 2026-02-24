@@ -27,7 +27,7 @@ const navbar = (
         <span className="font-semibold">Will D. Wang</span>
       </>
     }
-    projectLink="https://github.com/will-d-wang/will-d-wang.github.io"
+    projectLink="https://github.com/will-d-wang/wdwang"
   />
 );
 const footer = (
@@ -86,7 +86,7 @@ export default async function RootLayout({ children }) {
           // banner={banner}
           navbar={navbar}
           pageMap={pageMap}
-          docsRepositoryBase="https://github.com/phucbm/nextra-docs-starter/tree/main"
+          docsRepositoryBase="https://github.com/will-d-wang/wdwang/tree/main"
           footer={footer}
           search={<NextraSearchDialog pages={pages} />}
           // ... Your additional layout options
