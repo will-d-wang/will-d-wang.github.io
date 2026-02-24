@@ -3,6 +3,7 @@ import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "./globals.css";
 import { Metadata } from "next";
+import Image from "next/image";
 import { NextraSearchDialog } from "@/components/nextra-search-dialog";
 import { getPagesFromPageMap } from "@/lib/getPagesFromPageMap";
 
@@ -16,6 +17,13 @@ const navbar = (
   <Navbar
     logo={
       <>
+        <Image
+          src="/images/general/logo.webp"
+          alt="Will D. Wang logo"
+          width={24}
+          height={24}
+          className="mr-2 inline-block"
+        />
         <span className="font-semibold">Will D. Wang</span>
       </>
     }
@@ -71,7 +79,6 @@ export default async function RootLayout({ children }) {
       <Head
       // ... Your additional head options
       >
-        <link rel="shortcut icon" href="/images/general/icon.svg" />
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
