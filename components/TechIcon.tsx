@@ -80,6 +80,14 @@ const TECH_DATA: Record<string, TechData> = {
     href: "https://pandas.pydata.org",
     src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg",
   },
+  Pytest: {
+    href: "https://docs.pytest.org",
+    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/pytest/pytest-original.svg",
+  },
+  Pydantic: {
+    href: "https://docs.pydantic.dev",
+    src: "https://avatars.githubusercontent.com/u/110818415?s=200&v=4",
+  },
   Terraform: {
     href: "https://www.terraform.io",
     src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg",
@@ -103,6 +111,14 @@ const TECH_DATA: Record<string, TechData> = {
   "Apache Spark": {
     href: "https://spark.apache.org",
     src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg",
+  },
+  PySpark: {
+    href: "https://spark.apache.org/docs/latest/api/python/",
+    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg",
+  },
+  gRPC: {
+    href: "https://grpc.io/docs/",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grpc/grpc-plain.svg",
   },
   PyTorch: {
     href: "https://pytorch.org",
