@@ -20,8 +20,8 @@ const navbar = (
         <Image
           src="/images/general/logo.webp"
           alt="Will D. Wang logo"
-          width={24}
-          height={24}
+          width={48}
+          height={48}
           className="mr-2 inline-block"
         />
         <span className="font-semibold">Will D. Wang</span>
