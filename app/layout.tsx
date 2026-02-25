@@ -1,9 +1,10 @@
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
-import { Head } from "nextra/components";
+import { Head, Banner } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "./globals.css";
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { NextraSearchDialog } from "@/components/nextra-search-dialog";
 import { getPagesFromPageMap } from "@/lib/getPagesFromPageMap";
 
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
   // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 };
 
-// const banner = <Banner storageKey="some-key">This template was created with 🩸 and 💦 by <Link href="https://github.com/phucbm">PHUCBM</Link> 🐧</Banner>
+const banner = (
+  <Banner storageKey="some-key">Welcome to Will D. Wang's Home.👋</Banner>
+);
 const navbar = (
   <Navbar
     logo={
@@ -35,21 +38,42 @@ const footer = (
     <div className="nextra-footer-content">
       <p>
         Copyright © {new Date().getFullYear()} Will D. Wang. Powered by{" "}
-        <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
+        <Link
+          href="https://nextjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
           Next.js
-        </a>
+        </Link>
         {" & "}
-        <a href="https://nextra.site" target="_blank" rel="noopener noreferrer">
+        <Link
+          href="https://nextra.site"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
           Nextra
-        </a>
+        </Link>
+        {" & "}
+        <Link
+          href="https://github.com/phucbm/nextra-docs-starter"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          Nextra Docs Starter Template
+        </Link>
         . Hosted on{" "}
-        <a
+        <Link
           href="https://pages.github.com"
           target="_blank"
           rel="noopener noreferrer"
+          className="underline"
         >
           GitHub Pages
-        </a>
+        </Link>
+        .{" "}
       </p>
     </div>
   </Footer>
@@ -83,7 +107,7 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
-          // banner={banner}
+          banner={banner}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           navbar={navbar}
           pageMap={pageMap}
