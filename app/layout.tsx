@@ -84,6 +84,7 @@ export default async function RootLayout({ children }) {
       <body>
         <Layout
           // banner={banner}
+          sidebar={{ defaultMenuCollapseLevel: 1 }}
           navbar={navbar}
           pageMap={pageMap}
           docsRepositoryBase="https://github.com/will-d-wang/will-d-wang.github.io/tree/main"
