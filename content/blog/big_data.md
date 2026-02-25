@@ -1,8 +1,11 @@
 ---
 title: Introduction to Data Engineering
-date: 'April 17, 2023'
 tags: ['Big Data']
 authors: [Dingan]
+description: "Learn how to build beautiful documentation sites with Nextra, the Next.js-based static site generator"
+date: "2025-10-30"
+readingTime: "8 min read"
+published: true
 ---
 
 ## Big data pipelines

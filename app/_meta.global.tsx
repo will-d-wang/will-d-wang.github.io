@@ -18,11 +18,10 @@ export default {
     title: "Documentation",
     items: DOCS_ITEMS,
   },
-  // article: {
-  //   type: "page",
-  //   theme: {
-  //     toc: false,
-  //     typesetting: "article",
-  //   },
-  // },
+  blog: {
+    type: "page",
+    theme: {
+      typesetting: "article",
+    },
+  },
 };
