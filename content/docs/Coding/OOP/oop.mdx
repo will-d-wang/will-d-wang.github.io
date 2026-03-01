@@ -1,0 +1,228 @@
+---
+title: "Object Oriented Programming(OOP) Concepts in Python"
+description: "Encapsulation, abstraction, inheritance, polymorphism, composition, and message passing — with concrete Python stdlib/CPython-based examples and references."
+date: "April 18, 2023"
+tags: ["Programming"]
+---
+
+Python’s OOP model is simple and practical: **classes bundle data + behavior**, objects have **identity/type/value**, and most “polymorphism” is achieved via **protocols and the data model** (duck typing).
+
+This note focuses on the concepts interviewers expect you to _apply_ (especially in ETL pipelines and distributed workers).
+
+## What interviewers want at senior/staff
+
+- You can **model the domain** (entities, workflows, invariants).
+- You design for **change**: new requirements won’t cause a rewrite.
+- You know where OOP helps—and where to switch to **composition, data-oriented, or functional** approaches.
+- You can explain **tradeoffs** (simplicity vs extensibility, correctness vs latency, etc.).
+
+## 1) Objects, Types, and the Python Data Model
+
+**Core idea:** Everything is an object with **identity, type, and value**, and **behaviors** are expressed through special methods (the “data model”).
+
+Why staff engineers care:
+
+- The data model is the foundation for interoperability (e.g., `len(x)`, iteration, truthiness, async awaitables).
+- It’s how Python enables “polymorphism without inheritance.”
+
+---
+
+## 2) Encapsulation
+
+**Definition:** Hide internal state and expose a controlled public API to preserve invariants and reduce coupling.
+
+### Python reality (important nuance)
+
+Python uses _conventions_ more than strict access modifiers. Encapsulation is often achieved through:
+
+- **managed attributes** (`@property`)
+- **descriptors**
+- controlling mutation with immutable/value objects (e.g., frozen dataclasses)
+
+### Example: managed attribute via `@property` (backward-compatible API)
+
+```python
+class Account:
+    def __init__(self, balance: int) -> None:
+        self._balance = balance  # "private by convention"
+
+    @property
+    def balance(self) -> int:
+        return self._balance
+
+    def deposit(self, amount: int) -> None:
+        if amount <= 0:
+            raise ValueError("amount must be positive")
+        self._balance += amount
+```
+
+**Why this is real:** `property()` is implemented as a **data descriptor**, so it hooks attribute access through the dot operator. ([Python documentation](https://docs.python.org/3/reference/datamodel.html?utm_source=chatgpt.com))
+
+### Example: “mostly immutable” value objects with frozen dataclasses
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class TenantId:
+    value: str
+```
+
+`frozen=True` “emulates immutability” by adding `__setattr__`/`__delattr__` that raise on mutation. ([Python documentation](https://docs.python.org/3/library/dataclasses.html?utm_source=chatgpt.com))
+
+## 3) Abstraction
+
+**Definition:** Program to _capabilities/contracts_ (“what it does”), not concrete implementations (“how it does it”).
+
+In Python, a clean way to express abstraction for large systems is:
+
+- `typing.Protocol` (structural typing)
+- or `abc.ABC` (nominal interface)
+
+### Example A: Protocol (structural subtyping; “duck typing with type checking”)
+
+```python
+from typing import Protocol
+
+class EventSink(Protocol):
+    def publish(self, topic: str, payload: dict) -> None: ...
+
+def emit_metrics(sink: EventSink) -> None:
+    sink.publish("metrics", {"ok": True})
+```
+
+Protocols define contracts using `typing.Protocol`, enabling **structural subtyping**. ([Typing Documentation](https://typing.python.org/en/latest/spec/protocol.html?utm_source=chatgpt.com))
+
+### Example B: ABC (nominal interface; runtime enforcement)
+
+```python
+from abc import ABC, abstractmethod
+
+class Serializer(ABC):
+    @abstractmethod
+    def dumps(self, obj: object) -> bytes: ...
+```
+
+The `abc` module provides infrastructure for defining **abstract base classes**. ([Python documentation](https://docs.python.org/3/library/abc.html?utm_source=chatgpt.com))
+
+### Practical staff guidance
+
+- Use **Protocol** when you want flexible integration boundaries (plugins/adapters).
+- Use **ABC** when you need runtime guarantees and a “named interface.”
+
+## 4) Inheritance
+
+**Definition:** Reuse/extend behavior via an “is-a” relationship (subclass extends base class).
+
+Python’s tutorial defines classes as bundling data and functionality, and has a dedicated inheritance section. ([Python documentation](https://docs.python.org/3/tutorial/classes.html?utm_source=chatgpt.com))
+
+### Example: simple inheritance with override
+
+```python
+class BaseExtractor:
+    def extract(self) -> list[str]:
+        return ["raw"]
+
+class ApiExtractor(BaseExtractor):
+    def extract(self) -> list[str]:  # override
+        return ["raw-from-api"]
+```
+
+Staff advice
+
+- Inheritance is best when the base class contract is stable and truly is-a
+- Prefer composition for most production systems (less coupling).
+
+## 5) Polymorphism (the concept interviewers actually test)
+
+**Definition:** The same call site works with many concrete types because they share a common interface/contract.
+
+Python supports polymorphism mainly through:
+
+1. **Subtype polymorphism** (inheritance / ABC)
+2. **Structural polymorphism** (Protocol / duck typing)
+3. **Data-model polymorphism** (special methods like `__len__`, `__iter__`)
+
+[Polymorphism (computer science)](<https://en.wikipedia.org/wiki/Polymorphism_(computer_science)>)
+
+- _[Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)_: defines a common interface for an arbitrary set of individually specified types.
+- _[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)_: not specifying concrete types and instead use abstract symbols that can substitute for any type.
+- _[Subtyping](https://en.wikipedia.org/wiki/Subtyping)_ (also called _subtype polymorphism_ or _inclusion polymorphism_): when a name denotes instances of many different classes related by some common superclass.
+
+### Example A: structural polymorphism via Protocol
+
+A worker can accept any sink that implements `publish()`—no inheritance required. ([Typing Documentation](https://typing.python.org/en/latest/reference/protocols.html?utm_source=chatgpt.com))
+
+### Example B: data-model polymorphism (`len()` / mappings)
+
+Many objects work with `len(x)` because they provide the expected data-model behavior; the data model documents `len()` returning the number of items for mappings and other containers. ([Python documentation](https://docs.python.org/3/reference/datamodel.html?utm_source=chatgpt.com))
+
+### Example C: standard “many implementations, one interface” with `collections.abc`
+
+The `collections.abc` module provides ABCs like `Mapping`, `Iterable`, etc., to represent standard interfaces for containers. ([Python documentation](https://docs.python.org/3/library/collections.abc.html?utm_source=chatgpt.com))
+
+## 6) Composition
+
+**Definition:** Build objects out of other objects (“has-a”), delegating work to injected collaborators.
+
+Why staff engineers prefer composition:
+
+- clearer dependency boundaries
+- easier testing (swap fakes)
+- fewer fragile base-class problems
+
+### Example: service composed from ports (ETL-friendly)
+
+```python
+from typing import Protocol
+
+class Source(Protocol):
+    def read(self) -> list[dict]: ...
+
+class Sink(Protocol):
+    def write(self, rows: list[dict]) -> None: ...
+
+class Pipeline:
+    def __init__(self, source: Source, sink: Sink) -> None:
+        self._source = source
+        self._sink = sink
+
+    def run(self) -> None:
+        rows = self._source.read()
+        # transform...
+        self._sink.write(rows)
+```
+
+This is DIP-friendly OOP: high-level pipeline logic depends on abstractions (protocols), not implementations.
+
+## 7) Message Passing (method calls as “messages”)
+
+**Definition:** Objects collaborate by sending messages (calling methods) rather than directly manipulating each other’s internal state.
+
+A staff-level way to talk about this:
+
+- “I keep state transitions behind methods; collaborators request changes via the API.”
+
+## 8) Async/Distributed Worker angle: OOP with `asyncio`
+
+### Mediator: the event loop
+
+The event loop is described as the core of asyncio: it runs tasks and callbacks, performs network I/O, and runs subprocesses. ([Python documentation](https://docs.python.org/3/library/asyncio-eventloop.html?utm_source=chatgpt.com))
+
+### Observer: callbacks on futures
+
+Callbacks registered with `asyncio.Future.add_done_callback()` are scheduled via the loop (not executed immediately). ([Python documentation](https://docs.python.org/3/library/asyncio-future.html?utm_source=chatgpt.com))
+
+Why this matters in worker design:
+
+- **Mediator** pattern: loop orchestrates execution and I/O
+- **Observer** pattern: completion handlers decouple producers/consumers
+
+## Interview-ready summary (30 seconds)
+
+- **Encapsulation:** protect invariants with managed attributes (`property()` is a data descriptor). ([Python documentation](https://docs.python.org/3/reference/datamodel.html?utm_source=chatgpt.com))
+- **Abstraction:** define contracts with Protocols (structural subtyping) or ABCs. ([Typing Documentation](https://typing.python.org/en/latest/spec/protocol.html?utm_source=chatgpt.com))
+- **Inheritance:** use sparingly for stable “is-a” hierarchies; Python tutorial covers this directly. ([Python documentation](https://docs.python.org/3/tutorial/classes.html?utm_source=chatgpt.com))
+- **Polymorphism:** mostly via protocols + data model (`len`, container ABCs), not just inheritance. ([Python documentation](https://docs.python.org/3/library/collections.abc.html?utm_source=chatgpt.com))
+- **Composition:** prefer injecting collaborators (ports/adapters) for testability and evolvability.
+- **Async systems:** event loop mediates tasks; futures notify via callbacks. ([Python documentation](https://docs.python.org/3/library/asyncio-eventloop.html?utm_source=chatgpt.com))
