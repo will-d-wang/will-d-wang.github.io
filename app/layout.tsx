@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 };
 
 const banner = (
-  <Banner storageKey="some-key">Welcome to Will D. Wang's Home.👋</Banner>
+  <Banner storageKey="some-key">
+    Open to Seattle, US or Vancouver, BC • Available for onsite/hybrid.
+  </Banner>
 );
 const navbar = (
   <Navbar
