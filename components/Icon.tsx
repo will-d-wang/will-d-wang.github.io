@@ -1,3 +1,4 @@
+// Icons can be found in https://devicon.dev/ and https://techicons.dev/
 import Image from "next/image";
 import Link from "next/link";
 
@@ -155,6 +156,12 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
       techType: TechType.CloudInfra,
       href: "https://grafana.com/",
       filename: "Grafana.svg",
+    },
+    Datadog: {
+      type: IconType.Tech,
+      techType: TechType.CloudInfra,
+      href: "https://www.datadoghq.com/",
+      filename: "datadog.svg",
     },
     Helm: {
       type: IconType.Tech,
@@ -466,6 +473,7 @@ export const ALL_TECH_NAMES = Object.keys(ICON_DATA[IconType.Tech]);
 
 const ICON_ALIASES: Partial<Record<IconType, Record<string, string>>> = {
   [IconType.Tech]: {
+    datadog: "Datadog",
     nodejs: "Node.js",
     "node.js": "Node.js",
     nextjs: "Next.js",
