@@ -31,12 +31,12 @@ function TimelinePeriodCard({
     endTime,
     icons,
     details,
-    stackLine,
     tech_stacks,
   } = period;
   const roleInfo = `${organization} | ${role} | ${location}`;
   const organizationIconType =
     entryType === "experience" ? IconType.Company : IconType.School;
+  const stackLine = icons.join(", ");
   const timeRange = `${formatTimelineDate(startTime)} - ${formatTimelineDate(
     endTime,
   )}`;

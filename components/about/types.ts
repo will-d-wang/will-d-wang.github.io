@@ -20,7 +20,6 @@ type BaseTimelinePeriod = {
 };
 
 export type TimelinePeriod = BaseTimelinePeriod & {
-  stackLine?: string;
   tech_stacks?: string[];
 };
 

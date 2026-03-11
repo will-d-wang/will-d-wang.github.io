@@ -64,8 +64,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Node.js",
           "Terraform",
         ],
-        stackLine:
-          "Python, TypeScript, Node.js, Kubernetes, Terraform, AWS",
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
           "Led system test development on AWS to validate the on-prem solution end-to-end, including backend API and service validation plus integration coverage.",
@@ -96,8 +94,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "AWS",
           "TeamCity",
         ],
-        stackLine:
-          "Python, Terraform, Kubernetes, AWS, TeamCity, Golang",
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
           "Reduced on-prem SaaS release time from multiple days to about 2 hours by streamlining CI/CD pipelines, backend build and test workflows, and system-test automation.",
@@ -118,7 +114,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Golang",
           "Docker",
         ],
-        stackLine: "Golang, Python, Terraform, Kubernetes, Docker, AWS",
         details: [
           "Worked on a microservice-based SaaS platform deployed on Kubernetes and Docker.",
           "Contributed to the SaaS on-premise application in Go, improving deployment reliability and usability.",
@@ -189,8 +184,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Elasticsearch",
           "Kibana",
         ],
-        stackLine:
-          "Python, Jenkins, Groovy, Docker, Elasticsearch, Kibana",
         details: [
           "Worked on the Legato Delivery team within the IoT Business Unit.",
           "Maintained the Legato Testing Project, a pytest-based framework with Pexpect-driven CLI validation.",
@@ -208,7 +201,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         startTime: "2018-02",
         endTime: "2019-09",
         icons: ["Python", "VS-Code", "Git", "TeamCity", "JIRA", "Confluence"],
-        stackLine: "Python, TeamCity, Git, VS Code, Jira, Confluence",
         details: [
           "Designed and implemented system tests and automation tools in Python for the Intel NSG SSD Firmware Platform Service team.",
           "Built a tool to collect QuickBuild results via REST APIs and analyze outcomes to improve CI visibility.",
@@ -230,7 +222,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         startTime: "2017-04",
         endTime: "2018-01",
         icons: ["C", "Python", "Git", "TeamCity", "JIRA", "Confluence"],
-        stackLine: "C, Python, TeamCity, Git, Jira, Confluence",
         details: [
           "Programmed and debugged SSD firmware in C for the Intel SSD Firmware Product team.",
           "Maintained firmware for a production series of Intel NAND SSD drives, supporting feature updates and defect fixes.",
@@ -244,7 +235,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         startTime: "2016-01",
         endTime: "2017-03",
         icons: ["C", "Python", "Linux", "Git", "Bash", "CMake"],
-        stackLine: "C, Python, Linux, Git, Bash, CMake",
         details: [
           "Worked as a contractor supporting Ericsson projects following the acquisition.",
           "Developed and maintained hardware simulation software to support SSR feature development.",
@@ -258,7 +248,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         startTime: "2014-05",
         endTime: "2015-12",
         icons: ["C", "Python", "Linux", "Git", "Bash", "CMake"],
-        stackLine: "C, Python, Linux, Git, Bash, CMake",
         details: [
           "Joined the Forwarding Service team for the Smart Service Router.",
           "Developed ACL features in IP-OS and collaborated on Service Sync and Software Quality Ranking initiatives.",
