@@ -447,7 +447,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     "HCL Technologies": {
       type: IconType.Company,
       href: "https://www.hcltech.com",
-      filename: "hcltech.svg",
+      filename: "HCLTech.jpeg",
     },
     "Sierra Wireless": {
       type: IconType.Company,
