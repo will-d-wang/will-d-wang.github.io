@@ -3,6 +3,15 @@ title: About Me
 description: Software engineer with strong experience in backend development (Node.js), Python-based test automation, and DevOps/SRE for SaaS and on-prem systems.
 ---
 
-import { AboutPage } from "../components/AboutPage";
+import { CareerJourneySection } from "../components/about/CareerJourneySection";
+import { AboutImage, SocialLinks } from "../components/about/Header";
+import { TechStackSection } from "../components/about/TechStackSection";
+import { CareerEvolutionSection } from "../components/about/TimelineSection";
 
-<AboutPage />
+<main className="home-page">
+  <AboutImage />
+  <SocialLinks />
+  <CareerJourneySection />
+  <CareerEvolutionSection />
+  <TechStackSection />
+</main>
