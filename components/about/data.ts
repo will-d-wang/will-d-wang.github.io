@@ -80,10 +80,22 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "GCP",
           "Azure",
           "AWS",
+          "Kubernetes",
+          "Docker",
           "Linux",
+          "Node.js",
+          "Express",
+          "React",
+          "Cloudflare",
+          "Terraform",
+          "Helm",
           "Windows11",
           "JIRA",
           "Confluence",
+          "NGINX",
+          "NPM",
+          "HashiCorp Vault",
+          "Vercel"
         ],
         tech_stacks: [
           "Python - System testing & analysis",
@@ -124,6 +136,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Azure",
           "AWS",
           "TeamCity",
+          "Bash"
         ],
         tech_stacks: [
           "Terraform - Infrastructure as Code & resources management",
@@ -193,7 +206,11 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "PyTorch",
           "Git",
           "GCP",
+          "D3.js",
+          "LaTeX",
           "MongoDB",
+          "NumPy",
+          "Scikit-learn"
         ],
         tech_stacks: [
           "CSE6242 - Data and Visual Analytics",
@@ -229,6 +246,8 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Elasticsearch",
           "Logstash",
           "Kibana",
+          "Grafana",
+          "HashiCorp Vagrant"
         ],
         tech_stacks: [
           "Python - System testing",
