@@ -9,18 +9,23 @@ export type CurrentLanguage = {
   href: string;
 };
 
-export type TimelinePeriod = {
+type BaseTimelinePeriod = {
   company: string;
   role: string;
   location: string;
   startTime: string;
   endTime: string;
   icons: string[];
-  tech_stacks: string[];
   details?: string[];
 };
 
+export type TimelinePeriod = BaseTimelinePeriod & {
+  stackLine?: string;
+  tech_stacks?: string[];
+};
+
 export type TimelineEntry = {
+  type: "experience" | "education";
   title: string;
   periods: TimelinePeriod[];
 };

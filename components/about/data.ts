@@ -17,22 +17,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
 ];
 
-export const MY_TECH_STACK_ROWS = [
-  ["C", "Python", "Groovy", "Golang", "Java", "JavaScript"],
-  ["Gradle", "Jenkins", "Ubuntu", "VIM", "Git", "Docker", "Kubernetes"],
-  [
-    "Vagrant",
-    "Github",
-    "VS-Code",
-    "Windows11",
-    "Pandas",
-    "Terraform",
-    "GCP",
-    "AWS",
-    "Azure",
-  ],
-];
-
 export const CURRENT_LANGUAGES: CurrentLanguage[] = [
   { label: "Python", href: "https://www.python.org/" },
   { label: "Golang", href: "https://golang.org/" },
@@ -63,6 +47,7 @@ export const CURRENT_STATUS: string[] = [
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
+    type: "experience",
     title: "Platform Engineer",
     periods: [
       {
@@ -73,38 +58,14 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         endTime: "present",
         icons: [
           "Python",
-          "JavaScript",
           "TypeScript",
-          "Bash",
-          "MongoDB",
-          "GCP",
-          "Azure",
           "AWS",
           "Kubernetes",
-          "Docker",
-          "Linux",
           "Node.js",
-          "Express",
-          "React",
-          "Cloudflare",
           "Terraform",
-          "Helm",
-          "Windows11",
-          "JIRA",
-          "Confluence",
-          "NGINX",
-          "NPM",
-          "HashiCorp Vault",
-          "Vercel"
         ],
-        tech_stacks: [
-          "Python - System testing & analysis",
-          "JavaScript & Typescript - Backend development with REST API",
-          "SRE - System monitoring, alerting, incident response",
-          "Cloud Architecture - GCP, Azure, AWS",
-          "Platform reliability engineering",
-          "Advanced DevSecOps practices",
-        ],
+        stackLine:
+          "Python, TypeScript, Node.js, Kubernetes, Terraform, AWS",
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
           "Led system test development on AWS to validate the on-prem solution end-to-end, including backend API and service validation plus integration coverage.",
@@ -118,6 +79,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     ],
   },
   {
+    type: "experience",
     title: "DevOps Engineer",
     periods: [
       {
@@ -130,24 +92,12 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Python",
           "Terraform",
           "Kubernetes",
-          "Docker",
           "Golang",
-          "GCP",
-          "Azure",
           "AWS",
           "TeamCity",
-          "Bash"
         ],
-        tech_stacks: [
-          "Terraform - Infrastructure as Code & resources management",
-          "Kubernetes - SAAS application orchestration",
-          "Docker - Tasks containerization",
-          "Cloud - GCP, Azure, AWS platform management",
-          "TeamCity - CICD pipeline design and implementation",
-          "Python - System testing & automation",
-          "DevSecOps - Pipeline designs, Cloud security enhancement",
-          "Golang - Installer development",
-        ],
+        stackLine:
+          "Python, Terraform, Kubernetes, AWS, TeamCity, Golang",
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
           "Reduced on-prem SaaS release time from multiple days to about 2 hours by streamlining CI/CD pipelines, backend build and test workflows, and system-test automation.",
@@ -164,19 +114,11 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Python",
           "Terraform",
           "Kubernetes",
-          "Docker",
-          "GCP",
           "AWS",
           "Golang",
+          "Docker",
         ],
-        tech_stacks: [
-          "Terraform - Infrastructure as Code & resources management",
-          "Kubernetes - SAAS application orchestration",
-          "Docker - Tasks containerization",
-          "Cloud - GCP and AWS platform management",
-          "Python - System testing & automation",
-          "Golang - Installer development",
-        ],
+        stackLine: "Golang, Python, Terraform, Kubernetes, Docker, AWS",
         details: [
           "Worked on a microservice-based SaaS platform deployed on Kubernetes and Docker.",
           "Contributed to the SaaS on-premise application in Go, improving deployment reliability and usability.",
@@ -188,6 +130,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     ],
   },
   {
+    type: "education",
     title: "Master of Science - Computer Science",
     periods: [
       {
@@ -210,7 +153,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "LaTeX",
           "MongoDB",
           "NumPy",
-          "Scikit-learn"
+          "Scikit-learn",
         ],
         tech_stacks: [
           "CSE6242 - Data and Visual Analytics",
@@ -229,6 +172,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     ],
   },
   {
+    type: "experience",
     title: "SDET (Software Development Engineer in Test)",
     periods: [
       {
@@ -241,21 +185,12 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Python",
           "Docker",
           "Jenkins",
-          "Git",
           "Groovy",
           "Elasticsearch",
-          "Logstash",
           "Kibana",
-          "Grafana",
-          "HashiCorp Vagrant"
         ],
-        tech_stacks: [
-          "Python - System testing",
-          "Docker - Test agent containerization",
-          "Jenkins - CI/CD",
-          "Log & Reporting - ELK (Elasticsearch, Logstash, Kibana)",
-          "Groovy - Jenkins Pipeline development",
-        ],
+        stackLine:
+          "Python, Jenkins, Groovy, Docker, Elasticsearch, Kibana",
         details: [
           "Worked on the Legato Delivery team within the IoT Business Unit.",
           "Maintained the Legato Testing Project, a pytest-based framework with Pexpect-driven CLI validation.",
@@ -273,12 +208,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         startTime: "2018-02",
         endTime: "2019-09",
         icons: ["Python", "VS-Code", "Git", "TeamCity", "JIRA", "Confluence"],
-        tech_stacks: [
-          "Python - System testing",
-          "Python - Workflow automation",
-          "CICD - Teamcity",
-          "TDD - Test automation system",
-        ],
+        stackLine: "Python, TeamCity, Git, VS Code, Jira, Confluence",
         details: [
           "Designed and implemented system tests and automation tools in Python for the Intel NSG SSD Firmware Platform Service team.",
           "Built a tool to collect QuickBuild results via REST APIs and analyze outcomes to improve CI visibility.",
@@ -290,6 +220,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     ],
   },
   {
+    type: "experience",
     title: "Software Engineer",
     periods: [
       {
@@ -299,10 +230,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         startTime: "2017-04",
         endTime: "2018-01",
         icons: ["C", "Python", "Git", "TeamCity", "JIRA", "Confluence"],
-        tech_stacks: [
-          "C - SSD Firmware Development",
-          "Python - System testing",
-        ],
+        stackLine: "C, Python, TeamCity, Git, Jira, Confluence",
         details: [
           "Programmed and debugged SSD firmware in C for the Intel SSD Firmware Product team.",
           "Maintained firmware for a production series of Intel NAND SSD drives, supporting feature updates and defect fixes.",
@@ -315,12 +243,8 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         location: "Burnaby, B.C., Canada",
         startTime: "2016-01",
         endTime: "2017-03",
-        icons: ["C", "Python", "CMake", "VIM", "Git", "Bash", "Linux"],
-        tech_stacks: [
-          "C - Linux based Distributed system development",
-          "Python - Integration & System tests",
-          "Layer 2 ACL implementation and validation",
-        ],
+        icons: ["C", "Python", "Linux", "Git", "Bash", "CMake"],
+        stackLine: "C, Python, Linux, Git, Bash, CMake",
         details: [
           "Worked as a contractor supporting Ericsson projects following the acquisition.",
           "Developed and maintained hardware simulation software to support SSR feature development.",
@@ -333,13 +257,8 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         location: "Burnaby, B.C., Canada",
         startTime: "2014-05",
         endTime: "2015-12",
-        icons: ["C", "Python", "CMake", "VIM", "Git", "Bash", "Linux"],
-        tech_stacks: [
-          "C - Linux based Distributed system development",
-          "Python - Integration & System tests",
-          "Agile Development",
-          "System Performance and Profiling",
-        ],
+        icons: ["C", "Python", "Linux", "Git", "Bash", "CMake"],
+        stackLine: "C, Python, Linux, Git, Bash, CMake",
         details: [
           "Joined the Forwarding Service team for the Smart Service Router.",
           "Developed ACL features in IP-OS and collaborated on Service Sync and Software Quality Ranking initiatives.",
@@ -352,6 +271,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     ],
   },
   {
+    type: "education",
     title: "Bachelor of Applied Science (BASc) - Computer Science",
     periods: [
       {

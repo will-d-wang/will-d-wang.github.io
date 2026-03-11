@@ -17,15 +17,13 @@ export function TechRow({ icons }: { icons: string[] }) {
 }
 
 function TimelinePeriodCard({
-  company,
-  role,
-  location,
-  startTime,
-  endTime,
-  icons,
-  tech_stacks: summary,
-  details,
-}: TimelinePeriod) {
+  entryType,
+  period,
+}: {
+  entryType: TimelineEntry["type"];
+  period: TimelinePeriod;
+}) {
+  const { company, role, location, startTime, endTime, icons, details } = period;
   const roleInfo = `${company} | ${role} | ${location}`;
   const timeRange = `${formatTimelineDate(startTime)} - ${formatTimelineDate(
     endTime,
@@ -37,13 +35,24 @@ function TimelinePeriodCard({
       <div>
         <strong>{timeRange}</strong>
       </div>
-      <strong>Tech Stack & Knowledge </strong>
+      {entryType === "experience" ? (
+        <div style={{ marginTop: "0.75rem" }}>
+          <strong>Core Stack </strong>
+          <span>{period.stackLine}</span>
+        </div>
+      ) : (
+        <>
+          <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+            <strong>Coursework</strong>
+          </div>
+          <ul>
+            {period.tech_stacks.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </>
+      )}
       <TechRow icons={icons} />
-      <ul>
-        {summary.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
       {details?.length ? (
         <>
           <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
@@ -56,7 +65,7 @@ function TimelinePeriodCard({
   );
 }
 
-function TimelineEntryCard({ title, periods }: TimelineEntry) {
+function TimelineEntryCard({ type, title, periods }: TimelineEntry) {
   const duration = getEntryDuration(periods);
 
   return (
@@ -69,7 +78,8 @@ function TimelineEntryCard({ title, periods }: TimelineEntry) {
         {periods.map((period) => (
           <TimelinePeriodCard
             key={`${title}-${period.company}-${period.role}-${period.startTime}`}
-            {...period}
+            entryType={type}
+            period={period}
           />
         ))}
       </div>

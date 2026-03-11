@@ -9,8 +9,8 @@ export function AboutPage() {
       <AboutImage />
       <SocialLinks />
       <CareerJourneySection />
-      <TechStackSection />
       <CareerEvolutionSection />
+      <TechStackSection />
     </main>
   );
 }
