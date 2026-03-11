@@ -136,11 +136,6 @@ const TECH_DATA: Record<string, TechData> = {
     href: "https://vercel.com/",
     src: "/icons/Vercel.svg",
   },
-  "HashiCorp Vagrant": {
-    type: TechType.CloudInfra,
-    href: "https://www.vagrantup.com/",
-    src: "/icons/HashiCorpVagrant.svg",
-  },
   "HashiCorp Vault": {
     type: TechType.CloudInfra,
     href: "https://www.hashicorp.com/products/vault",
