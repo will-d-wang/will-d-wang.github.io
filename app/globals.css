@@ -220,19 +220,19 @@
 
   body {
     @apply bg-background text-foreground;
-    line-height: 1.7;
+    line-height: 1.5;
   }
 }
 
 .nextra-content,
 .nextra-sidebar-container,
 .nextra-toc {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 20px;
+    font-size: 19px;
   }
 }
 
