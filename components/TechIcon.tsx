@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 // Maps technology names used across MDX content to icon metadata for rendering
 // linked tech badges. This module centralizes icon source selection so pages can
 // reference tools by name without repeating URLs or asset paths.
@@ -195,8 +198,8 @@ export function TechIcon({ alt, width = 60, height = 60 }: TechIconProps) {
   }
 
   return (
-    <a href={techData.href}>
-      <img src={techData.src} alt={alt} width={width} height={height} />
-    </a>
+    <Link href={techData.href}>
+      <Image src={techData.src} alt={alt} width={width} height={height} />
+    </Link>
   );
 }
