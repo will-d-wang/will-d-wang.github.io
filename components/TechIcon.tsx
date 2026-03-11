@@ -1,3 +1,7 @@
+// Maps technology names used across MDX content to icon metadata for rendering
+// linked tech badges. This module centralizes icon source selection so pages can
+// reference tools by name without repeating URLs or asset paths.
+// The icons can be found in https://techicons.dev/
 interface TechData {
   href: string;
   src: string;
@@ -6,83 +10,95 @@ interface TechData {
 const TECH_DATA: Record<string, TechData> = {
   C: {
     href: "https://www.cprogramming.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg",
+    src: "/icons/C.svg",
   },
   "C++": {
     href: "https://isocpp.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg",
+    src: "/icons/CPlusPlus.svg",
   },
   Python: {
     href: "https://www.python.org/doc",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
+    src: "/icons/Python.svg",
   },
   Groovy: {
     href: "https://groovy-lang.org/documentation.html",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/groovy/groovy-original.svg",
+    src: "/icons/Groovy.svg",
   },
   Golang: {
     href: "https://go.dev",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg",
+    src: "/icons/Golang.svg",
   },
   Java: {
     href: "https://dev.java",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
+    src: "/icons/Java.svg",
   },
   JavaScript: {
     href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+    src: "/icons/JavaScript.svg",
   },
   TypeScript: {
     href: "https://www.typescriptlang.org/docs/",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
+    src: "/icons/TypeScript.svg",
   },
   Gradle: {
     href: "https://docs.gradle.org/current/userguide/userguide.html",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/gradle/gradle-original.svg",
+    src: "/icons/Gradle.svg",
   },
   Jenkins: {
     href: "https://www.jenkins.io/doc",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg",
+    src: "/icons/Jenkins.svg",
   },
   Ubuntu: {
     href: "https://ubuntu.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/ubuntu/ubuntu-plain-wordmark.svg",
+    src: "/icons/Ubuntu.svg",
   },
   VIM: {
     href: "https://www.vim.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vim/vim-plain.svg",
+    src: "/icons/VIM.svg",
   },
   Git: {
     href: "https://git-scm.com/doc",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
+    src: "/icons/Git.svg",
   },
   Docker: {
     href: "https://docs.docker.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",
+    src: "/icons/Docker.svg",
+  },
+  Elasticsearch: {
+    href: "https://www.elastic.co/elasticsearch",
+    src: "/icons/ElasticSearch.svg",
+  },
+  Logstash: {
+    href: "https://www.elastic.co/logstash",
+    src: "/icons/Logstash.svg",
+  },
+  Kibana: {
+    href: "https://www.elastic.co/kibana",
+    src: "/icons/Kibana.svg",
   },
   Kubernetes: {
     href: "https://kubernetes.io/docs/home",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg",
+    src: "/icons/Kubernetes.svg",
   },
   Vagrant: {
     href: "https://www.vagrantup.com/docs",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vagrant/vagrant-original.svg",
+    src: "/icons/Vagrant.svg",
   },
   Github: {
     href: "https://docs.github.com/en",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg",
+    src: "/icons/Github.svg",
   },
   "VS-Code": {
     href: "https://code.visualstudio.com/docs",
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png",
+    src: "/icons/VSCode.svg",
   },
   Pandas: {
     href: "https://pandas.pydata.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg",
+    src: "/icons/Pandas.svg",
   },
   Pytest: {
     href: "https://docs.pytest.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/pytest/pytest-original.svg",
+    src: "/icons/Pytest.svg",
   },
   Pydantic: {
     href: "https://docs.pydantic.dev",
@@ -90,27 +106,27 @@ const TECH_DATA: Record<string, TechData> = {
   },
   Terraform: {
     href: "https://www.terraform.io",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg",
+    src: "/icons/Terraform.svg",
   },
   GCP: {
     href: "https://cloud.google.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg",
+    src: "/icons/GCP.svg",
   },
   AWS: {
     href: "https://aws.amazon.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+    src: "/icons/AWS.svg",
   },
   Azure: {
     href: "https://azure.microsoft.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg",
+    src: "/icons/Azure.svg",
   },
   Linux: {
     href: "https://www.linux.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg",
+    src: "/icons/Linux.svg",
   },
   "Apache Spark": {
     href: "https://spark.apache.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg",
+    src: "/icons/ApacheSpark.svg",
   },
   PySpark: {
     href: "https://spark.apache.org/docs/latest/api/python/",
@@ -122,11 +138,11 @@ const TECH_DATA: Record<string, TechData> = {
   },
   PyTorch: {
     href: "https://pytorch.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/pytorch/pytorch-original.svg",
+    src: "/icons/PyTorch.svg",
   },
   MongoDB: {
     href: "https://www.mongodb.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg",
+    src: "/icons/MongoDB.svg",
   },
   TeamCity: {
     href: "https://www.jetbrains.com/help/teamcity/teamcity-documentation.html",
@@ -134,23 +150,23 @@ const TECH_DATA: Record<string, TechData> = {
   },
   JIRA: {
     href: "https://www.atlassian.com/software/jira",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jira/jira-original.svg",
+    src: "/icons/JIRA.svg",
   },
   Confluence: {
     href: "https://www.atlassian.com/software/confluence",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/confluence/confluence-original.svg",
+    src: "/icons/Confluence.svg",
   },
   Bash: {
     href: "https://www.gnu.org/software/bash/",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg",
+    src: "/icons/Bash.svg",
   },
   CMake: {
     href: "https://cmake.org",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/cmake/cmake-original.svg",
+    src: "/icons/CMake.svg",
   },
   MySQL: {
     href: "https://www.mysql.com",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg",
+    src: "/icons/MySQL.svg",
   },
 };
 
