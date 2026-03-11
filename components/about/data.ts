@@ -2,7 +2,7 @@ import type { SocialLink, TimelineEntry } from "@/components/about/types";
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    alt: "My github.io",
+    alt: "My GitHub profile",
     href: "https://github.com/Will-D-Wang",
     src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg",
   },
@@ -14,10 +14,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const CURRENT_STATUS: string[] = [
-  "🎵️🎶️ I'm playing with AI, backend, micro-service, system design, DevOps, SRE, Platform Engineering",
-  "🍻️🥂️ I'm looking to collaborate on more interesting open source projects.",
-  "🌱🌳️ I'm learning history, psychology, philosophy, management, etc.",
-  "☯️❤️ Fun fact: Life is the most precious journey, only once in the universe, enjoy it everyday.",
+  "🎵️🎶️ I'm exploring AI, backend systems, microservices, system design, DevOps, SRE, and platform engineering.",
+  "🍻️🥂️ I'm looking to collaborate on more interesting open-source projects.",
+  "🌱🌳️ I'm studying history, psychology, philosophy, management, and related subjects.",
+  "☯️❤️ Fun fact: Life is a precious journey that happens only once in the universe, so enjoy it every day.",
 ];
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
@@ -42,13 +42,13 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Terraform",
         ],
         details: [
-          "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
-          "Led system test development on AWS to validate the on-prem solution end-to-end, including backend API and service validation plus integration coverage.",
-          "Owned TeamCity CI/CD infrastructure, creating reusable meta-runners, build templates, and hundreds of build configurations to support backend delivery at scale.",
+          "Joined the Platform team to advance DevOps and SRE objectives, improving backend service reliability, release stability, and operational readiness.",
+          "Led the Pipeline group in building CI/CD pipelines for the Anyware Manager product line across both SaaS and on-premises releases, while also contributing backend improvements for safer and faster deployments.",
+          "Led system test development on AWS to validate the on-premises solution end to end, including backend API validation, service verification, and integration coverage.",
           "Implemented and validated security compliance features across AWS and Azure environments.",
-          "Joined the Platform team to drive DevOps and SRE objectives, improving backend service reliability, release stability, and operational readiness.",
-          "Owned security reviews and security feature delivery, and contributed to SOC 2 readiness and audit support.",
-          "Worked across DevOps, Platform, and SRE responsibilities to support backend development, CI/CD reliability, infrastructure, and production operations.",
+          "Owned the TeamCity CI/CD infrastructure, creating reusable meta-runners, build templates, and hundreds of build configurations to support backend delivery at scale.",
+          "Led security reviews and security feature delivery, and contributed to SOC 2 readiness and audit support.",
+          "Worked across DevOps, Platform, and SRE functions to support backend development, CI/CD reliability, infrastructure, and production operations.",
         ],
       },
     ],
@@ -74,9 +74,8 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "TeamCity"
         ],
         details: [
-          "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
-          "Reduced on-prem SaaS release time from multiple days to about 2 hours by streamlining CI/CD pipelines, backend build and test workflows, and system-test automation.",
-          "Owned TeamCity CI/CD infrastructure and supported backend delivery at scale.",
+          "Worked on the Anyware Manager product line, contributing to both the SaaS and on-premises solutions.",
+          "Continued in the same role following HP's acquisition of Teradici, after previously serving as a Staff Software Developer.",
         ],
       },
       {
@@ -96,11 +95,14 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "TeamCity"
         ],
         details: [
-          "Worked on a microservice-based SaaS platform deployed on Kubernetes and Docker.",
-          "Contributed to the SaaS on-premise application in Go, improving deployment reliability and usability.",
+          "Worked on a microservices-based SaaS platform deployed on Kubernetes and Docker.",
+          "Led the Pipeline group in building CI/CD pipelines for the Anyware Manager product line's on-premises releases, while also contributing backend improvements for safer and faster product releases.",
+          "Served as the CI/CD and release gatekeeper, reviewing pipeline health, enforcing quality checks, and coordinating release readiness.",
+          "Contributed to the SaaS and on-premises application in Go, improving deployment reliability and usability.",
+          "Reduced release time for the on-premises SaaS offering from multiple days to about two hours by streamlining CI/CD pipelines, backend build and test workflows, and system-test automation.",
+          "Owned the TeamCity CI/CD infrastructure and supported backend delivery at scale.",
           "Developed and maintained Python test automation scripts to strengthen regression coverage.",
           "Managed Google Cloud Platform and AWS resources using Terraform.",
-          "Served as CI/CD and release gatekeeper, reviewing pipeline health, enforcing quality checks, and coordinating release readiness.",
         ],
       },
     ],
@@ -175,7 +177,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Developed and maintained Jenkins pipeline Groovy scripts and Docker images to automate CI/CD workflows.",
           "Introduced test-driven development practices for Jenkins pipeline Groovy scripts to improve reliability and reduce regressions.",
           "Automated performance testing and published results to Kibana dashboards.",
-          "Automated Python test reporting by collecting metrics from Jira and Quality Center via REST APIs, then generating Confluence pages.",
+          "Automated Python-based test reporting by collecting metrics from Jira and Quality Center through REST APIs and generating Confluence pages.",
           "Served as Scrum Master for the delivery team, facilitating sprint ceremonies and removing blockers.",
         ],
       },
@@ -223,7 +225,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         details: [
           "Worked as a contractor supporting Ericsson projects following the acquisition.",
           "Developed and maintained hardware simulation software to support SSR feature development.",
-          "Implemented and tested Layer 2 ACL functionality with automated and manual test cases.",
+          "Implemented and tested Layer 2 ACL functionality using both automated and manual test cases.",
         ],
       },
       {
@@ -236,7 +238,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         details: [
           "Joined the Forwarding Service team for the Smart Service Router.",
           "Developed ACL features in IP-OS and collaborated on Service Sync and Software Quality Ranking initiatives.",
-          "Built a Python unit test framework for ACL and improved coverage and regression safety.",
+          "Built a Python unit test framework for ACL, improving coverage and regression safety.",
           "Designed module APIs and wrote Doxygen documentation for maintainable interfaces.",
           "Led performance testing and optimization of a pub-sub system supporting 128K circuits.",
           "Drove profiling and coverage reporting to improve runtime efficiency and code quality.",
@@ -271,7 +273,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "CMPT-771 - Internet Architecture and Protocols",
         ],
         details: [
-          "Tutored CMPT 130 lab sessions and guided students in debugging and improving C programs.",
+          "Tutored CMPT 130 lab sessions and guided students in debugging and improving their C programs.",
           "Graded programming assignments and exams, providing clear and actionable feedback.",
         ],
       },
