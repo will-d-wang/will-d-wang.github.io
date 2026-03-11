@@ -1,4 +1,4 @@
-import { TechIcon } from "@/components/TechIcon";
+import { Icon, IconType } from "@/components/Icon";
 import { TIMELINE_ENTRIES } from "@/components/about/data";
 import {
   formatTimelineDate,
@@ -10,7 +10,7 @@ export function TechRow({ icons }: { icons: string[] }) {
   return (
     <div className="home-tech-row">
       {icons.map((icon) => (
-        <TechIcon key={icon} alt={icon} />
+        <Icon key={icon} name={icon} type={IconType.Tech} />
       ))}
     </div>
   );
@@ -23,17 +23,38 @@ function TimelinePeriodCard({
   entryType: TimelineEntry["type"];
   period: TimelinePeriod;
 }) {
-  const { company, role, location, startTime, endTime, icons, details } = period;
-  const roleInfo = `${company} | ${role} | ${location}`;
+  const { organization, role, location, startTime, endTime, icons, details } =
+    period;
+  const roleInfo = `${organization} | ${role} | ${location}`;
+  const organizationIconType =
+    entryType === "experience" ? IconType.Company : IconType.School;
   const timeRange = `${formatTimelineDate(startTime)} - ${formatTimelineDate(
     endTime,
   )}`;
 
   return (
     <article className="home-timeline-period">
-      <strong>{roleInfo}</strong>
-      <div>
-        <strong>{timeRange}</strong>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          gap: "0.75rem",
+          flexWrap: "nowrap",
+        }}
+      >
+        <Icon
+          name={organization}
+          type={organizationIconType}
+          alt={organization}
+        />
+        <div>
+          <div>
+            <strong>{roleInfo}</strong>
+          </div>
+          <div>
+            <strong>{timeRange}</strong>
+          </div>
+        </div>
       </div>
       {entryType === "experience" ? (
         <div style={{ marginTop: "0.75rem" }}>
@@ -77,7 +98,7 @@ function TimelineEntryCard({ type, title, periods }: TimelineEntry) {
       <div className="home-timeline-content">
         {periods.map((period) => (
           <TimelinePeriodCard
-            key={`${title}-${period.company}-${period.role}-${period.startTime}`}
+            key={`${title}-${period.organization}-${period.role}-${period.startTime}`}
             entryType={type}
             period={period}
           />

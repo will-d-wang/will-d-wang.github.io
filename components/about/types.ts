@@ -10,7 +10,7 @@ export type CurrentLanguage = {
 };
 
 type BaseTimelinePeriod = {
-  company: string;
+  organization: string;
   role: string;
   location: string;
   startTime: string;

@@ -1,4 +1,9 @@
-import { ALL_TECH_NAMES, getTechData, TechType } from "@/components/TechIcon";
+import {
+  ALL_TECH_NAMES,
+  getIconData,
+  IconType,
+  TechType,
+} from "@/components/Icon";
 import { TechRow } from "@/components/about/TimelineSection";
 
 const ICONS_PER_ROW = 8;
@@ -7,16 +12,16 @@ export function TechStackSection() {
   const iconsByType = ALL_TECH_NAMES.reduce<
     Partial<Record<TechType, string[]>>
   >((groups, icon) => {
-    const techData = getTechData(icon);
+    const techData = getIconData(icon, IconType.Tech);
     if (!techData) {
       return groups;
     }
 
-    if (!groups[techData.type]) {
-      groups[techData.type] = [];
+    if (!groups[techData.techType]) {
+      groups[techData.techType] = [];
     }
 
-    groups[techData.type].push(icon);
+    groups[techData.techType].push(icon);
     return groups;
   }, {});
 

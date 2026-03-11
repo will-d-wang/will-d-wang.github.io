@@ -51,7 +51,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     title: "Platform Engineer",
     periods: [
       {
-        company: "HP",
+        organization: "HP",
         role: "Software Applications Engineer 3",
         location: "Vancouver, B.C., Canada · Hybrid",
         startTime: "2024-01",
@@ -83,7 +83,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     title: "DevOps Engineer",
     periods: [
       {
-        company: "HP",
+        organization: "HP",
         role: "Software Applications Engineer 3",
         location: "Vancouver, B.C., Canada · Hybrid",
         startTime: "2021-10",
@@ -105,7 +105,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        company: "Teradici, an HP Company",
+        organization: "Teradici, an HP Company",
         role: "Software Developer - Staff",
         location: "Greater Vancouver, B.C., Canada",
         startTime: "2021-01",
@@ -134,7 +134,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     title: "Master of Science - Computer Science",
     periods: [
       {
-        company: "Georgia Institute of Technology",
+        organization: "Georgia Institute of Technology",
         role: "Master of Science - Computer Science (Grade: 3.82/4.0)",
         location: "Atlanta, GA, USA",
         startTime: "2021-01",
@@ -176,7 +176,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     title: "SDET (Software Development Engineer in Test)",
     periods: [
       {
-        company: "Sierra Wireless",
+        organization: "Sierra Wireless",
         role: "Senior Validation Engineer",
         location: "Richmond, British Columbia, Canada",
         startTime: "2019-10",
@@ -202,7 +202,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        company: "Intel Corporation (Contractor)",
+        organization: "Intel Corporation (Contractor)",
         role: "Validation Engineer",
         location: "Vancouver, B.C., Canada",
         startTime: "2018-02",
@@ -224,7 +224,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     title: "Software Engineer",
     periods: [
       {
-        company: "Intel Corporation (Contractor)",
+        organization: "Intel Corporation (Contractor)",
         role: "Software Engineer",
         location: "Vancouver, B.C., Canada",
         startTime: "2017-04",
@@ -238,7 +238,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        company: "HCL Technologies",
+        organization: "HCL Technologies",
         role: "Software Developer",
         location: "Burnaby, B.C., Canada",
         startTime: "2016-01",
@@ -252,7 +252,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        company: "Ericsson",
+        organization: "Ericsson",
         role: "Software Developer",
         location: "Burnaby, B.C., Canada",
         startTime: "2014-05",
@@ -275,7 +275,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     title: "Bachelor of Applied Science (BASc) - Computer Science",
     periods: [
       {
-        company: "Simon Fraser University",
+        organization: "Simon Fraser University",
         role: "BASc - Computer Science (Concentration on operating systems and networking)",
         location: "Burnaby, B.C., Canada",
         startTime: "2011-01",
