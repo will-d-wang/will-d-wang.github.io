@@ -113,7 +113,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     periods: [
       {
         organization: "Georgia Institute of Technology",
-        role: "Master of Science - Computer Science (Grade: 3.82/4.0)",
+        role: "GPA: 3.82/4.0",
         location: "Atlanta, GA, USA",
         startTime: "2021-01",
         endTime: "2024-12",

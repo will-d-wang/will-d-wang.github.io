@@ -20,31 +20,31 @@ const CURRENT_PRIORITY = [
 
 const INTRO_PARAGRAPHS: ReactNode[] = [
   [
-    "Welcome!👋! I've marked down my career journey as a software engineer, inspired by the idea of ",
+    "👋 Welcome! I started documenting my journey as a software engineer after being inspired by ",
     <Link
       key="intro-phd-grind"
       href="https://www.goodreads.com/en/book/show/15731248-the-ph-d-grind"
     >
-      The Ph.D. Grind: A Ph.D. Student Memoir
+      The Ph.D. Grind: A Ph.D. Student Memoir, Philip J. Guo
     </Link>,
-    ".",
+    ", in which he chronicles his six-year pursuit of a Ph.D. in Computer Science at Stanford University from 2006 to 2012.",
   ],
   [
-    "The software engineer journey is a pursuit of ",
+    "😇 A software engineering career is also a pursuit of ",
     <Link
       key="intro-craftsmanship"
       href="https://manifesto.softwarecraftsmanship.org/"
     >
       craftsmanship
     </Link>,
-    " spirit. Software engineers normally read more, grind more technologies and then use less and elegant code in work.",
+    ". It means reading broadly, learning deeply, and striving to solve real problems with simpler, more elegant code.",
   ],
   [
-    "Computer programming is ultimately an form of art, that was the great insight from ",
+    "🎨 Through this journal and the spirit of craftsmanship, I see computer programming as ultimately a form of art, an idea championed by ",
     <Link key="intro-knuth" href="https://en.wikipedia.org/wiki/Donald_Knuth">
       Donald Knuth
     </Link>,
-    ", who even wrote a book to emphasize this point: ",
+    ", who underscored that view in ",
     <Link
       key="intro-taocp"
       href="https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming"
@@ -57,12 +57,27 @@ const INTRO_PARAGRAPHS: ReactNode[] = [
 
 export function CareerJourneySection() {
   return (
-    <section>
+    <>
+      <CareerJournalSection />
+      <CurrentStatusSection />
+    </>
+  );
+}
+
+export function CareerJournalSection() {
+  return (
+    <section className="home-section home-journal">
       <h2>My Career Journey</h2>
       {INTRO_PARAGRAPHS.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}
+    </section>
+  );
+}
 
+export function CurrentStatusSection() {
+  return (
+    <section className="home-section">
       <h3>Current Status</h3>
       <p>🔭 My current focuses:</p>
       <div className="home-tech-row" style={{ justifyContent: "flex-start" }}>
