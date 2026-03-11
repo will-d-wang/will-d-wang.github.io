@@ -58,8 +58,10 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         endTime: "present",
         icons: [
           "Python",
+          "JavaScript",
           "TypeScript",
           "AWS",
+          "Azure",
           "Kubernetes",
           "Node.js",
           "Terraform",
@@ -89,10 +91,12 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         icons: [
           "Python",
           "Terraform",
+          "Docker",
           "Kubernetes",
           "Golang",
           "AWS",
-          "TeamCity",
+          "GCP",
+          "TeamCity"
         ],
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
@@ -109,10 +113,12 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         icons: [
           "Python",
           "Terraform",
-          "Kubernetes",
-          "AWS",
-          "Golang",
           "Docker",
+          "Kubernetes",
+          "Golang",
+          "AWS",
+          "GCP",
+          "TeamCity"
         ],
         details: [
           "Worked on a microservice-based SaaS platform deployed on Kubernetes and Docker.",
@@ -136,16 +142,18 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         endTime: "2024-12",
         icons: [
           "C",
+          "C++",
           "Python",
+          "JavaScript",
+          "Java",
           "Docker",
+          "Kubernetes",
           "Linux",
           "Apache Spark",
           "Pandas",
           "PyTorch",
-          "Git",
           "GCP",
           "D3.js",
-          "LaTeX",
           "MongoDB",
           "NumPy",
           "Scikit-learn",
@@ -182,7 +190,9 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Jenkins",
           "Groovy",
           "Elasticsearch",
+          "Logstash",
           "Kibana",
+          "Confluence",
         ],
         details: [
           "Worked on the Legato Delivery team within the IoT Business Unit.",
@@ -221,7 +231,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         location: "Vancouver, B.C., Canada",
         startTime: "2017-04",
         endTime: "2018-01",
-        icons: ["C", "Python", "Git", "TeamCity", "JIRA", "Confluence"],
+        icons: ["C", "Git", "TeamCity", "JIRA", "Confluence"],
         details: [
           "Programmed and debugged SSD firmware in C for the Intel SSD Firmware Product team.",
           "Maintained firmware for a production series of Intel NAND SSD drives, supporting feature updates and defect fixes.",

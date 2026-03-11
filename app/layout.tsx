@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 const banner = (
   <Banner storageKey="some-key">
-    Open to AI related Platform Engineer, DevOps, SRE Roles in Seattle, US or
-    Vancouver, BC • Available for onsite/hybrid.
+    Open to AI related Platform Engineer, DevOps, SRE Roles in Seattle(US) or
+    Vancouver(BC) • Available for onsite/hybrid.
   </Banner>
 );
 const navbar = (
