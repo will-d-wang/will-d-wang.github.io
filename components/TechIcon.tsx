@@ -171,6 +171,10 @@ const TECH_DATA: Record<string, TechData> = {
     href: "https://www.mysql.com",
     src: "/icons/MySQL.svg",
   },
+  Windows11: {
+    href: "https://www.microsoft.com/en-us/windows/windows-11",
+    src: "/icons/Windows11.svg",
+  },
 };
 
 interface TechIconProps {

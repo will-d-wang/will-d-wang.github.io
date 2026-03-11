@@ -16,10 +16,9 @@ type CurrentLanguage = {
 };
 
 type TimelinePeriod = {
-  period: string;
+  summary: string;
   icons: string[];
-  summary: string[];
-  detailTitle?: string;
+  tech_stacks: string[];
   details?: string[];
 };
 
@@ -49,6 +48,7 @@ const MY_TECH_STACK_ROWS = [
     "Vagrant",
     "Github",
     "VS-Code",
+    "Windows11",
     "Pandas",
     "Terraform",
     "GCP",
@@ -63,20 +63,22 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
     duration: getCurrentDurationLabel(new Date(2024, 0, 1)),
     periods: [
       {
-        period: "January 2024 - Present",
+        summary:
+          "HP | Software Applications Engineer 3 | January 2024 - Present | Vancouver, B.C., Canada · Hybrid",
         icons: [
           "Python",
           "JavaScript",
           "TypeScript",
+          "Bash",
+          "Linux",
+          "Windows11",
           "GCP",
           "Azure",
           "AWS",
           "JIRA",
           "Confluence",
-          "Bash",
-          "Linux",
         ],
-        summary: [
+        tech_stacks: [
           "Python - System testing & analysis",
           "JavaScript & Typescript - Backend development with REST API",
           "SRE - System monitoring, alerting, incident response",
@@ -84,8 +86,6 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Platform reliability engineering",
           "Advanced DevSecOps practices",
         ],
-        detailTitle:
-          "HP | Software Applications Engineer 3 | Oct 2021 - Present | Vancouver, B.C., Canada · Hybrid",
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
           "Led system test development on AWS to validate the on-prem solution end-to-end, including backend API and service validation plus integration coverage.",
@@ -104,31 +104,29 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
     duration: "3 years",
     periods: [
       {
-        period: "October 2021 - December 2023",
+        summary:
+          "HP | Software Applications Engineer 3 | Oct 2021 - Dec 2023 | Vancouver, B.C., Canada · Hybrid",
         icons: [
           "Python",
           "Terraform",
           "Kubernetes",
           "Docker",
+          "Golang",
           "GCP",
           "Azure",
           "AWS",
-          "Jenkins",
           "TeamCity",
-          "Golang",
         ],
-        summary: [
+        tech_stacks: [
           "Terraform - Infrastructure as Code & resources management",
           "Kubernetes - SAAS application orchestration",
           "Docker - Tasks containerization",
           "Cloud - GCP, Azure, AWS platform management",
-          "Teamcity & Jenkins - CICD pipeline design and implementation",
+          "Teamcity - CICD pipeline design and implementation",
           "Python - System testing & automation",
           "DevSecOps - Pipeline designs, Cloud security enhancement",
           "Golang - Installer development",
         ],
-        detailTitle:
-          "HP | Software Applications Engineer 3 | Oct 2021 - Dec 2023 | Vancouver, B.C., Canada · Hybrid",
         details: [
           "Led the Pipeline group to build CI/CD pipelines for the Anyware Manager product line across SaaS and on-prem releases, while contributing backend improvements for safer and faster releases.",
           "Reduced on-prem SaaS release time from multiple days to about 2 hours by streamlining CI/CD pipelines, backend build and test workflows, and system-test automation.",
@@ -136,7 +134,8 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        period: "January 2021 - October 2021",
+        summary:
+          "Teradici, an HP Company | Software Developer - Staff | Jan 2021 - Oct 2021 | Greater Vancouver, B.C., Canada",
         icons: [
           "Python",
           "Terraform",
@@ -146,7 +145,7 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
           "AWS",
           "Golang",
         ],
-        summary: [
+        tech_stacks: [
           "Terraform - Infrastructure as Code & resources management",
           "Kubernetes - SAAS application orchestration",
           "Docker - Tasks containerization",
@@ -154,8 +153,6 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Python - System testing & automation",
           "Golang - Installer development",
         ],
-        detailTitle:
-          "Teradici, an HP Company | Software Developer - Staff | Jan 2021 - Oct 2021 | Greater Vancouver, B.C., Canada",
         details: [
           "Worked on a microservice-based SaaS platform deployed on Kubernetes and Docker.",
           "Contributed to the SaaS on-premise application in Go, improving deployment reliability and usability.",
@@ -171,7 +168,7 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
     duration: "4 years",
     periods: [
       {
-        period:
+        summary:
           "Georgia Institute of Technology | Jan 2021 – Dec 2024 | Grade: 3.82/4.0",
         icons: [
           "C",
@@ -185,7 +182,7 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
           "GCP",
           "MongoDB",
         ],
-        summary: [
+        tech_stacks: [
           "CSE6242 - Data and Visual Analytics",
           "CS 7646 - Machine Learning for Trading",
           "CS 6310 - Software Architecture and Design",
@@ -206,25 +203,25 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
     duration: "2+ years",
     periods: [
       {
-        period: "October 2019 - December 2020",
+        summary:
+          "Sierra Wireless | Senior Validation Engineer | Oct 2019 - Jan 2021 | Richmond, British Columbia, Canada",
         icons: [
           "Python",
           "Docker",
           "Jenkins",
+          "Git",
           "Groovy",
           "Elasticsearch",
           "Logstash",
           "Kibana",
         ],
-        summary: [
+        tech_stacks: [
           "Python - System testing",
           "Docker - Test agent containerization",
           "Jenkins - CI/CD",
           "Log & Reporting - ELK (Elasticsearch, Logstash, Kibana)",
           "Groovy - Jenkins Pipeline development",
         ],
-        detailTitle:
-          "Sierra Wireless | Senior Validation Engineer | Oct 2019 - Jan 2021 | Richmond, British Columbia, Canada",
         details: [
           "Worked on the Legato Delivery team within the IoT Business Unit.",
           "Maintained the Legato Testing Project, a pytest-based framework with Pexpect-driven CLI validation.",
@@ -236,16 +233,15 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        period: "March 2018 - September 2019",
-        icons: ["Python", "TeamCity", "JIRA", "Confluence"],
-        summary: [
+        summary:
+          "Intel Corporation (Contractor) | Validation Engineer | Feb 2018 - Sep 2019 | Vancouver, B.C., Canada",
+        icons: ["Python", "VS-Code", "Git", "TeamCity", "JIRA", "Confluence"],
+        tech_stacks: [
           "Python - System testing",
           "Python - Workflow automation",
           "CICD - Teamcity",
           "TDD - Test automation system",
         ],
-        detailTitle:
-          "Intel Corporation | Validation Engineer | Feb 2018 - Sep 2019 | Vancouver, B.C., Canada",
         details: [
           "Designed and implemented system tests and automation tools in Python for the Intel NSG SSD Firmware Platform Service team.",
           "Built a tool to collect QuickBuild results via REST APIs and analyze outcomes to improve CI visibility.",
@@ -261,11 +257,13 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
     duration: "3+ years",
     periods: [
       {
-        period: "April 2017 - February 2018",
-        icons: ["C", "Python"],
-        summary: ["C - SSD Firmware Development", "Python - System testing"],
-        detailTitle:
-          "Intel Corporation | Software Engineer | Apr 2017 - Jan 2018 | Vancouver, B.C., Canada",
+        summary:
+          "Intel Corporation (Contractor) | Software Engineer | Apr 2017 - Jan 2018 | Vancouver, B.C., Canada",
+        icons: ["C", "Python", "Git", "TeamCity", "JIRA", "Confluence"],
+        tech_stacks: [
+          "C - SSD Firmware Development",
+          "Python - System testing",
+        ],
         details: [
           "Programmed and debugged SSD firmware in C for the Intel SSD Firmware Product team.",
           "Maintained firmware for a production series of Intel NAND SSD drives, supporting feature updates and defect fixes.",
@@ -273,28 +271,37 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
         ],
       },
       {
-        period: "May 2014 - March 2017",
+        summary:
+          "HCL Technologies | Software Developer | Jan 2016 - Mar 2017 | Burnaby, B.C., Canada",
         icons: ["C", "Python", "CMake", "VIM", "Git", "Bash", "Linux"],
-        summary: [
-          "C - Distributed system development",
-          "Python - Integration tests",
+        tech_stacks: [
+          "C - Linux based Distributed system development",
+          "Python - Integration & System tests",
+          "Layer 2 ACL implementation and validation",
+        ],
+        details: [
+          "Worked as a contractor supporting Ericsson projects following the acquisition.",
+          "Developed and maintained hardware simulation software to support SSR feature development.",
+          "Implemented and tested Layer 2 ACL functionality with automated and manual test cases.",
+        ],
+      },
+      {
+        summary:
+          "Ericsson | Software Developer | May 2014 - Dec 2015 | Burnaby, B.C., Canada",
+        icons: ["C", "Python", "CMake", "VIM", "Git", "Bash", "Linux"],
+        tech_stacks: [
+          "C - Linux based Distributed system development",
+          "Python - Integration & System tests",
           "Agile Development",
           "System Performance and Profiling",
         ],
-        detailTitle:
-          "Ericsson | Software Developer | May 2014 - Dec 2015 | Burnaby, B.C., Canada",
         details: [
+          "Joined the Forwarding Service team for the Smart Service Router.",
           "Developed ACL features in IP-OS and collaborated on Service Sync and Software Quality Ranking initiatives.",
           "Built a Python unit test framework for ACL and improved coverage and regression safety.",
           "Designed module APIs and wrote Doxygen documentation for maintainable interfaces.",
           "Led performance testing and optimization of a pub-sub system supporting 128K circuits.",
           "Drove profiling and coverage reporting to improve runtime efficiency and code quality.",
-          "HCL Technologies | Software Developer | Jan 2016 - Mar 2017 | Burnaby, B.C., Canada",
-          "Worked as a contractor supporting Ericsson projects following the acquisition.",
-          "Ericsson | Software Developer COOP | Jan 2013 - Aug 2013 | Burnaby, B.C., Canada",
-          "Joined the Forwarding Service team for the Smart Service Router.",
-          "Developed and maintained hardware simulation software to support SSR feature development.",
-          "Implemented and tested Layer 2 ACL functionality with automated and manual test cases.",
         ],
       },
     ],
@@ -304,10 +311,10 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
     duration: "4 years",
     periods: [
       {
-        period:
+        summary:
           "Simon Fraser University | 2011 – 2014 | Concentration on operating systems and networking",
         icons: ["C", "C++", "Java", "Python", "JavaScript", "Linux", "MySQL"],
-        summary: [
+        tech_stacks: [
           "CMPT-225 - Data Structure/Programming",
           "CMPT-275 - Software Engineering",
           "CMPT-300 - Operating System",
@@ -322,8 +329,6 @@ const TIMELINE_ENTRIES: TimelineEntry[] = [
           "CMPT-705 - Design/Analysis Algorithms",
           "CMPT-771 - Internet Architecture and Protocols",
         ],
-        detailTitle:
-          "Simon Fraser University | Teaching Assistant | Sep 2012 - Dec 2012 | Burnaby, B.C., Canada",
         details: [
           "Tutored CMPT 130 lab sessions and guided students in debugging and improving C programs.",
           "Graded programming assignments and exams, providing clear and actionable feedback.",
@@ -426,25 +431,25 @@ function TechRow({ icons }: { icons: string[] }) {
 }
 
 function TimelinePeriodCard({
-  period,
+  summary: period,
   icons,
-  summary,
-  detailTitle,
+  tech_stacks: summary,
   details,
 }: TimelinePeriod) {
   return (
     <article className="home-timeline-period">
       <strong>{period}</strong>
+      <strong>Tech Stack & Knowledge </strong>
       <TechRow icons={icons} />
       <ul>
         {summary.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
-      {detailTitle ? (
+      {details?.length ? (
         <>
           <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-            <strong>{detailTitle}</strong>
+            <strong>Work Details</strong>
           </div>
           <ul>{details?.map((item) => <li key={item}>{item}</li>)}</ul>
         </>
@@ -462,7 +467,7 @@ function TimelineEntryCard({ title, duration, periods }: TimelineEntry) {
       </header>
       <div className="home-timeline-content">
         {periods.map((period) => (
-          <TimelinePeriodCard key={`${title}-${period.period}`} {...period} />
+          <TimelinePeriodCard key={`${title}-${period.summary}`} {...period} />
         ))}
       </div>
     </article>
