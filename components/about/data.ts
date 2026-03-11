@@ -1,8 +1,4 @@
-import type {
-  CurrentLanguage,
-  SocialLink,
-  TimelineEntry,
-} from "@/components/about/types";
+import type { SocialLink, TimelineEntry } from "@/components/about/types";
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
@@ -17,31 +13,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
 ];
 
-export const CURRENT_LANGUAGES: CurrentLanguage[] = [
-  { label: "Python", href: "https://www.python.org/" },
-  { label: "Golang", href: "https://golang.org/" },
-  {
-    label: "JavaScript",
-    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-  },
-  {
-    label: "Jenkins CI/CD",
-    href: "https://www.jenkins.io/doc/book/pipeline/",
-  },
-  {
-    label: "Teamcity",
-    href: "https://www.jetbrains.com/help/teamcity/teamcity-documentation.html",
-  },
-  { label: "Terraform", href: "https://www.terraform.io/" },
-  { label: "Kubernetes", href: "https://kubernetes.io/" },
-  { label: "Docker", href: "https://www.docker.com/" },
-];
-
 export const CURRENT_STATUS: string[] = [
-  "🎵️🎶️ I'm playing with backend, micro-service, system design, DevOps, SRE, Teamcity, AI.",
-  "🌱🌳️ I'm learning history, psychology, philosophy, management.",
+  "🎵️🎶️ I'm playing with AI, backend, micro-service, system design, DevOps, SRE, Platform Engineering",
   "🍻️🥂️ I'm looking to collaborate on more interesting open source projects.",
-  "💬🗒️ Ask me about test automation, philosophy, python, AI.",
+  "🌱🌳️ I'm learning history, psychology, philosophy, management, etc.",
   "☯️❤️ Fun fact: Life is the most precious journey, only once in the universe, enjoy it everyday.",
 ];
 

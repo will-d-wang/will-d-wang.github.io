@@ -1,7 +1,22 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
-import { CURRENT_LANGUAGES, CURRENT_STATUS } from "@/components/about/data";
+import { Icon, IconType } from "@/components/Icon";
+import { CURRENT_STATUS } from "@/components/about/data";
+
+const CURRENT_PRIORITY = [
+  "Python",
+  "Golang",
+  "JavaScript",
+  "TypeScript",
+  "Terraform",
+  "Kubernetes",
+  "Docker",
+  "AWS",
+  "Azure",
+  "GCP",
+  "PyTorch",
+];
 
 const INTRO_PARAGRAPHS: ReactNode[] = [
   [
@@ -49,15 +64,12 @@ export function CareerJourneySection() {
       ))}
 
       <h3>Current Status</h3>
-      <p>
-        🔭 I&apos;m working with{" "}
-        {CURRENT_LANGUAGES.map((item, index) => (
-          <span key={item.href}>
-            {index > 0 ? ", " : ""}
-            <Link href={item.href}>{item.label}</Link>
-          </span>
+      <p>🔭 My current focuses:</p>
+      <div className="home-tech-row" style={{ justifyContent: "flex-start" }}>
+        {CURRENT_PRIORITY.map((name) => (
+          <Icon key={name} name={name} type={IconType.Tech} />
         ))}
-      </p>
+      </div>
       <ul>
         {CURRENT_STATUS.map((item) => (
           <li key={item}>{item}</li>
@@ -65,7 +77,7 @@ export function CareerJourneySection() {
       </ul>
 
       <h3>
-        Enjoy cultures across 🀄️🌏️🍁️🗽️🌎️ as a human, love the technologies
+        Enjoy cultures across 🌏️🍁️🗽️🀄️🌎️ as a human, love the technologies
         as a geek.
       </h3>
     </section>

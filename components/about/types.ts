@@ -4,11 +4,6 @@ export type SocialLink = {
   src: string;
 };
 
-export type CurrentLanguage = {
-  label: string;
-  href: string;
-};
-
 type BaseTimelinePeriod = {
   organization: string;
   role: string;
