@@ -39,6 +39,78 @@ const TECH_DATA: Record<string, TechData> = {
     href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
     src: "/icons/JavaScript.svg",
   },
+  "Node.js": {
+    href: "https://nodejs.org/",
+    src: "/icons/NodeJS.svg",
+  },
+  Express: {
+    href: "https://expressjs.com/",
+    src: "/icons/Express.svg",
+  },
+  React: {
+    href: "https://reactjs.org/",
+    src: "/icons/React.svg",
+  },
+  "Next.js": {
+    href: "https://nextjs.org/",
+    src: "/icons/NextJS.svg",
+  },
+  "D3.js": {
+    href: "https://d3js.org/",
+    src: "/icons/D3js.svg",
+  },
+  Cloudflare: {
+    href: "https://www.cloudflare.com/",
+    src: "/icons/Cloudflare.svg",
+  },
+  Grafana: {
+    href: "https://grafana.com/",
+    src: "/icons/Grafana.svg",
+  },
+  Helm: {
+    href: "https://helm.sh/",
+    src: "/icons/Helm.svg",
+  },
+  LaTeX: {
+    href: "https://www.latex-project.org/",
+    src: "/icons/LaTeX.svg",
+  },
+  NGINX: {
+    href: "https://www.nginx.com/",
+    src: "/icons/NGINX.svg",
+  },
+  NPM: {
+    href: "https://www.npmjs.com/",
+    src: "/icons/NPM.svg",
+  },
+  NumPy: {
+    href: "https://numpy.org/",
+    src: "/icons/NumPy.svg",
+  },
+  "Oh My Zsh": {
+    href: "https://ohmyz.sh/",
+    src: "/icons/OhMyZsh.svg",
+  },
+  "Scikit-learn": {
+    href: "https://scikit-learn.org/",
+    src: "/icons/ScikitLearn.svg",
+  },
+  "Tailwind CSS": {
+    href: "https://tailwindcss.com/",
+    src: "/icons/TailwindCSS.svg",
+  },
+  Vercel: {
+    href: "https://vercel.com/",
+    src: "/icons/Vercel.svg",
+  },
+  "HashiCorp Vagrant": {
+    href: "https://www.vagrantup.com/",
+    src: "/icons/HashiCorpVagrant.svg",
+  },
+  "HashiCorp Vault": {
+    href: "https://www.hashicorp.com/products/vault",
+    src: "/icons/HashiCorpVault.svg",
+  },
   TypeScript: {
     href: "https://www.typescriptlang.org/docs/",
     src: "/icons/TypeScript.svg",
@@ -105,7 +177,7 @@ const TECH_DATA: Record<string, TechData> = {
   },
   Pydantic: {
     href: "https://docs.pydantic.dev",
-    src: "https://avatars.githubusercontent.com/u/110818415?s=200&v=4",
+    src: "/icons/Pydantic.png",
   },
   Terraform: {
     href: "https://www.terraform.io",
@@ -133,11 +205,11 @@ const TECH_DATA: Record<string, TechData> = {
   },
   PySpark: {
     href: "https://spark.apache.org/docs/latest/api/python/",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg",
+    src: "/icons/PySpark.svg",
   },
   gRPC: {
     href: "https://grpc.io/docs/",
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grpc/grpc-plain.svg",
+    src: "/icons/gRPC.svg",
   },
   PyTorch: {
     href: "https://pytorch.org",
@@ -149,7 +221,7 @@ const TECH_DATA: Record<string, TechData> = {
   },
   TeamCity: {
     href: "https://www.jetbrains.com/help/teamcity/teamcity-documentation.html",
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/TeamCity_Icon.png/1280px-TeamCity_Icon.png",
+    src: "/icons/TeamCity.png",
   },
   JIRA: {
     href: "https://www.atlassian.com/software/jira",
@@ -177,6 +249,22 @@ const TECH_DATA: Record<string, TechData> = {
   },
 };
 
+const TECH_ALIASES: Record<string, string> = {
+  nodejs: "Node.js",
+  "node.js": "Node.js",
+  nextjs: "Next.js",
+  d3: "D3.js",
+  latex: "LaTeX",
+  nginx: "NGINX",
+  npm: "NPM",
+  "oh my zsh": "Oh My Zsh",
+  "oh myzsh": "Oh My Zsh",
+  ohmyzsh: "Oh My Zsh",
+  "scikit-learn": "Scikit-learn",
+  scikitlearn: "Scikit-learn",
+  tailwindcss: "Tailwind CSS",
+};
+
 interface TechIconProps {
   alt: string;
   width?: number;
@@ -184,12 +272,15 @@ interface TechIconProps {
 }
 
 export function TechIcon({ alt, width = 60, height = 60 }: TechIconProps) {
-  // Case-insensitive lookup: try exact match first, then find by case-insensitive comparison
-  let techData = TECH_DATA[alt];
+  const normalizedAlt = alt.trim();
+  const canonicalName =
+    TECH_ALIASES[normalizedAlt.toLowerCase()] ?? normalizedAlt;
+  // Resolve canonical name first, then fallback to case-insensitive key lookup.
+  let techData = TECH_DATA[canonicalName];
 
   if (!techData) {
     const key = Object.keys(TECH_DATA).find(
-      (k) => k.toLowerCase() === alt.toLowerCase(),
+      (k) => k.toLowerCase() === canonicalName.toLowerCase(),
     );
     if (key) {
       techData = TECH_DATA[key];

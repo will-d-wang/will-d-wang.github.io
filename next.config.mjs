@@ -33,6 +33,10 @@ export default withNextra({
         protocol: "https",
         hostname: "komarev.com",
       },
+      {
+        protocol: "https",
+        hostname: "icon.icepanel.io",
+      },
     ],
   },
 });
