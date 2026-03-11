@@ -36,7 +36,6 @@ function TimelinePeriodCard({
   const roleInfo = `${organization} | ${role} | ${location}`;
   const organizationIconType =
     entryType === "experience" ? IconType.Company : IconType.School;
-  const stackLine = icons.join(", ");
   const timeRange = `${formatTimelineDate(startTime)} - ${formatTimelineDate(
     endTime,
   )}`;
@@ -48,7 +47,7 @@ function TimelinePeriodCard({
           display: "flex",
           alignItems: "flex-start",
           gap: "0.75rem",
-          flexWrap: "nowrap",
+          flexWrap: "wrap",
         }}
       >
         <Icon
@@ -72,11 +71,18 @@ function TimelinePeriodCard({
           display: "flex",
           alignItems: "baseline",
           gap: "0.35rem",
-          flexWrap: "nowrap",
+          flexWrap: "wrap",
         }}
       >
-        <strong>Core Stack: </strong>
-        {stackLine ? <span style={{ whiteSpace: "nowrap" }}>{stackLine}</span> : null}
+        <strong>Core Stack </strong>
+        <span style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem" }}>
+          {icons.map((icon, index) => (
+            <span key={icon} style={{ whiteSpace: "nowrap" }}>
+              {icon}
+              {index < icons.length - 1 ? "," : ""}
+            </span>
+          ))}
+        </span>
       </div>
       <TechRow icons={icons} />
       {entryType === "experience" && details?.length ? (

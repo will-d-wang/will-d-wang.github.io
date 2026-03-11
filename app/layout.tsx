@@ -78,6 +78,10 @@ const footer = (
         </Link>
         .{" "}
       </p>
+      <p>
+        Organization logos and icons may be copyrighted trademarks owned by
+        their respective organizations.
+      </p>
     </div>
   </Footer>
 );

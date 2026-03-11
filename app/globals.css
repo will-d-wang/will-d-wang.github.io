@@ -210,11 +210,29 @@
 }
 
 @layer base {
+  html {
+    font-size: 18px;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    line-height: 1.7;
+  }
+}
+
+.nextra-content,
+.nextra-sidebar-container,
+.nextra-toc {
+  font-size: 1.05rem;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 20px;
   }
 }
 
