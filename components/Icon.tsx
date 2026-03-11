@@ -63,7 +63,10 @@ const ICON_BASE_PATHS: Record<IconType, string> = {
   [IconType.School]: "/icons/school",
 };
 
-function getIconSrc({ type, filename }: Pick<IconDefinition, "type" | "filename">) {
+function getIconSrc({
+  type,
+  filename,
+}: Pick<IconDefinition, "type" | "filename">) {
   return `${ICON_BASE_PATHS[type]}/${filename}`;
 }
 
@@ -233,7 +236,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     },
     Ubuntu: {
       type: IconType.Tech,
-      techType: TechType.Tools,
+      techType: TechType.DevOpsCiCd,
       href: "https://ubuntu.com",
       filename: "Ubuntu.svg",
     },
@@ -251,7 +254,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     },
     Docker: {
       type: IconType.Tech,
-      techType: TechType.CloudInfra,
+      techType: TechType.DevOpsCiCd,
       href: "https://docs.docker.com",
       filename: "Docker.svg",
     },
@@ -287,7 +290,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     },
     Github: {
       type: IconType.Tech,
-      techType: TechType.Tools,
+      techType: TechType.DevOpsCiCd,
       href: "https://docs.github.com/en",
       filename: "Github.svg",
     },
@@ -341,7 +344,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     },
     Linux: {
       type: IconType.Tech,
-      techType: TechType.CloudInfra,
+      techType: TechType.DevOpsCiCd,
       href: "https://www.linux.org",
       filename: "Linux.svg",
     },
@@ -359,7 +362,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     },
     gRPC: {
       type: IconType.Tech,
-      techType: TechType.BackendWeb,
+      techType: TechType.CloudInfra,
       href: "https://grpc.io/docs/",
       filename: "gRPC.svg",
     },
@@ -413,7 +416,7 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
     },
     Windows11: {
       type: IconType.Tech,
-      techType: TechType.Tools,
+      techType: TechType.DevOpsCiCd,
       href: "https://www.microsoft.com/en-us/windows/windows-11",
       filename: "Windows11.svg",
     },
@@ -495,10 +498,7 @@ const ICON_ALIASES: Partial<Record<IconType, Record<string, string>>> = {
   },
 };
 
-function findCanonicalName(
-  name: string,
-  iconType: IconType,
-): string | null {
+function findCanonicalName(name: string, iconType: IconType): string | null {
   const normalizedName = name.trim();
   const aliases = ICON_ALIASES[iconType] ?? {};
   const canonicalName = aliases[normalizedName.toLowerCase()] ?? normalizedName;
@@ -561,13 +561,7 @@ interface IconProps {
   alt?: string;
 }
 
-export function Icon({
-  name,
-  type,
-  width = 60,
-  height = 60,
-  alt,
-}: IconProps) {
+export function Icon({ name, type, width = 60, height = 60, alt }: IconProps) {
   const iconData = getIconData(name, type);
 
   if (!iconData) {

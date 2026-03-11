@@ -441,6 +441,43 @@
   animation: home-fade-up 0.6s ease both;
 }
 
+.home-tech-stack {
+  --home-ink: oklch(0.22 0.03 201);
+  --home-muted: oklch(0.48 0.02 220);
+  --home-accent: oklch(0.54 0.11 189);
+  --home-accent-soft: oklch(0.95 0.03 190);
+  --home-card: oklch(0.99 0.01 190 / 96%);
+  --home-border: oklch(0.89 0.02 190);
+  color: var(--home-ink);
+}
+
+.dark .home-tech-stack {
+  --home-ink: oklch(0.93 0.015 190);
+  --home-muted: oklch(0.78 0.015 220);
+  --home-accent: oklch(0.74 0.12 182);
+  --home-accent-soft: oklch(0.3 0.04 190);
+  --home-card: oklch(0.24 0.02 210 / 88%);
+  --home-border: oklch(0.38 0.03 200);
+}
+
+.home-tech-stack h2,
+.home-tech-stack h3 {
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.home-tech-stack h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-top: 0;
+  color: var(--home-ink);
+}
+
+.home-tech-stack h3 {
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  color: var(--home-ink);
+}
+
 .home-section:nth-of-type(2) {
   animation-delay: 0.05s;
 }

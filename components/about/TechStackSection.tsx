@@ -26,7 +26,7 @@ export function TechStackSection() {
   }, {});
 
   return (
-    <section>
+    <section className="home-section home-tech-stack">
       <h2>My Tech Stack Journey</h2>
       <div className="home-tech">
         <div className="home-tech-heart">❤️</div>
