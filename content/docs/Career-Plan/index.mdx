@@ -1,5 +1,193 @@
 ---
-title: Career Plan
+title: DevOps vs SRE vs Cloud vs Platform Engineer
+description: A practical comparison of four closely related infrastructure and reliability roles.
 ---
 
-Career planning resources, interview preparation, and professional development guides.
+import { Callout, Cards, Steps, Table, Tabs } from "nextra/components";
+
+![Visual comparison between DevOps, SRE, Cloud Engineer, and Platform Engineer roles](/images/DevOps-SRE-Cloud-PE.jpeg)
+
+These titles overlap a lot, but they do not optimize for exactly the same outcome. The fastest way to separate them is to ask: **who is the customer, what platform do they own, and which metric matters most?**
+
+## Quick Read
+
+<Cards num={2}>
+  <Cards.Card title="DevOps Engineer" href="#devops-engineer">
+    Improves **delivery flow** with CI/CD, release automation, and feedback
+    loops.
+  </Cards.Card>
+  <Cards.Card
+    title="Site Reliability Engineer"
+    href="#site-reliability-engineer"
+  >
+    Protects **service reliability** with SLOs, incident response, and
+    observability.
+  </Cards.Card>
+  <Cards.Card title="Cloud Engineer" href="#cloud-engineer">
+    Builds **cloud foundations** across networking, IAM, compute, and
+    infrastructure as code.
+  </Cards.Card>
+  <Cards.Card title="Platform Engineer" href="#platform-engineer">
+    Creates **internal platforms** and self-service paths that other engineers
+    can reuse.
+  </Cards.Card>
+</Cards>
+
+<Callout type="info">
+  Short version: **DevOps** improves **software delivery**, **SRE** protects
+  **reliability**, **Cloud engineering** builds the **cloud foundation**, and
+  **Platform engineering** turns that foundation into a **product for internal
+  teams**.
+</Callout>
+
+## Role Snapshots
+
+### DevOps Engineer
+
+Improves the path from code commit to production by focusing on CI/CD, automation, release pipelines, environment consistency, and collaboration between development and operations.
+
+### Site Reliability Engineer
+
+Keeps services reliable as systems scale and change by focusing on availability, latency, observability, incident response, SLOs, error budgets, and reducing operational toil.
+
+### Cloud Engineer
+
+Builds and manages the cloud layer itself, including networking, IAM, compute, storage, managed services, infrastructure as code, account structure, and governance.
+
+### Platform Engineer
+
+Turns shared infrastructure into a product for internal teams through paved roads, golden paths, self-service workflows, templates, runtime platforms, and developer portals.
+
+## Side-by-Side Comparison
+
+<Table>
+  <thead>
+    <Table.Tr>
+      <Table.Th>Dimension</Table.Th>
+      <Table.Th>DevOps</Table.Th>
+      <Table.Th>SRE</Table.Th>
+      <Table.Th>Cloud Engineer</Table.Th>
+      <Table.Th>Platform Engineer</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+    <Table.Tr>
+      <Table.Th>Main goal</Table.Th>
+      <Table.Td>Ship faster and safer</Table.Td>
+      <Table.Td>Keep services reliable under change</Table.Td>
+      <Table.Td>Build and manage cloud foundations</Table.Td>
+      <Table.Td>Make engineers productive through self-service</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Th>Primary customer</Table.Th>
+      <Table.Td>Application teams</Table.Td>
+      <Table.Td>End users and service owners</Table.Td>
+      <Table.Td>Infrastructure and application teams</Table.Td>
+      <Table.Td>Internal developers and product squads</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Th>Typical scope</Table.Th>
+      <Table.Td>CI/CD, automation, release workflows</Table.Td>
+      <Table.Td>Monitoring, incidents, capacity, resilience</Table.Td>
+      <Table.Td>
+        Cloud accounts, networking, IAM, Terraform, landing zones
+      </Table.Td>
+      <Table.Td>
+        Developer portal, templates, runtime platform, guardrails
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Th>Success metrics</Table.Th>
+      <Table.Td>Deployment frequency, lead time, change failure rate</Table.Td>
+      <Table.Td>SLO attainment, MTTR, toil reduction, incident rate</Table.Td>
+      <Table.Td>
+        Availability, security posture, cost efficiency, standardization
+      </Table.Td>
+      <Table.Td>
+        Developer experience, adoption, time to provision, consistency
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Th>Common tools</Table.Th>
+      <Table.Td>GitHub Actions, Jenkins, Argo CD, Docker</Table.Td>
+      <Table.Td>Prometheus, Grafana, Datadog, PagerDuty</Table.Td>
+      <Table.Td>AWS or Azure or GCP, Terraform, IAM, VPC, Kubernetes</Table.Td>
+      <Table.Td>
+        Backstage, Kubernetes, Terraform, Crossplane, internal CLIs
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Th>Mindset</Table.Th>
+      <Table.Td>Automation and collaboration</Table.Td>
+      <Table.Td>Engineering for reliability</Table.Td>
+      <Table.Td>Architecture and infrastructure stewardship</Table.Td>
+      <Table.Td>Platform as a product</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+## Where People Get Confused
+
+<Tabs items={["DevOps", "SRE", "Cloud", "Platform"]}>
+  <Tabs.Tab>
+    **DevOps is often a culture first, not just a title.**
+
+    Many companies hire a "DevOps Engineer" when they really need someone
+    to own build pipelines, deployment automation, release standardization,
+    and the handoff between software teams and operations.
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    **SRE is not just ops with better monitoring.**
+
+    Mature SRE teams use software engineering, SLOs, and error budgets to
+    decide how reliability work should trade off against feature velocity.
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    **Cloud engineering can be broad or very infrastructure-heavy.**
+
+    In some companies it means Kubernetes and Terraform. In others it includes
+    security baselines, networking, migrations, governance, and FinOps.
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    **Platform engineering turns shared infrastructure into a product.**
+
+    The difference is the product mindset: documentation, paved roads,
+    self-service workflows, API quality, and adoption by internal teams.
+
+  </Tabs.Tab>
+</Tabs>
+
+## Which Role Fits Best?
+
+<Steps>
+### Choose DevOps
+
+Pick this if you enjoy build systems, deployment automation, release quality,
+and improving the path from commit to production.
+
+### Choose SRE
+
+Pick this if you like reliability engineering, incident response, observability,
+performance, and designing systems that stay calm during failure.
+
+### Choose Cloud Engineer
+
+Pick this if you want deeper ownership of cloud networking, IAM, landing zones,
+infrastructure as code, and cloud architecture.
+
+### Choose Platform Engineer
+
+Pick this if you enjoy building reusable systems for other engineers and thinking
+of internal tooling as a product.
+
+</Steps>
+
+## Practical Rule of Thumb
+
+If a team says, “we need to deploy better,” that usually leans <strong>DevOps</strong>.
+If they say, “production keeps hurting us,” that leans <strong>SRE</strong>.
+If they say, “our cloud estate is messy,” that leans <strong>Cloud Engineer</strong>.
+If they say, “every team reinvents infrastructure,” that leans <strong>Platform Engineer</strong>.
