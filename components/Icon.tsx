@@ -355,12 +355,6 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
       href: "https://www.linux.org",
       filename: "Linux.svg",
     },
-    "Apache Spark": {
-      type: IconType.Tech,
-      techType: TechType.DataMl,
-      href: "https://spark.apache.org",
-      filename: "ApacheSpark.svg",
-    },
     PySpark: {
       type: IconType.Tech,
       techType: TechType.DataMl,
