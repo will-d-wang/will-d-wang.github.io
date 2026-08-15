@@ -42,14 +42,7 @@ function TimelinePeriodCard({
 
   return (
     <article className="home-timeline-period">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "0.75rem",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="home-period-head">
         <Icon
           name={organization}
           type={organizationIconType}
@@ -64,30 +57,13 @@ function TimelinePeriodCard({
           </div>
         </div>
       </div>
-      <div
-        style={{
-          marginTop: "0.75rem",
-          marginBottom: "0.5rem",
-          display: "flex",
-          alignItems: "baseline",
-          gap: "0.35rem",
-          flexWrap: "wrap",
-        }}
-      >
-        <strong>Core Stack </strong>
-        <span style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem" }}>
-          {icons.map((icon, index) => (
-            <span key={icon} style={{ whiteSpace: "nowrap" }}>
-              {icon}
-              {index < icons.length - 1 ? "," : ""}
-            </span>
-          ))}
-        </span>
+      <div className="home-period-label">
+        <strong>Core Stack</strong>
       </div>
       <TechRow icons={icons} />
       {entryType === "experience" && details?.length ? (
         <>
-          <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+          <div className="home-period-label">
             <strong>Work Details</strong>
           </div>
           <ul>{details?.map((item) => <li key={item}>{item}</li>)}</ul>
@@ -95,7 +71,7 @@ function TimelinePeriodCard({
       ) : null}
       {entryType === "education" && tech_stacks?.length ? (
         <>
-          <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+          <div className="home-period-label">
             <strong>Coursework</strong>
           </div>
           <ul>

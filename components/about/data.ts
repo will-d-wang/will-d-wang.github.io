@@ -4,23 +4,50 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     alt: "My GitHub profile",
     href: "https://github.com/Will-D-Wang",
-    src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg",
+    src: "/icons/social/github.svg",
   },
   {
     alt: "Will-Dingan-Wang",
     href: "https://linkedin.com/in/will-d-wang",
-    src: "https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg",
+    src: "/icons/social/linkedin.svg",
   },
 ];
 
 export const CURRENT_STATUS: string[] = [
-  "🎵️🎶️ I'm exploring AI, backend systems, microservices, system design, DevOps, SRE, and platform engineering.",
+  "🎵️🎶️ I'm currently focused on vibe coding with Claude, and exploring AI, backend systems, microservices, system design, DevOps, SRE, and platform engineering.",
   "🍻️🥂️ I'm looking to collaborate on more interesting open-source projects.",
   "🌱🌳️ I'm studying history, psychology, philosophy, management, and related subjects.",
   "☯️❤️ Fun fact: Life is a precious journey that happens only once in the universe, so enjoy it every day.",
 ];
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
+  {
+    type: "experience",
+    title: "DevOps / Platform Engineer",
+    periods: [
+      {
+        organization: "OpusClip",
+        role: "Member of Technical Staff",
+        location: "Burnaby, B.C., Canada · On-site",
+        startTime: "2026-04",
+        endTime: "present",
+        icons: [
+          "Claude Code",
+          "GCP",
+          "TypeScript",
+          "Golang",
+          "Python",
+          "Node.js",
+          "Docker",
+          "Kubernetes",
+          "Lark",
+        ],
+        details: [
+          "Working across DevOps and Platform Engineering functions to support backend delivery, CI/CD reliability, infrastructure, and production operations.",
+        ],
+      },
+    ],
+  },
   {
     type: "experience",
     title: "Platform Engineer",
@@ -30,7 +57,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
         role: "Software Applications Engineer 3",
         location: "Vancouver, B.C., Canada · Hybrid",
         startTime: "2024-01",
-        endTime: "present",
+        endTime: "2026-03",
         icons: [
           "Python",
           "JavaScript",

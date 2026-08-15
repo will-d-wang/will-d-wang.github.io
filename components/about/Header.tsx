@@ -37,7 +37,7 @@ export function SocialLinks() {
       ))}
       <span className="home-social-badge">
         <Image
-          src="https://komarev.com/ghpvc/?username=anonyknight"
+          src="https://komarev.com/ghpvc/?username=will-d-wang"
           alt="Will-D-Wang"
           width={150}
           height={20}
