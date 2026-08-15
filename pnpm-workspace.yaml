@@ -1,0 +1,7 @@
+# pnpm 11+ reads repo-level settings here (moved out of package.json's "pnpm" field).
+# Approve the native postinstall for this transitive resolver dep so installs exit clean
+# (Next 16's dependency-status check fails the build if `pnpm install` reports ignored builds).
+allowBuilds:
+  unrs-resolver: true
+onlyBuiltDependencies:
+  - unrs-resolver
