@@ -361,6 +361,12 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
       href: "https://spark.apache.org/docs/latest/api/python/",
       filename: "PySpark.svg",
     },
+    "Apache Spark": {
+      type: IconType.Tech,
+      techType: TechType.DataMl,
+      href: "https://spark.apache.org",
+      filename: "ApacheSpark.svg",
+    },
     gRPC: {
       type: IconType.Tech,
       techType: TechType.CloudInfra,
@@ -421,8 +427,25 @@ export const ICON_DATA: Record<IconType, Record<string, IconDefinition>> = {
       href: "https://www.microsoft.com/en-us/windows/windows-11",
       filename: "Windows11.svg",
     },
+    "Claude Code": {
+      type: IconType.Tech,
+      techType: TechType.Tools,
+      href: "https://claude.com/claude-code",
+      filename: "ClaudeCode.svg",
+    },
+    Lark: {
+      type: IconType.Tech,
+      techType: TechType.Tools,
+      href: "https://www.larksuite.com",
+      filename: "Lark.png",
+    },
   },
   [IconType.Company]: {
+    OpusClip: {
+      type: IconType.Company,
+      href: "https://www.opus.pro",
+      filename: "opusclip.png",
+    },
     HP: {
       type: IconType.Company,
       href: "https://www.hp.com",
@@ -572,7 +595,7 @@ export function Icon({ name, type, width = 60, height = 60, alt }: IconProps) {
   }
 
   return (
-    <Link href={iconData.href}>
+    <Link href={iconData.href} target="_blank" rel="noreferrer noopener">
       <Image
         src={iconData.src}
         alt={alt ?? name}

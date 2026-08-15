@@ -717,6 +717,18 @@
   flex-shrink: 0;
 }
 
+.home-period-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.home-period-label {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 @media (max-width: 640px) {
   .home-page {
     margin: 1.5rem 1rem 2rem;

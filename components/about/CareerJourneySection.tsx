@@ -5,17 +5,15 @@ import { Icon, IconType } from "@/components/Icon";
 import { CURRENT_STATUS } from "@/components/about/data";
 
 const CURRENT_PRIORITY = [
-  "Python",
-  "Golang",
-  "JavaScript",
-  "TypeScript",
-  "Terraform",
-  "Kubernetes",
-  "Docker",
-  "AWS",
-  "Azure",
+  "Claude Code",
   "GCP",
-  "PyTorch",
+  "TypeScript",
+  "Golang",
+  "Python",
+  "Node.js",
+  "Docker",
+  "Kubernetes",
+  "Lark",
 ];
 
 const INTRO_PARAGRAPHS: ReactNode[] = [

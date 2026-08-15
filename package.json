@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "check:icons": "node scripts/check-icons.mjs",
+    "prebuild": "node scripts/check-icons.mjs",
     "build": "next build",
     "postbuild": "pagefind --site out --output-path out/_pagefind",
     "start": "npx serve@latest out",
