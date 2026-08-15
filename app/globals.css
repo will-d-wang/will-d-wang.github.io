@@ -729,6 +729,47 @@
   margin-bottom: 0.5rem;
 }
 
+.home-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.home-project-card {
+  padding: 1.25rem;
+  background: var(--home-card);
+  border: 1px solid var(--home-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px oklch(0.2 0.03 220 / 0.1);
+}
+
+.home-project-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home-project-head h3 {
+  margin: 0;
+  text-align: left;
+  color: var(--home-ink);
+}
+
+.home-project-tagline {
+  color: var(--home-muted);
+  margin: 0.5rem 0 0.75rem;
+}
+
+.home-project-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
 @media (max-width: 640px) {
   .home-page {
     margin: 1.5rem 1rem 2rem;

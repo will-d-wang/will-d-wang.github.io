@@ -23,3 +23,18 @@ export type TimelineEntry = {
   title: string;
   periods: TimelinePeriod[];
 };
+
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
+export type Project = {
+  name: string;
+  tagline: string;
+  startTime: string;
+  endTime: string;
+  icons: string[];
+  highlights: string[];
+  links?: ProjectLink[];
+};

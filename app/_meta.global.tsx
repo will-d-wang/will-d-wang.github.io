@@ -2,6 +2,7 @@ import { MetaRecord } from "nextra";
 
 const DOCS_ITEMS: MetaRecord = {
   index: "",
+  projects: "Projects",
 };
 
 export default {
