@@ -1,4 +1,8 @@
-import type { SocialLink, TimelineEntry } from "@/components/about/types";
+import type {
+  Project,
+  SocialLink,
+  TimelineEntry,
+} from "@/components/about/types";
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
@@ -18,6 +22,60 @@ export const CURRENT_STATUS: string[] = [
   "🍻️🥂️ I'm looking to collaborate on more interesting open-source projects.",
   "🌱🌳️ I'm studying history, psychology, philosophy, management, and related subjects.",
   "☯️❤️ Fun fact: Life is a precious journey that happens only once in the universe, so enjoy it every day.",
+];
+
+export const PROJECTS: Project[] = [
+  // Add more projects following the examples below. Every icon name must
+  // exist in components/Icon.tsx (the prebuild `check:icons` guard enforces it).
+  {
+    name: "HP Anyware (Anyware Manager)",
+    tagline:
+      "Platform Engineering, SRE, and CI/CD for Anyware Manager — the management plane of HP's PCoIP-based secure remote-access product, across SaaS and on-premises.",
+    startTime: "2021-01",
+    endTime: "2026-03",
+    icons: [
+      "Golang",
+      "Python",
+      "Kubernetes",
+      "AWS",
+      "Azure",
+      "Terraform",
+      "TeamCity",
+    ],
+    highlights: [
+      "Advanced Platform Engineering and SRE for the Anyware Manager Platform Team, improving backend service reliability, release stability, and operational readiness across SaaS and on-premises.",
+      "Led CI/CD pipeline development for SaaS and on-prem releases and owned the TeamCity infrastructure — reusable meta-runners, build templates, and hundreds of build configurations.",
+      "Managed cloud services under SRE principles across AWS, Azure, and GCP (AKS, Kafka, Event Hubs, Cosmos DB), and contributed to SOC 2 readiness and security compliance.",
+    ],
+    links: [{ label: "Product", href: "https://developers.hp.com/hp-anyware" }],
+  },
+  {
+    name: "LeTP — Legato Test Project",
+    tagline:
+      "Open-source pytest + Pexpect framework for full end-to-end test automation of Sierra Wireless Legato embedded/IoT devices.",
+    startTime: "2019-10",
+    endTime: "2021-01",
+    icons: ["Python", "Pytest", "Linux"],
+    highlights: [
+      "Maintained LeTP, which builds and loads Legato apps onto real targets, drives them over CLI/AT ports, verifies output against expectations, and power-cycles devices for hands-off regression runs.",
+      "Powers the Legato team's CI/CD and lets customers validate Legato functionality in their own environments.",
+      "Built on pytest with reusable fixtures and Pexpect-driven CLI validation, extensible via pytest plugins.",
+    ],
+    links: [{ label: "Code", href: "https://github.com/legatoproject/LeTP" }],
+  },
+  {
+    name: "Ericsson SSR — IP-OS",
+    tagline:
+      "ACL features and performance work in IP-OS, the carrier-grade operating system for Ericsson's Smart Service Router (SSR).",
+    startTime: "2014-05",
+    endTime: "2015-12",
+    icons: ["C", "Python", "Linux", "CMake"],
+    highlights: [
+      "Developed ACL (access control list) features in IP-OS on the Forwarding Service team, and contributed to Service Sync and Software Quality Ranking initiatives.",
+      "Built a Python unit-test framework for ACL to improve coverage and regression safety, and designed module APIs documented with Doxygen.",
+      "Led performance testing and optimization of a pub/sub system supporting 128K circuits, using profiling and coverage reporting to improve runtime efficiency.",
+    ],
+  },
 ];
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
