@@ -15,19 +15,18 @@ Status legend: `[x]` shipped · `[ ]` pending.
   - [x] Timeline inline styles → CSS classes; dropped duplicate stack text
   - [x] Icon links open in a new tab; self-hosted GitHub/LinkedIn icons
 - [x] **Projects section** — `ProjectsSection` at `/docs/projects` under the Documentation menu, with HP Anyware, LeTP, and Ericsson SSR IP-OS. _(PR #4)_
-- [x] **SEO** — full page `metadata` (title/description/OpenGraph/Twitter/canonical/icons) + Person JSON-LD structured data. _(branch `willw-0815--seo-metadata`)_
-
-## Pending — safe to implement (no extra input needed)
-
-- [ ] **Hero value-proposition** — lead the homepage with a one-line positioning headline (e.g. "Platform / DevOps Engineer building reliable CI/CD & cloud infra on GCP + Kubernetes") instead of opening on the avatar + "Welcome!".
-- [ ] **Featured blog posts** — surface existing `content/blog` posts on the homepage for thought-leadership signal.
-- [ ] **Per-page OpenGraph polish** — a dedicated 1200×630 OG image (current OG uses the 320×320 avatar) and per-page titles/descriptions.
+- [x] **SEO** — full page `metadata` (title/description/OpenGraph/Twitter/canonical/icons) + Person JSON-LD structured data. _(PR #5)_
+- [x] **Hero value-proposition** — homepage leads with an H1 name + one-line positioning lede. _(PR #6)_
+- [x] **Availability banner** — added SF(US) to the available locations. _(PR #7)_
+- [x] **Featured blog posts** — "From the Blog" section on the homepage linking to selected posts.
+- [x] **Dedicated OpenGraph image** — generated 1200×630 card via `app/opengraph-image.tsx`; per-page titles/descriptions (fixed the `big_data` placeholder description).
+- [x] **Blog articles** — rewrote `big_data` (Data Engineering) and `d3` (D3 for Data & Visual Analytics) into full, professional articles; removed broken Docusaurus-era references.
 
 ## Pending — needs owner input
 
 - [ ] **Contact CTA + résumé download** — add a primary "Contact" CTA and a one-click résumé (PDF). _Needs: public email + résumé PDF (or link)._
 - [ ] **Quantify impact** — convert experience/project bullets from activity-first to outcome-first with numbers (deploy time, scale, cost, reliability). _Needs: real metrics; won't fabricate._
-- [ ] **Custom domain** — move from `will-d-wang.github.io` to a custom domain (e.g. `willwang.dev`) for a more senior presence. _Needs: owned domain, then a `CNAME` file + DNS records._
+- [ ] **Custom domain** — move from `will-d-wang.github.io` to a custom domain (e.g. `willwang.dev`). _Needs: owned domain, then a `CNAME` file + DNS records._
 
 ## Notes
 
