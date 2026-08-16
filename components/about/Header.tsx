@@ -17,6 +17,19 @@ export function AboutImage() {
   );
 }
 
+export function Hero() {
+  return (
+    <header className="home-hero-intro">
+      <h1 className="home-title">Will D. Wang</h1>
+      <p className="home-lede">
+        Member of Technical Staff at OpusClip — DevOps / Platform Engineer
+        building reliable CI/CD, cloud infrastructure, and AI-assisted developer
+        workflows on GCP and Kubernetes.
+      </p>
+    </header>
+  );
+}
+
 export function SocialLinks() {
   return (
     <nav
