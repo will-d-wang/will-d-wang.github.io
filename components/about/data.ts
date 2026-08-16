@@ -1,4 +1,5 @@
 import type {
+  FeaturedPost,
   Project,
   SocialLink,
   TimelineEntry,
@@ -75,6 +76,20 @@ export const PROJECTS: Project[] = [
       "Built a Python unit-test framework for ACL to improve coverage and regression safety, and designed module APIs documented with Doxygen.",
       "Led performance testing and optimization of a pub/sub system supporting 128K circuits, using profiling and coverage reporting to improve runtime efficiency.",
     ],
+  },
+];
+
+export const FEATURED_POSTS: FeaturedPost[] = [
+  {
+    title: "Introduction to Data Engineering",
+    href: "/blog/big_data",
+    blurb: "Building big-data pipelines and data-engineering foundations.",
+  },
+  {
+    title: "D3 for Data and Visual Analytics",
+    href: "/blog/d3",
+    blurb:
+      "Dynamic, interactive data visualizations with D3.js (Georgia Tech CSE 6242).",
   },
 ];
 

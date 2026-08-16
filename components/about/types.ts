@@ -38,3 +38,9 @@ export type Project = {
   highlights: string[];
   links?: ProjectLink[];
 };
+
+export type FeaturedPost = {
+  title: string;
+  href: string;
+  blurb: string;
+};
