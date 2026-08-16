@@ -8,9 +8,71 @@ import Link from "next/link";
 import { NextraSearchDialog } from "@/components/nextra-search-dialog";
 import { getPagesFromPageMap } from "@/lib/getPagesFromPageMap";
 
+const SITE_URL = "https://will-d-wang.github.io";
+const SITE_TITLE = "Will D. Wang";
+const SITE_TAGLINE = `${SITE_TITLE} — DevOps / Platform Engineer`;
+const SITE_DESCRIPTION =
+  "Member of Technical Staff at OpusClip working across DevOps and Platform Engineering — CI/CD, cloud infrastructure, and AI-assisted developer workflows for backend systems on GCP and Kubernetes.";
+const OG_IMAGE = "/images/DinganWang.jpg";
+
 export const metadata: Metadata = {
-  // Define your metadata here
-  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TAGLINE,
+    template: `%s — ${SITE_TITLE}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_TITLE,
+  authors: [{ name: SITE_TITLE, url: SITE_URL }],
+  creator: SITE_TITLE,
+  keywords: [
+    "Will D. Wang",
+    "Dingan Wang",
+    "Platform Engineer",
+    "DevOps Engineer",
+    "SRE",
+    "Kubernetes",
+    "CI/CD",
+    "GCP",
+    "AWS",
+    "Azure",
+    "OpusClip",
+  ],
+  alternates: { canonical: "/" },
+  icons: { icon: "/images/general/logo.webp" },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_TITLE,
+    title: SITE_TAGLINE,
+    description: SITE_DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 320, height: 320, alt: SITE_TITLE }],
+  },
+  twitter: {
+    card: "summary",
+    title: SITE_TAGLINE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE_TITLE,
+  alternateName: "Dingan Wang",
+  url: SITE_URL,
+  image: `${SITE_URL}${OG_IMAGE}`,
+  jobTitle: "Member of Technical Staff — DevOps / Platform Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "OpusClip",
+    url: "https://www.opus.pro",
+  },
+  sameAs: [
+    "https://github.com/Will-D-Wang",
+    "https://linkedin.com/in/will-d-wang",
+  ],
 };
 
 const banner = (
@@ -113,6 +175,10 @@ export default async function RootLayout({ children }) {
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Layout
           banner={banner}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
