@@ -116,7 +116,9 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
           "Lark",
         ],
         details: [
-          "Working across DevOps and Platform Engineering functions to support backend delivery, CI/CD reliability, infrastructure, and production operations.",
+          "Completed SOC compliance projects, strengthening the organization's security and compliance posture.",
+          "Reduced the CI/CD pipeline failure rate to below 4%, improving delivery reliability for engineering teams.",
+          "Reduced build time by 70%, accelerating developer feedback and software delivery.",
         ],
       },
     ],
