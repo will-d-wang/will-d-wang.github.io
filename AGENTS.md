@@ -30,8 +30,8 @@ Personal website / portfolio for Will D. Wang — Nextra 4 (docs theme) on Next.
 
 ## Conventions
 
-- Never push directly to `main`. Branch as `{first}{lastinitial}-{mmdd}--{brief-feature}` (e.g. `willw-0815--seo-metadata`).
-- PRs: use a `chore:` prefix for config-only changes; include an "AI coding brief" section (original request / manual interventions / retro).
+- Commit completed changes and push directly to `main`. Create a feature branch or PR only when explicitly requested.
+- Use a `chore:` prefix for config-only commits.
 - Verify runtime changes by driving the app (dev server + fetch), not just by typechecking.
 
 <!-- BEGIN:nextjs-agent-rules -->
