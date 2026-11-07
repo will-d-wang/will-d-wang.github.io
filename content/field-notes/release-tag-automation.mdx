@@ -1,18 +1,20 @@
 ---
-description: A field note on connecting release tags, CI/CD, and automated system tests to reduce an on-premises release from days to about two hours.
+description: A field note on connecting release tags, CI/CD, infrastructure as code, and automated tests across AWS and GCP.
 ---
 
-# Turn release tags into an automated delivery contract
+# Connect release tags, IaC, and automated tests
 
 **Project context:** April 2021
 
-I reduced the release time for an on-premises product from multiple days to about two hours by redesigning the path between release tags, CI, CD, backend build and test workflows, and automated system tests.
+I reduced the release time for an on-premises product from multiple days to about two hours by redesigning the path between release tags, CI, CD, backend build and test workflows, and automated system tests. I also automated cloud deployment with infrastructure as code (IaC), connected each deployed environment to the test automation, and applied the pattern across both Google Cloud Platform (GCP) and Amazon Web Services (AWS).
 
-The important change was not simply making an individual job faster. The existing CI workflow was disconnected from the tagging system, so a release tag did not reliably initiate and identify the complete delivery process. Build, test, deployment, and system-test activities required manual coordination across several tools and handoffs.
+The important change was not simply making an individual job faster. The existing CI workflow was disconnected from the tagging system, so a release tag did not reliably initiate and identify the complete delivery process. Cloud deployment and test automation were also separate concerns instead of consecutive stages of one verifiable workflow. Build, infrastructure deployment, application deployment, testing, and release activities required coordination across several tools and handoffs.
 
 ## Make the tag the release contract
 
-I redesigned the release tag as the shared identifier that connected the stages. Creating an approved tag started a traceable workflow in which CI built and tested the backend, CD consumed the corresponding release output, and system-test automation verified the candidate. Each stage operated on the same release identity instead of relying on people to reconstruct which build, deployment, and test result belonged together.
+I redesigned the release tag as the shared identifier that connected the stages. Creating an approved tag started a traceable workflow in which CI built and tested the backend, CD consumed the corresponding release output, IaC created or updated the cloud environment, and system-test automation verified the deployed candidate.
+
+Each stage operated on the same release identity instead of relying on people to reconstruct which source, build, infrastructure change, deployment, and test result belonged together.
 
 ```text
 Approved source commit
@@ -31,7 +33,9 @@ CI workflow
 CD workflow
           │
           ▼
-On-premises release candidate
+IaC cloud deployment
+├── GCP environment
+└── AWS environment
           │
           ▼
 Automated system tests
@@ -40,13 +44,15 @@ Automated system tests
 Human audit of release evidence
           │
           ▼
-Release
+On-premises release
           │
           ▼
 Post-release dogfooding
 ```
 
-This changed the human role from executing and coordinating every step to reviewing evidence and making the release decision. An engineer audited the build and test results, approved the release, and performed post-release dogfooding. Automation handled the repeatable mechanics; people retained responsibility for judgment and product confidence.
+The IaC stage made environment creation part of the delivery system rather than a separate setup activity. When deployment completed, the workflow supplied the resulting environment to the automated system tests. This made infrastructure state, application version, and test evidence part of the same release record in both GCP and AWS.
+
+The redesign changed the human role from executing and coordinating every step to reviewing evidence and making the release decision. An engineer audited the infrastructure change, build, deployment, and test results, approved the release, and performed post-release dogfooding. Automation handled the repeatable mechanics; people retained responsibility for judgment and product confidence.
 
 ## Why the lead time fell
 
@@ -57,10 +63,17 @@ Connecting the workflow removed those queues and reduced avoidable rework:
 - a tag provided one release identity across CI, CD, artifacts, and test evidence;
 - downstream stages started from machine-readable events rather than manual notification;
 - backend build and test work ran as part of the same controlled path;
+- IaC made cloud deployments repeatable and gave tests a known environment to verify;
 - system tests returned evidence to the release decision instead of being coordinated separately;
 - the release audit focused on exceptions and results rather than routine execution.
 
 The resulting end-to-end release completed in about two hours. That measurement represents elapsed release time, not only pipeline runtime: the useful outcome was shortening the path from a release decision to an auditable candidate for the on-premises offering.
+
+## What AWS and GCP taught me
+
+Implementing the workflow for two cloud providers made the boundary between delivery intent and provider implementation visible. The pipeline needed a stable contract—deploy this version, return the environment endpoint and status, then run this test suite—but the IaC behind that contract had to respect each provider's identity, networking, resource, and lifecycle model.
+
+The goal was not to pretend AWS and GCP were identical. A useful cross-cloud design keeps the release and verification interface consistent while allowing provider-specific modules to express real differences. Automated system tests then validate the behavior expected from the deployed product rather than merely proving that an IaC command returned successfully.
 
 ## Controls that keep this pattern safe
 
@@ -71,6 +84,8 @@ Event-driven automation increases the importance of the contract around the tag.
 | Protected tag creation | Only an authorized, reviewed commit can initiate a release. |
 | Immutable versioned artifact | CD promotes the output that CI tested instead of rebuilding different bits. |
 | Recorded provenance | The tag, commit, build, artifact, test evidence, approval, and deployment remain traceable. |
+| Reviewed IaC change | The release evidence includes the intended infrastructure change before it is applied. |
+| Idempotent deployment | Reapplying the same desired state converges without creating an unrelated environment. |
 | Clear failure boundaries | A failed build or test stops promotion and identifies the responsible stage. |
 | Repeatable deployment | Retrying a stage does not silently create a different release candidate. |
 | Recovery procedure | Operators know whether to retry, roll forward, or restore the prior version. |
@@ -79,7 +94,7 @@ The manual audit was a deliberate control, not unfinished automation. Full auton
 
 ## What I took from the project
 
-Release performance is often constrained by missing connections rather than slow tools. Optimizing one build step would not have removed multi-day coordination. Establishing a common release identity and an event-driven control flow changed the system boundary and eliminated entire classes of handoff.
+Release performance is often constrained by missing connections rather than slow tools. Optimizing one build step would not have removed multi-day coordination. Establishing a common release identity and an event-driven control flow changed the system boundary and eliminated entire classes of handoff. Encoding cloud deployment in IaC made the environment itself another tested, reviewable output of that flow.
 
 The broader lesson is to measure the complete value stream. Record both execution time and queue time, then ask which transitions still depend on a person copying information or deciding what should happen next. Automate those transitions when the rule is deterministic, preserve human review where judgment matters, and make the evidence strong enough that approval is a decision rather than an investigation.
 
