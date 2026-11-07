@@ -1,0 +1,35 @@
+---
+description: Compare Cloudflare Tunnel and Cloudflare Mesh by network layer, connection direction, source IP, and operational tradeoffs.
+lastReviewed: "2026-11-07"
+---
+
+# Choose between Cloudflare Tunnel and Mesh
+
+The first question is **who must be able to start a connection?** If users need to reach a particular application or private resource, Cloudflare Tunnel is usually the simpler path. If servers, devices, or sites need to initiate connections to one another, Cloudflare Mesh is designed for that network relationship.
+Both carry traffic through Cloudflare, but they expose different connectivity models. [Cloudflare's connection-method guide](https://developers.cloudflare.com/learning-paths/replace-vpn/connect-private-network/connection-methods/) compares the two directly.
+
+## What layer does each operate at?
+
+Cloudflare describes **Mesh as a Layer 3 proxy**. Each enrolled participant receives a private Mesh IP and can send TCP, UDP, or ICMP traffic to other participants. A Mesh node can also advertise routes to a subnet behind it. The traffic passes through Cloudflare; Mesh does not create a direct Ethernet link between participants. [Mesh concepts](https://developers.cloudflare.com/mesh/concepts/)
+
+**Tunnel is a proxy and off-ramp to resources behind `cloudflared`.** Its common form publishes an HTTP application at a hostname, so it is often described as a Layer 7 option. Tunnel can also route private hostnames and IP/CIDR ranges to services behind the connector. That IP routing does not make the origin an enrolled participant that can initiate new connections back to clients. [Tunnel fundamentals](https://developers.cloudflare.com/tunnel/concepts/), [private IP routing](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-cidr/)
+
+| Decision point | Cloudflare Tunnel | Cloudflare Mesh |
+| --- | --- | --- |
+| Connection initiation | Client to resource behind `cloudflared` | Either enrolled participant can initiate |
+| Addressing | Published hostname or private route | Mesh IP per participant; optional subnet routes |
+| Origin's view of client IP | Usually the `cloudflared` host; HTTP can use `CF-Connecting-IP` | Initiating device's virtual IP is preserved |
+| Connector | `cloudflared` | Cloudflare One Client; headless Mesh nodes run on Linux |
+| Strong fit | Web apps, APIs, and selected private services | Device-to-device, server-to-server, and site-to-site traffic |
+
+The direction row describes **new connections**. Replies to a Tunnel request travel back normally. The difference is that a service behind Tunnel cannot start an unrelated connection to the requesting device through that tunnel. [Cloudflare's comparison](https://developers.cloudflare.com/mesh/concepts/)
+
+## Benefits and costs of each choice
+
+Tunnel keeps the origin's address private and needs no inbound firewall port at that origin. It is easy to attach a hostname to an application, apply Cloudflare's application controls, and run multiple `cloudflared` replicas for availability.
+For private routes, the source address seen by the resource is generally the connector host, which simplifies return routing but can matter to applications that depend on client IPs. [Tunnel fundamentals](https://developers.cloudflare.com/tunnel/concepts/), [connectivity options](https://developers.cloudflare.com/cloudflare-one/networks/connectivity-options/)
+
+Mesh supports bidirectional private IP traffic, server-initiated protocols, and long-lived connections such as database replication or remote administration. It can preserve the source IP and connect networks through advertised routes.
+The added work is enrolling participants, defining policies, and ensuring return traffic for routed subnets goes back through the Mesh node. Mesh nodes currently require Linux or the supported container image. [Mesh concepts](https://developers.cloudflare.com/mesh/concepts/), [platform requirements](https://developers.cloudflare.com/mesh/platform/)
+
+For one published service, start with Tunnel. For a private network in which both sides must initiate traffic, use Mesh. They can coexist: publish applications through Tunnel and use Mesh only for the workloads that need its broader connectivity. In either case, connectivity and authorization are separate decisions; set access and network policies for the resources being reached. [Cloudflare's guidance](https://developers.cloudflare.com/learning-paths/replace-vpn/connect-private-network/connection-methods/)
