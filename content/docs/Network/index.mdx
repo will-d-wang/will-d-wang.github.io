@@ -1,5 +1,45 @@
 ---
-title: Network
+description: TCP/IP and OSI layers, encapsulation, and a practical way to troubleshoot network paths.
+lastReviewed: "2026-11-07"
 ---
 
-Networking concepts, protocols, and system commands.
+# Network
+
+Networking moves application data between hosts through a stack of protocols. The **TCP/IP model** describes the Internet protocol suite in four layers. The **OSI model** divides network communication into seven conceptual layers; it is useful for explaining responsibilities and narrowing down faults. The mapping is approximate because real protocols do not always fit one OSI layer exactly.
+
+## TCP/IP and OSI layers
+
+| OSI layer | TCP/IP layer | Responsibility and examples |
+| --- | --- | --- |
+| 7. Application | Application | Services used by applications: HTTP, DNS, SMTP |
+| 6. Presentation | Application | Data representation and protection: text encoding, serialization, TLS |
+| 5. Session | Application | Managing an exchange: session state and connection management |
+| 4. Transport | Transport | End-to-end delivery and ports: TCP, UDP |
+| 3. Network | Internet | Logical addressing and routing: IPv4, IPv6, ICMP |
+| 2. Data link | Link | Framing and local delivery: Ethernet, Wi-Fi, MAC addresses |
+| 1. Physical | Link | Sending bits over copper, fiber, or radio |
+
+Some diagrams split TCP/IP's link layer into data link and physical layers and call it a five-layer model. OSI layers 5–7 are usually implemented together by application protocols and libraries rather than as three separate components.
+
+## Follow one request through the stack
+
+For an HTTP request over TCP on an Ethernet network:
+
+1. The application creates an HTTP message.
+2. TCP uses ports and divides the byte stream into segments. It handles ordering and retransmission.
+3. IP places each segment in a packet with source and destination IP addresses so routers can forward it.
+4. Ethernet puts the packet in a frame for the next local hop; the physical medium carries the bits.
+
+The receiving host removes these layers in reverse order. IP addresses identify network endpoints, TCP or UDP ports identify the receiving service, and MAC addresses identify interfaces on the local link. A router replaces the link-layer frame at each hop while forwarding the IP packet.
+
+## Troubleshoot by layer
+
+| Symptom | Start checking |
+| --- | --- |
+| No link or interface | Physical medium, interface state, Wi-Fi association, local link |
+| Name does not resolve | DNS records, resolver configuration, DNS reachability |
+| Host or subnet unreachable | IP address, subnet, route, gateway, firewall rules |
+| Connection refused or timed out | Destination port, listener, TCP handshake, network policy |
+| Connected but request fails | TLS handshake, HTTP status, application logs |
+
+Use [Linux network commands](/docs/Network/cmd) for hands-on checks and [Network Knowledge](/docs/Network/knowledge) for related protocol notes. The four TCP/IP layers follow [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html); the OSI layer breakdown is described in [NIST's networking reference](https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nbsir86-3430.pdf).

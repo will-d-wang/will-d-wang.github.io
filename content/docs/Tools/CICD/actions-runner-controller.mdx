@@ -1,0 +1,39 @@
+---
+description: Kubernetes-hosted GitHub Actions runners with Actions Runner Controller, runner scale sets, and operational boundaries.
+lastReviewed: "2026-11-07"
+---
+
+# Actions Runner Controller
+
+I have used [Actions Runner Controller (ARC)](https://github.com/actions/actions-runner-controller) to run self-hosted GitHub Actions jobs on Kubernetes. ARC manages runner pods and scales them in response to assigned jobs. The current GitHub-supported approach uses autoscaling runner scale sets; older autoscaling modes remain in the project as legacy options.
+
+## How runner scale sets work
+
+The ARC controller runs in the cluster and manages a runner scale set. A listener receives available jobs from GitHub, adjusts the desired number of ephemeral runners, and creates runner pods. A workflow routes a job to the scale set by using its name in `runs-on`.
+
+```yaml
+jobs:
+  build:
+    runs-on: arc-runner-set
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Running on an ARC runner"
+```
+
+Here, `arc-runner-set` is the Helm release name of the runner scale set, unless `runnerScaleSetName` overrides it.
+
+## Deployment choices
+
+ARC uses separate Helm charts for the controller and each runner scale set. A scale set points at a repository, organization, or enterprise through `githubConfigUrl`. For repository and organization runners, GitHub recommends a GitHub App for API authentication. Keep the App credentials in a Kubernetes Secret and reference that Secret from the scale-set values instead of putting credentials on the Helm command line.
+
+Set `minRunners` for idle capacity and `maxRunners` to cap concurrency. Leaving both unset allows the scale set to return to zero when there are no active jobs. Use runner groups to restrict which repositories can use a scale set.
+
+## Operational boundaries
+
+- Put runner pods in a different namespace from the ARC controller.
+- Treat workflow code as untrusted when deciding cluster access, network reachability, and credential exposure.
+- Keep production workloads isolated from runner workloads where the risk requires it.
+- Retain controller, listener, and ephemeral runner logs; the runner pods disappear after jobs complete.
+- Watch job queue time, pod scheduling failures, runner startup time, and failed registration when diagnosing capacity or authentication problems.
+
+See GitHub's [ARC overview](https://docs.github.com/en/actions/concepts/runners/actions-runner-controller), [getting-started guide](https://docs.github.com/en/actions/tutorials/use-actions-runner-controller/get-started), and [runner scale-set deployment guide](https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets) for current setup details. The broader workflow and trust model is covered in [GitHub Actions](/docs/Tools/CICD/github-actions).
