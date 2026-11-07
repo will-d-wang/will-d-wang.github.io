@@ -29,7 +29,7 @@ const topics = [
     number: "05",
     title: "AI for Engineering",
     description: "Use AI in engineering workflows, with evaluation and human review built in.",
-    href: "/docs/ai",
+    href: "/ai",
   },
 ] as const;
 
@@ -150,7 +150,7 @@ export function LearningHome() {
       <section className="learning-about" aria-labelledby="about-heading">
         <div>
           <p className="learning-eyebrow">The person behind the notes</p>
-          <h2 id="about-heading">Hi, I’m Will.</h2>
+          <h2 id="about-heading">Hi, I’m Will D.</h2>
           <p>
             I work across DevOps and platform engineering. This site is where I
             turn what I study and build into practical notes for other engineers.
