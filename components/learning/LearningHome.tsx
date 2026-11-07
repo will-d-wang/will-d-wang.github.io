@@ -4,25 +4,25 @@ const topics = [
   {
     number: "01",
     title: "Site Reliability Engineering",
-    description: "Define reliability, observe services, and turn incidents into better systems.",
+    description: "Design SLOs, resilience, incident systems, and reliability governance across teams.",
     href: "/docs/sre",
   },
   {
     number: "02",
     title: "Infrastructure",
-    description: "Work through cloud foundations, containers, Kubernetes, and distributed systems.",
+    description: "Architect cloud foundations, failure boundaries, IaC, security, recovery, and cost controls.",
     href: "/docs/infrastructure",
   },
   {
     number: "03",
     title: "DevOps",
-    description: "Shorten the path from a code change to a dependable release.",
+    description: "Improve delivery flow, progressive release, supply-chain trust, and recovery at scale.",
     href: "/docs/devops",
   },
   {
     number: "04",
     title: "Platform Engineering",
-    description: "Design developer workflows and internal platforms that make delivery easier.",
+    description: "Build internal products with stable contracts, paved roads, SLOs, and measurable adoption.",
     href: "/docs/platform",
   },
   {
@@ -92,7 +92,7 @@ export function LearningHome() {
             <p className="learning-eyebrow">Choose a focus</p>
             <h2 id="topics-heading">Five connected disciplines</h2>
           </div>
-          <p>Follow a topic from first principles to the work of running it.</p>
+          <p>Follow a topic from first principles to staff and principal-level decisions.</p>
         </div>
         <div className="learning-topic-grid">
           {topics.map((topic) => (
