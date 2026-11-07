@@ -1,5 +1,5 @@
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
-import { Head, Banner } from "nextra/components";
+import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "./globals.css";
 import { Metadata } from "next";
@@ -10,9 +10,9 @@ import { getPagesFromPageMap } from "@/lib/getPagesFromPageMap";
 
 const SITE_URL = "https://will-d-wang.github.io";
 const SITE_TITLE = "Will D. Wang";
-const SITE_TAGLINE = `${SITE_TITLE} — DevOps / Platform Engineer`;
+const SITE_TAGLINE = `${SITE_TITLE} — SRE, Infrastructure, DevOps, Platform Engineering & AI`;
 const SITE_DESCRIPTION =
-  "Member of Technical Staff at OpusClip working across DevOps and Platform Engineering — CI/CD, cloud infrastructure, and AI-assisted developer workflows for backend systems on GCP and Kubernetes.";
+  "Practical learning paths, labs, and field notes about reliable systems, cloud infrastructure, DevOps, platform engineering, and AI for engineers.";
 const OG_IMAGE = "/images/DinganWang.jpg";
 
 export const metadata: Metadata = {
@@ -73,12 +73,6 @@ const personJsonLd = {
   ],
 };
 
-const banner = (
-  <Banner storageKey="some-key">
-    Open to AI related Platform Engineer, DevOps, SRE Roles in Seattle(US),
-    SF(US), or Vancouver(BC) • Available for onsite/hybrid.
-  </Banner>
-);
 const navbar = (
   <Navbar
     logo={
@@ -178,7 +172,6 @@ export default async function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <Layout
-          banner={banner}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           navbar={navbar}
           pageMap={pageMap}

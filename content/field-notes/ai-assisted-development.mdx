@@ -1,0 +1,19 @@
+---
+description: A practical workflow for applying AI to engineering tasks while retaining review and verification.
+---
+
+# Use AI-assisted development with clear checks
+
+AI assistance works best when the task and its evidence of success are explicit. Before asking for code, describe the behavior you want, the constraints of the system, and how you will verify the result. Keep ownership of the decision with the engineer reviewing the change.
+
+## A reviewable workflow
+
+1. **Bound the task.** Pick a small change with a visible result. State the interface, expected behavior, and constraints.
+2. **Ask for a proposal.** Request a plan or patch that explains its assumptions. Treat unfamiliar APIs and version-specific claims as things to verify.
+3. **Read the diff.** Check data handling, failure paths, security boundaries, and whether the change fits existing conventions.
+4. **Run the system.** Use the relevant tests and exercise the feature through the application. A passing typecheck alone does not show that a page or service works.
+5. **Record what happened.** Keep useful prompts, failed approaches, and the checks that caught mistakes so the next task starts with better context.
+
+## Where to begin
+
+Try one change in the [service lab](/labs/build-and-operate-a-service): ask an assistant to add a `/version` endpoint or improve the deployment verification step. Decide what response you expect before seeing the generated code, then run the service and compare the actual response. For release workflows, use the [CI feedback loop note](/field-notes/ci-feedback-loop) to decide whether assistance improved the path from change to reliable feedback.

@@ -1,0 +1,22 @@
+---
+description: A learning path for observing, operating, and improving service reliability.
+---
+
+# Site Reliability Engineering
+
+SRE starts with a question: what does a dependable experience look like for the people using this service? Work from the user-visible behavior backward to signals, operational procedures, and changes that reduce recurring failures.
+
+## Follow this path
+
+1. **[Monitor a system](/docs/DevSecOps/process/7.monitor)** to identify the signals an operator needs before an incident.
+2. **[Review operational work](/docs/DevSecOps/process/6.operate)** and separate routine operations from failure response.
+3. **[Study distributed systems](/docs/OMSCS/CS7210-Distributed-Systems)** for the failure modes that appear when services depend on a network.
+4. **[Run a service in a local cluster](/labs/build-and-operate-a-service)** and check its health after a deployment.
+
+## Practice questions
+
+- Which request would you use as a basic availability probe, and what failure would that probe miss?
+- If a deployment makes the service unhealthy, which signal tells you first? How do you decide whether to roll back?
+- Which repeated manual response could become an automated safeguard?
+
+Use the [CI feedback loop field note](/field-notes/ci-feedback-loop) to connect reliability with the speed and clarity of release feedback.

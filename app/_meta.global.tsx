@@ -1,13 +1,19 @@
 import { MetaRecord } from "nextra";
 
 const DOCS_ITEMS: MetaRecord = {
-  index: "",
-  projects: "Projects",
+  index: "Start Here",
+  sre: "SRE",
+  infrastructure: "Infrastructure",
+  devops: "DevOps",
+  platform: "Platform Engineering",
+  ai: "AI for Engineering",
+  projects: "Projects (portfolio)",
 };
 
-export default {
+const globalMeta = {
   index: {
     type: "page",
+    title: "Home",
     theme: {
       layout: "full",
       toc: false,
@@ -16,13 +22,22 @@ export default {
   },
   docs: {
     type: "page",
-    title: "Documentation",
+    title: "Learn",
     items: DOCS_ITEMS,
   },
-  blog: {
+  labs: {
     type: "page",
-    theme: {
-      typesetting: "article",
-    },
+    title: "Labs",
+  },
+  "field-notes": {
+    type: "page",
+    title: "Field Notes",
+  },
+  about: {
+    type: "page",
+    title: "About",
+    theme: { layout: "full", toc: false, timestamp: false },
   },
 };
+
+export default globalMeta;

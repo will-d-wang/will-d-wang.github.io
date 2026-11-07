@@ -1,0 +1,25 @@
+---
+description: A practical framework for measuring build time, failure signals, and recovery in CI/CD.
+---
+
+# Shorten the CI feedback loop
+
+A pipeline is a conversation with the developer who changed the code. A useful result arrives soon enough to affect the next decision, and explains what needs attention. When improving CI/CD, look at both time to feedback and the quality of that feedback.
+
+## Map the path of one change
+
+Record timestamps for queueing, dependency setup, build, tests, packaging, deployment, and the first post-deploy check. Use a few representative changes rather than only the fastest run. A median shows the usual wait; a slow percentile reveals delays that developers remember.
+
+For each failure, ask whether it came from the code change, the test, or the pipeline environment. Keep those categories separate. A flaky infrastructure failure is a different problem from a useful test failure, even when both make a build red.
+
+## Improve one bottleneck at a time
+
+If setup dominates, check dependency caching and image size. If tests dominate, look for independent suites that can run in parallel and for tests that should move earlier. If the queue dominates, adding more tests to the same shared runner will not improve feedback. After each change, measure again and check whether failure diagnosis became easier or harder.
+
+Fast green builds are useful only when they still protect the release. Keep an explicit list of checks that must pass before deployment and a recovery path for a bad release. The [build](/docs/DevSecOps/process/2.build), [test](/docs/DevSecOps/process/3.test), and [deploy](/docs/DevSecOps/process/5.deploy) notes cover the stages.
+
+## A small experiment
+
+Take one pipeline and record ten recent runs: total duration, time in each stage, whether it failed, and the reason. Choose one change with a clear hypothesis, such as "cache dependencies to reduce setup time." Compare another ten runs after the change. Write down the tradeoff, including cache invalidation, runner cost, or any new failure mode.
+
+The [service lab](/labs/build-and-operate-a-service) gives you a small application to use when thinking through which checks belong in a delivery path.

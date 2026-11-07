@@ -1,0 +1,18 @@
+---
+description: Cloud, containers, Kubernetes, and the systems that host software.
+---
+
+# Infrastructure
+
+Infrastructure is the set of decisions that lets a service run somewhere predictable: its compute, networking, storage, identity, deployment environment, and operational boundaries. Start with one local service, then map each part to a cloud environment.
+
+## Follow this path
+
+1. **[Docker fundamentals](/docs/Tools/docker)** explain how an application becomes a repeatable container image.
+2. **[Kubernetes concepts](/docs/Tools/k8s/k8s_concepts)** introduce clusters, workloads, and the control plane.
+3. **[Kubernetes operations](/docs/Tools/k8s/k8s_operations)** collect practical operational considerations.
+4. **[GCP notes](/docs/DevSecOps/Cloud/GCP)** provide a cloud-provider starting point; [AWS](/docs/DevSecOps/Cloud/AWS) and [Azure](/docs/DevSecOps/Cloud/Azure) are also available.
+
+## Put it into practice
+
+In the [build and operate a service lab](/labs/build-and-operate-a-service), build a container image, load it into a local Kubernetes cluster, and verify a Deployment's readiness. While working, write down which parts would need a different choice in production: image registry, secrets, resource limits, ingress, and observability.

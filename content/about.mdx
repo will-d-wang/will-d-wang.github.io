@@ -1,0 +1,24 @@
+---
+title: About Will D. Wang
+description: Background, experience, projects, and the tools behind this technical learning site.
+---
+
+import { CareerJourneySection } from "../components/about/CareerJourneySection";
+import { AboutImage, Hero, SocialLinks } from "../components/about/Header";
+import { TechStackSection } from "../components/about/TechStackSection";
+import { BlogSection } from "../components/about/BlogSection";
+import { CareerEvolutionSection } from "../components/about/TimelineSection";
+import Link from "next/link";
+
+<main className="home-page">
+  <AboutImage />
+  <Hero />
+  <SocialLinks />
+  <CareerJourneySection />
+  <CareerEvolutionSection />
+  <TechStackSection />
+  <BlogSection />
+  <p>
+    <Link href="/docs/projects">Explore selected projects →</Link>
+  </p>
+</main>

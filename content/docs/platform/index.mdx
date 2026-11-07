@@ -1,0 +1,18 @@
+---
+description: Developer workflows, internal platforms, and reliable paths to production.
+---
+
+# Platform Engineering
+
+A platform should make a common developer task easier to do correctly. Begin with the path a developer follows to build, deploy, and observe a service. Then identify which parts can become a reusable interface, template, or self-service workflow.
+
+## Follow this path
+
+1. **[Review the delivery stages](/docs/DevSecOps/process/1.code)** from code through operations to find repeated work.
+2. **[Study CI systems](/docs/Tools/CICD/github-actions)** and consider which checks should be standard across services.
+3. **[Explore system design](/docs/System-Design)** for the boundaries between a service and its supporting platform.
+4. **[Read about feedback loops](/field-notes/ci-feedback-loop)** before selecting a platform success metric.
+
+## Design exercise
+
+After completing the [service lab](/labs/build-and-operate-a-service), sketch a starter template that supplies the health endpoint, container build, deployment manifest, and a verification checklist. Decide what should be configurable by a service team and what the platform should own. Keep the first version small enough that a new service can use it without platform-team intervention.

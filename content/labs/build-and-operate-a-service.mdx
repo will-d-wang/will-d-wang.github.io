@@ -1,0 +1,138 @@
+---
+description: Build a small HTTP service, containerize it, deploy it to local Kubernetes, and verify its health.
+---
+
+# Build and operate a service
+
+This lab follows one service from source code to a running Kubernetes Deployment. It uses a local [kind](https://kind.sigs.k8s.io/) cluster so you can inspect each step without a cloud account. Expect to finish with a reachable `/` endpoint and a passing `/healthz` readiness probe.
+
+**You need:** Python 3, Docker, kind, kubectl, and a terminal. Run the commands from a new empty directory. The examples use a Unix-like shell.
+
+## Build a local service
+
+Create `app.py`:
+
+```python
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/healthz":
+            body = b"ok\n"
+        elif self.path == "/":
+            body = b"hello from the service\n"
+        else:
+            self.send_error(404)
+            return
+
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+
+HTTPServer(("0.0.0.0", 8080), Handler).serve_forever()
+```
+
+Run `python3 app.py` in one terminal and `curl -fsS http://localhost:8080/healthz` in another. The expected response is `ok`. Stop the server before the next step.
+
+## Containerize and run
+
+Create `Dockerfile` next to `app.py`:
+
+```dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+COPY app.py .
+USER 10001
+EXPOSE 8080
+CMD ["python", "app.py"]
+```
+
+Build and run the image:
+
+```sh
+docker build -t learning-service:local .
+docker run --rm --name learning-service -p 8080:8080 learning-service:local
+```
+
+In another terminal, run `curl -fsS http://localhost:8080/`. The expected response is `hello from the service`. Stop the container with Ctrl+C before continuing. For more context, see the [Docker notes](/docs/Tools/docker).
+
+## Deploy to local Kubernetes
+
+Create a cluster and load the image into it:
+
+```sh
+kind create cluster --name learning-service
+kind load docker-image learning-service:local --name learning-service
+```
+
+Create `k8s.yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learning-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: learning-service
+  template:
+    metadata:
+      labels:
+        app: learning-service
+    spec:
+      containers:
+        - name: service
+          image: learning-service:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+```
+
+Apply it and wait for readiness:
+
+```sh
+kubectl apply -f k8s.yaml
+kubectl rollout status deployment/learning-service
+kubectl port-forward deployment/learning-service 8080:8080
+```
+
+In another terminal, `curl -fsS http://localhost:8080/healthz` should again return `ok`. The `kubectl rollout status` command should report a successful rollout. If it does not, inspect `kubectl get pods`, `kubectl describe pod <pod-name>`, and `kubectl logs deployment/learning-service`. The [Kubernetes concepts](/docs/Tools/k8s/k8s_concepts) page explains the objects involved.
+
+## Change and verify
+
+Stop port forwarding. Change the `/` response in `app.py`, rebuild the image, then load it into kind again. Restart the Deployment and check the new response:
+
+```sh
+docker build -t learning-service:local .
+kind load docker-image learning-service:local --name learning-service
+kubectl rollout restart deployment/learning-service
+kubectl rollout status deployment/learning-service
+kubectl port-forward deployment/learning-service 8080:8080
+```
+
+In another terminal, fetch `/` and confirm it returns your new response. Think about the gap between "the Deployment is ready" and "users can complete their task." Which additional check would close that gap? Continue with the [SRE path](/docs/sre) or [CI feedback loop field note](/field-notes/ci-feedback-loop).
+
+## Clean up
+
+Stop port forwarding, then run `kind delete cluster --name learning-service`. This removes the local cluster created for the lab.
