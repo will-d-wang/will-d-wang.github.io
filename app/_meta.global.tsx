@@ -3,6 +3,7 @@ import { MetaRecord } from "nextra";
 const DOCS_ITEMS: MetaRecord = {
   index: "Start Here",
   "--guided-paths": { type: "separator", title: "Guided paths" },
+  "Career-Plan": { display: "children" },
   sre: "SRE",
   infrastructure: "Infrastructure",
   devops: "DevOps",
@@ -21,7 +22,6 @@ const DOCS_ITEMS: MetaRecord = {
   Hardware: "Computer Hardware",
   "--archive": { type: "separator", title: "More from the archive" },
   OMSCS: "Graduate Coursework",
-  "Career-Plan": "Career Notes",
   projects: "Projects (portfolio)",
 };
 
