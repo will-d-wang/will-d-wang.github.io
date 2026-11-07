@@ -1,10 +1,10 @@
 ---
-description: Cloud, containers, Kubernetes, and the systems that host software.
+description: Cloud, containers, Kubernetes, infrastructure as code, and security controls for the systems that host software.
 ---
 
 # Infrastructure
 
-Infrastructure is the set of decisions that lets a service run somewhere predictable: its compute, networking, storage, identity, deployment environment, and operational boundaries. Start with one local service, then map each part to a cloud environment.
+Infrastructure is the set of decisions that lets a service run somewhere predictable: its compute, networking, storage, identity, deployment environment, and operational boundaries. Start with one local service, then map each part to a cloud environment. Define repeatable environments with infrastructure as code (IaC), and build security and compliance checks into the way those environments are changed and operated.
 
 ## Follow this path
 
@@ -12,7 +12,9 @@ Infrastructure is the set of decisions that lets a service run somewhere predict
 2. **[Kubernetes concepts](/docs/Tools/k8s/k8s_concepts)** introduce clusters, workloads, and the control plane.
 3. **[Kubernetes operations](/docs/Tools/k8s/k8s_operations)** collect practical operational considerations.
 4. **[GCP notes](/docs/DevSecOps/Cloud/GCP)** provide a cloud-provider starting point; [AWS](/docs/DevSecOps/Cloud/AWS) and [Azure](/docs/DevSecOps/Cloud/Azure) are also available.
+5. **[Infrastructure as code](/docs/infrastructure/infrastructure-as-code)** covers versioned definitions, change review, state, and drift.
+6. **[Security and compliance](/docs/infrastructure/security-and-compliance)** connects identity, secrets, network boundaries, and audit evidence to infrastructure work.
 
 ## Put it into practice
 
-In the [build and operate a service lab](/labs/build-and-operate-a-service), build a container image, load it into a local Kubernetes cluster, and verify a Deployment's readiness. While working, write down which parts would need a different choice in production: image registry, secrets, resource limits, ingress, and observability.
+In the [build and operate a service lab](/labs/build-and-operate-a-service), build a container image, load it into a local Kubernetes cluster, and verify a Deployment's readiness. While working, write down which parts would need a different choice in production: image registry, secrets, resource limits, ingress, and observability. Sketch the IaC change that would create those production resources, then identify the security controls and evidence you would need to review before applying it.

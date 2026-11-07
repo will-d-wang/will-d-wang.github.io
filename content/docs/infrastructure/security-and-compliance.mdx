@@ -1,0 +1,24 @@
+---
+description: Security controls and compliance evidence to include in infrastructure work.
+---
+
+# Security and Compliance in Infrastructure
+
+Infrastructure security starts with the paths people and services use to access resources. Compliance work makes the relevant controls repeatable and produces evidence that they are operating. The specific requirements depend on the system and the framework being assessed.
+
+## Build controls into the workflow
+
+1. **Identity and access:** Give people, workloads, and deployment automation only the permissions they need. Review privileged roles and remove unused access.
+2. **Network boundaries:** Limit inbound and outbound access, avoid public exposure by default, and document the traffic a service requires.
+3. **Secrets and data:** Keep credentials out of source code and IaC state where possible. Use managed secret storage, encryption, and a rotation process appropriate to the service.
+4. **Configuration checks:** Review IaC plans and scan for insecure settings before deployment. Record exceptions and who approved them.
+5. **Visibility and recovery:** Enable relevant audit logs, monitor changes to critical resources, and test backups and restore procedures.
+6. **Evidence:** Keep change reviews, access reviews, configuration results, and recovery test records so an auditor can trace a requirement to a working control.
+
+## Practice questions
+
+- Which identity applies an infrastructure change, and can it modify production outside the reviewed workflow?
+- How would you detect a storage bucket or service becoming public?
+- What record would show that a control was checked and that a failed check was resolved?
+
+Apply these questions to the [infrastructure as code workflow](/docs/infrastructure/infrastructure-as-code) and the [service lab](/labs/build-and-operate-a-service). For application security topics, continue to the [Security notes](/docs/Security).

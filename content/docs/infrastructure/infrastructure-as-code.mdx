@@ -1,0 +1,23 @@
+---
+description: A practical workflow for defining and reviewing cloud infrastructure as code.
+---
+
+# Infrastructure as Code
+
+Infrastructure as code (IaC) puts cloud resources and their relationships in versioned configuration. It makes an environment reproducible and gives reviewers a record of intended changes. Terraform is one common tool; the same review habits apply to other IaC systems.
+
+## Work through a change
+
+1. **Define the smallest useful stack.** Identify the network, compute, storage, identity, and service dependencies. Keep environment-specific values explicit.
+2. **Keep state protected.** Use a shared backend with access controls, encryption, and state locking where supported. State can contain sensitive values, even when they are marked sensitive in output.
+3. **Validate and plan.** Format and validate the configuration, then inspect the plan for replacements, deletions, broad permissions, and public exposure.
+4. **Review before applying.** Commit the configuration and review the plan with the code change. Apply from a controlled workflow with the intended identity and environment.
+5. **Check the result.** Confirm that resources and application behavior match the plan. Detect drift and decide whether to update code or correct an out-of-band change.
+
+## Practice questions
+
+- Which resources must exist before the application can start, and which values differ between development and production?
+- Who can read or change state, and how would you recover it after an accidental change?
+- What would a plan show if a database or network boundary were about to be replaced?
+
+Use the [service lab](/labs/build-and-operate-a-service) as a starting point: list the cloud resources needed to run the same service outside a local cluster, then review a proposed change before applying it.
