@@ -1,48 +1,36 @@
 ---
-date: '2021-08-06'
-tags: ['DevSecOps']
+description: How security, quality, and operational evidence fit through the software delivery lifecycle.
+lastReviewed: "2026-11-07"
 ---
 
-# DevSecOps Roadmap
+# Delivery and Security
 
-## DevOps Tools of the Trade
+Secure delivery is a system of feedback loops rather than a sequence of scanners. A change moves from intent to source, build, test, artifact, deployment, and operation. Each stage should produce evidence, reduce a known risk, and preserve enough context to diagnose failure.
 
-![Devops Tools of the Trade](./images/DevOps-Tools-of-the-trade.png)
+```mermaid
+flowchart LR
+    P[Plan and threat model] --> C[Code and review]
+    C --> B[Build and dependencies]
+    B --> T[Test and security analysis]
+    T --> R[Artifact and provenance]
+    R --> D[Progressive deployment]
+    D --> O[Operate and observe]
+    O -. incidents and learning .-> P
+```
 
-## DevOps RoadMap
+## Follow the lifecycle
 
-![Devops](./images/devops.png)
+1. **[Plan](/docs/DevSecOps/process/0.plan):** establish requirements, risk, data use, ownership, and acceptance criteria.
+2. **[Code](/docs/DevSecOps/process/1.code):** review changes, detect exposed secrets, and apply language-aware analysis.
+3. **[Build](/docs/DevSecOps/process/2.build):** produce reproducible artifacts and account for dependencies and provenance.
+4. **[Test](/docs/DevSecOps/process/3.test):** build confidence at the cheapest effective layer and test security properties.
+5. **[Release](/docs/DevSecOps/process/4.release):** promote an immutable, identifiable artifact with its evidence.
+6. **[Deploy](/docs/DevSecOps/process/5.deploy):** control exposure, verify outcomes, and retain a recovery path.
+7. **[Operate](/docs/DevSecOps/process/6.operate):** own service health, change, access, capacity, and recovery.
+8. **[Monitor](/docs/DevSecOps/process/7.monitor):** turn telemetry into user-impact and risk decisions.
 
-## DevSecOps RoadMap
+## Design controls around risk
 
-![DevSecOps - ©PentesterAcademy.com](./images/DevSecOps.png)
+Avoid adding a tool without naming the failure it detects, its expected signal quality, and the action attached to a result. Fast checks belong close to the developer. Expensive integration or dynamic checks can run later, provided they do not become an unbounded release queue.
 
-## [DevSecOps Maturity Model(DSOMM)](https://dsomm.timo-pagel.de/)
-
-## Why DevSecOps
->
-> DevSecOps term is a relatively new term but given the rise in security awareness as well as breaches, it has become the talk of the town. Instead of having a team for manual security testing, it is way more efficient and cost/time effective to have automated security checks and catching the issue as soon as possible. This makes DevSecOps a highly demanded and regarded skill in the industry.
-
-[DevSecOps](https://www.sumologic.com/insight/devsecops-rugged-devops/)
-
-[Automating Terraform Deployment to Google Cloud with GitHub Actions](https://medium.com/interleap/automating-terraform-deployment-to-google-cloud-with-github-actions-17516c4fb2e5)
-
-## Cloud technologies
-
-* [12 Factor App](https://12factor.net/)
-* [Azure Well Architected Framework](https://learn.microsoft.com/en-us/azure/architecture/framework/)
-* SRE Practices
-* [Cloud Design Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/)
-
-## Agile Manifesto
-
-Manifesto for Software Craftsmanship
-
-[Minifesto](http://minifesto.org/)
-
-[Manifesto for Software Craftsmanship](https://manifesto.softwarecraftsmanship.org/)
-
-## Reference
-
-[DevOps-Roadmap-Github](https://github.com/raycad/devops-roadmap)
-[DevSecOps-RoadMap-Github](https://github.com/hahwul/DevSecOps)
+The [DevOps path](/docs/devops) covers delivery flow and software-supply-chain architecture. [Security and Compliance in Infrastructure](/docs/infrastructure/security-and-compliance) develops control ownership and evidence in more depth.

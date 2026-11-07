@@ -1,6 +1,23 @@
 ---
-title: ACR
-date: '2021-08-13'
-tags: ['DevSecOps', 'CI']
+description: How static analysis, secret detection, dependency checks, policy, and human review combine in a secure delivery path.
+lastReviewed: "2026-11-07"
 ---
 
+# Automated Code Review
+
+Automated review finds repeatable patterns quickly; human review evaluates intent, architecture, abuse cases, and context. Neither replaces the other.
+
+## Useful checks
+
+- compiler, type, lint, and formatting checks for deterministic defects;
+- secret detection before credentials enter history;
+- static application security testing for language-aware vulnerability patterns;
+- software composition analysis for dependency inventory and known risk;
+- IaC and policy checks for exposure, identity, encryption, and ownership;
+- generated artifact and provenance verification.
+
+Run fast, high-signal checks before merge and move expensive analysis later only when the feedback remains actionable. Establish a baseline for legacy findings instead of making a permanently ignored failing gate.
+
+Every finding needs severity context, ownership, suppression with justification and expiry, and a way to verify remediation. Measure false-positive rate, time to triage, recurrence, and material defects found before and after release.
+
+Reviewers should still ask what trust boundary changed, which authorization is enforced, how sensitive data moves, what can fail open, and whether rollback or recovery remains safe.

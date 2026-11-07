@@ -1,7 +1,32 @@
-# K8S operations
+---
+description: Production Kubernetes operations across upgrades, capacity, networking, state, observability, security, and recovery.
+lastReviewed: "2026-11-07"
+---
 
-## dynamic configuration
+# Kubernetes Operations
 
-## secrets storage
+Operating Kubernetes means managing the cluster and its dependent workloads as separate but coupled systems. A healthy API server does not prove applications are healthy, and healthy Pods do not prove a user journey succeeds.
 
-## container orchestration
+## Operational domains
+
+| Domain | Questions |
+| --- | --- |
+| Control plane | Who upgrades it, backs up etcd, rotates certificates, and restores API access? |
+| Nodes | How are images patched, drained, replaced, and distributed across failure domains? |
+| Capacity | Do requests reflect usage, and is there headroom for disruption and failover? |
+| Networking | How are DNS, CNI, Services, ingress, egress, and network policy observed? |
+| Storage | Are CSI lifecycle, topology, snapshots, application-consistent backup, and restore tested? |
+| Security | Are RBAC, workload identity, admission, runtime policy, and audit events governed? |
+| Workloads | Are probes, disruption budgets, rollout strategy, quotas, and graceful shutdown correct? |
+
+## Change and recovery
+
+Test version skew and deprecated APIs before upgrades. Roll changes through a bounded node or cluster cohort, monitor platform and user outcomes, and retain a documented stop condition. PodDisruptionBudgets constrain voluntary disruption but do not guarantee application availability.
+
+Back up the desired state and the application data needed to recreate service. Exercise cluster bootstrap, control-plane recovery, workload restoration, and external dependencies. A manifest backup without keys, identity, DNS, storage, and data is incomplete.
+
+## Multi-tenant risk
+
+Use quotas and priority carefully so one workload cannot starve critical system components. Separate tenants by cluster when the required security or failure boundary is stronger than namespaces and policy can provide. Track shared controllers and admission policies because one defect can affect every namespace.
+
+The [Infrastructure Engineering path](/docs/infrastructure) covers cluster boundaries, landing zones, identity, recovery, and cost at organization scale.

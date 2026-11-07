@@ -1,36 +1,25 @@
 ---
-title: Jenkins
-date: '2021-08-08'
-tags: ['DevOps', 'CI', 'CD']
+description: Jenkins controller and agent boundaries, Pipeline as Code, shared libraries, credentials, isolation, upgrades, and recovery.
+lastReviewed: "2026-11-07"
 ---
 
-[Tikal Knowledge - Generic Python script-runner using Dockerized Jenkins-pipeline](https://www.tikalk.com/posts/2017/09/24/generic-python-script-runner-using-dockerized-jenkins-pipeline/)
+# Jenkins
 
-[GitHub - jenkinsci/pyenv-pipeline-plugin: Execute commands in Python virtualenvs in Jenkins Pipeline DSL](https://github.com/jenkinsci/pyenv-pipeline-plugin)
+Jenkins is an extensible automation server. Its flexibility makes controller security, plugin lifecycle, agent isolation, and shared-library governance central design concerns.
 
-Exercise:
-Run LeTP-UnitTests locally with docker.
+## Architecture and trust
 
-[Using Docker with Pipeline](https://www.jenkins.io/doc/book/pipeline/docker/)
+Keep build execution on agents rather than the controller. Separate trusted release workloads from untrusted pull-request jobs, especially when agents have network access, persistent workspaces, or credentials. Prefer ephemeral agents and short-lived workload identity.
 
-[declarative-pipeline-fundamentals](https://www.jenkins.io/doc/book/pipeline/%5C#declarative-pipeline-fundamentals)
+Store pipelines with source as a `Jenkinsfile`. Shared libraries can standardize delivery contracts, but version them, test changes against representative consumers, and publish migrations. Avoid allowing repository-controlled scripts to acquire controller or production authority before trusted review.
 
-## Jenkins design
+## Operate Jenkins
 
-structuring the project to core, plugins, modules, and other independent pieces
+- minimize plugins and track their security and compatibility lifecycle;
+- back up configuration, credentials metadata, job history needed for audit, and shared state;
+- test controller restoration and agent bootstrap;
+- restrict script approval, administrative access, and credential domains;
+- monitor queue time, executors, controller health, agent failures, flaky jobs, and artifact publishing;
+- upgrade through a staged environment with rollback and plugin compatibility checks.
 
-## Jenkins pipeline
-
-[Jenkins: Using Gradle to build your Shared Library \\| Rubix](https://www.rubix.nl/blogs/jenkins-using-gradle-build-your-shared-library/)
-
-[Jenkins: Preparing your Shared Library for tests \\| Rubix](https://www.rubix.nl/blogs/jenkins-preparing-your-shared-library-for-tests/)
-
-[Jenkins: Testing a full declarative pipeline in your Shared Library \\| Rubix](https://www.rubix.nl/blogs/jenkins-testing-a-full-declarative-pipeline-in-your-shared-library/)
-
-## Q&A
-
-### What's two types of pipeline?
-
-[Pipeline Syntax](https://www.jenkins.io/doc/book/pipeline/syntax/#compare)
-
-Declarative and Scripted pipeline.
+Use Jenkins when its extensibility and existing investment justify the operating burden. Compare the full lifecycle and migration cost with managed CI services, not only pipeline syntax.

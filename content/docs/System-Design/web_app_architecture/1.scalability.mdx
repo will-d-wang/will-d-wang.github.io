@@ -1,85 +1,23 @@
 ---
-date: 'January 30, 2022'
-tags: ['System-Design']
+description: Capacity modeling, horizontal and vertical scaling, bottlenecks, load testing, elasticity, and overload behavior.
+lastReviewed: "2026-11-07"
 ---
-# Scalability
 
-the ability of the application to handle & withstand increased workload without sacrificing the latency.
+# Scalability and Elasticity
 
-![scalability.jpeg](./scalability.jpeg)
+Scalability is the ability to handle growth while meeting explicit latency, throughput, reliability, and cost objectives. Elasticity is the ability to add and remove capacity in response to demand. Neither requires microservices, and neither guarantees availability.
 
-*Latency* is the amount of time a system takes to respond to a user request.
+## Model demand and capacity
 
-This latency is generally divided into two parts:
+Estimate request rate, concurrency, payload size, storage growth, fan-out, cache hit rate, background work, and peak shape. Identify the constrained resource and how quickly additional capacity becomes useful.
 
-1. Network Latency - CDN to cut down.
+- **Vertical scaling** adds resources to one node. It can be simple and efficient but encounters hardware, restart, and failure-domain limits.
+- **Horizontal scaling** adds nodes or partitions. It requires workload distribution, stateless or explicitly partitioned state, consistency decisions, and operational coordination.
 
-1. Application Latency - stress & load tests and refactor the bottleneck.
+Optimize after measuring. Common constraints include serialized work, connection pools, hot partitions, synchronous fan-out, lock contention, queue consumers, external quotas, and downstream capacity. Caching and asynchronous processing can move or defer load, but both introduce freshness, backlog, and failure behavior.
 
-   ![latency.jpeg](./latency.jpeg)
+## Test the system
 
-## Type of scalatility
+Use representative traffic, data size, cache state, dependencies, and failure conditions. Measure latency percentiles, throughput, errors, saturation, queue growth, retry amplification, and cost. Determine the sustainable limit and what happens beyond it.
 
-Vertical Scaling - hardware scale up.
-
-![vertical-scale.jpeg](./vertical-scale.jpeg)
-
-Horizontal Scaling - server scale out.
-
-![horizontal-scale.jpeg](./horizontal-scale.jpeg)
-
-### Cloud Elasticity
-
-Scale up & down danamically.
-
-![micro-service-scale.jpeg](./micro-service-scale.jpeg)
-
-### Scalability approach
-
-No *static instances* in the class. Static instances hold application data & if a particular server goes down all the static data/state is lost.
-
-Development teams today are adopting a distributed micro-services architecture right from the start & the workloads are meant to be deployed on the cloud. So, inherently the workloads are horizontally scaled out on the fly.
-
-## Primary bottlenecks
-
-- **application architecture:** *not using asynchronous processes & modules where ever required rather all the processes are scheduled sequentially.*
-
-- Not using **caching** via several layers
-
-- **Database:** database partitioning, sharding, use multiple database servers to make the module efficient.
-
-- Having **Business logic in DB**
-
-- Not **right DB**: transactions & strong consistency for Relational DB.  horizontal scalability on the fly pick a *NoSQL* database
-
-- Code level: unnecessary loops, nested loops, tightly coupled code, Big-O complexity
-
-## How to improve & Test scalability?
-
-Performance tunning
-
-- Profiling for concurrency errors, memory errors, robustness, safety
-
-- Caching
-
-- CDN
-
-- Data compression
-
-- Avoid unnecessary Client-Server requests.
-
-### Testing the scalability
-
-Different system parameters are taken into account such as the *CPU usage, network bandwidth consumption, throughput, the number of requests processed within a stipulated time, latency, memory usage of the program, end-user experience when the system is under heavy load* etc.
-
-*JMeter* to load & stress tests.
-
-[how production engineers support global events on Facebook.](https://engineering.fb.com/production-engineering/how-production-engineers-support-global-events-on-facebook/)
-
-[how Hotstar a video streaming service scaled with over 10 million concurrent users](https://www.8bitmen.com/how-hotstar-scaled-with-10-3-million-concurrent-users-an-architectural-insight/)
-
-*Cadvisor*, *Prometheus* and *Grafana* to tracking the system.
-
-![dashboard-monitoring.jpeg](./dashboard-monitoring.jpeg)
-
-[read more about the pre-production monitoring.](https://www.8bitmen.com/what-is-grafana-why-use-it-everything-you-should-know-about-it/)
+Design overload behavior before autoscaling: bounded queues, deadlines, admission control, load shedding, and degraded responses protect existing work while new capacity starts.

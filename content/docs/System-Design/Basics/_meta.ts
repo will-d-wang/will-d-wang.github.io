@@ -1,0 +1,17 @@
+export default {
+  CAP: "Consistency and CAP",
+  load_balancer: "Load Balancing",
+  caching: "Caching",
+  replication: "Replication",
+  message_broker: "Messaging",
+  "--archive": { type: "separator", title: "Study archive" },
+  "0.topic_lists": { title: "Concept Map", display: "hidden" },
+  kafka: { title: "Kafka Notes", display: "hidden" },
+  DB: { title: "Database Notes", display: "hidden" },
+  CDN: { title: "CDN Notes", display: "hidden" },
+  DNS: { title: "DNS Notes", display: "hidden" },
+  DQ: { title: "Data Quality Notes", display: "hidden" },
+  ELK: { title: "ELK Notes", display: "hidden" },
+  CD: { title: "Continuous Delivery Notes", display: "hidden" },
+  embedded_system: { title: "Embedded Systems Notes", display: "hidden" },
+};

@@ -1,48 +1,28 @@
 ---
-title: 5.Deploy
-date: '2021-09-30'
-tags: ['DevSecOps', 'Release', 'CD']
+description: Progressive delivery, configuration, database compatibility, verification, rollback, and auditable infrastructure changes.
+lastReviewed: "2026-11-07"
 ---
 
-## Problems
+# Deployment
 
-- How to deploy our solution in the production?
-- How to automate the deploy process?
+Deployment changes a running system; release changes who can use a capability. Separating them with staged exposure or feature flags can reduce risk, but it also creates lifecycle and cleanup work.
 
-## Automation Provision
+## A safe deployment path
 
-## Infrastructure as Code
+1. Select an immutable artifact and versioned configuration.
+2. Validate policy, environment prerequisites, and database compatibility.
+3. Deploy to a bounded cohort or failure domain.
+4. Verify technical health and a critical user journey against predefined thresholds.
+5. Continue, stop, roll back, or roll forward from observed evidence.
+6. Record the artifact, configuration, identity, approval, result, and recovery action.
 
-[What's IaC](https://stackify.com/what-is-infrastructure-as-code-how-it-works-best-practices-tutorials/)
+Use expand–migrate–contract for database changes so old and new application versions can coexist. Test rollback before relying on it; data mutations and external side effects may make roll-forward safer.
 
-## [Ansible](https://www.ansible.com/overview/how-ansible-works)
+## Deployment strategies
 
-## [Puppet](https://puppet.com/docs/puppet/7/puppet_index.html)
+- **Rolling:** efficient default when mixed versions are compatible.
+- **Canary:** limits exposure and compares a small cohort before expansion.
+- **Blue/green:** provides fast traffic switching but duplicates capacity and does not solve data compatibility.
+- **Feature flag:** separates code deployment from exposure; flags need ownership and removal dates.
 
-## [Chef](https://github.com/chef/chef)
-
-## [Terraform](https://www.terraform.io/)
-
-## Why is it important in DevSecOps?
-
-> Infrastructure as Code saves the repetitive human effort in setting up and managing the infrastructure. It also removes the human error altogether (i.e. once the script is finalized) by making sure that everything is set up, in the same way, every time the script is run. It also ensures that the developers and testers are working on an accurate setup with no special settings/misconfiguration etc caused by the operations team.
-
-## CI Server
-
-[Jenkins](https://www.jenkins.io/)
-
-## Delivery platform
-
-[Spinnaker](https://spinnaker.io/)
-
-## Blue Green Deployment
-
-The Blue/Green naming is just a way to distinguish between two separate environments: Because the same environment can serve as production one day and as non-production the other, we need to refer to them with a constant naming, regardless of the role they play.
-
-[5 Blue Green Deployment Best Practices for a Smooth Release](https://www.blazemeter.com/blog/blue-green-deployment-testing)
-
-[What Is Blue-Green Deployment?](https://semaphoreci.com/blog/blue-green-deployment)
-
-## Canary Deployment
-
-[What Is Canary Deployment?](https://semaphoreci.com/blog/what-is-canary-deployment)
+IaC reduces configuration drift and creates reviewable change records, but it does not eliminate human error. Module defects, incorrect requirements, unsafe plans, excessive permissions, and untested recovery can reproduce mistakes consistently. Use the [IaC workflow](/docs/infrastructure/infrastructure-as-code) for state, plan, policy, and drift controls.

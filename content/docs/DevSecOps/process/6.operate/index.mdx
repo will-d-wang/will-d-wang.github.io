@@ -1,40 +1,25 @@
 ---
-date: '2021-08-08'
-tags: ['DevSecOps', 'Ops', 'CD']
+description: Service ownership, on-call readiness, capacity, access, change, recovery, and operational learning.
+lastReviewed: "2026-11-07"
 ---
 
-# 6.Operate
+# Operate Services
 
-## Problems
+Operating a service means maintaining its user contract through routine change and failure. The service owner needs enough access, telemetry, documentation, and authority to diagnose impact and restore service.
 
-- How to operate our solutions and report bugs?
+## Operational readiness
 
-## Container
+- named service and dependency owners with escalation paths;
+- user-focused SLOs and actionable alerts;
+- dashboards that connect symptoms to saturation and recent changes;
+- deployment, rollback, feature-disable, and break-glass procedures;
+- capacity limits, quotas, overload behavior, and growth forecasts;
+- backup, restore, and regional recovery exercises;
+- privileged-access review and auditable production changes;
+- runbooks for known mitigations and a process for retiring obsolete steps.
 
-### Docker vs RKT
+## During and after failure
 
-Rcketr or RKT is more security-focused container solutions
+Separate incident command, technical investigation, and stakeholder communication. Restore the critical journey before pursuing complete causal analysis. Afterward, identify contributing conditions and improve architecture, automation, tests, observability, or procedures. Track whether the same failure class recurs.
 
-[Head to Head Comparison between RKT and Docker (Infographics)](https://www.educba.com/rkt-vs-docker/)
-
-### LXC
-
-LXC is a well-known [Linux Containers](https://linuxcontainers.org/) runtime.
-
-## Container orchestration engines (COEs)
-
-### Apache Mesos
-
-flexibility and the ability to share resources among different frameworks
-
-### Kubernetes
-
-container management and orchestration
-
-### YARN
-
-resource management and batch processing within the Hadoop ecosystem
-
-[KUBERNETES VS. MESOS](https://www.crowdstrike.com/cybersecurity-101/observability/kubernetes-vs-mesos/)
-
-[Docker Swarm vs Kubernetes: Top Differences](https://www.knowledgehut.com/blog/devops/docker-swarm-vs-kubernetes)
+Containers and orchestrators are implementation choices inside this operating model. Their health is not the service outcome. Continue with [Kubernetes Operations](/docs/Tools/k8s/k8s_operations), [Monitoring](/docs/DevSecOps/process/7.monitor), and the [SRE path](/docs/sre).

@@ -1,20 +1,22 @@
 ---
-date: '2021-08-08'
-tags: ['DevSecOps', 'tools']
+description: How image building, provisioning, configuration management, orchestration, and policy fit together.
+lastReviewed: "2026-11-07"
 ---
 
-# Configuration Management(CM)
+# Configuration and Infrastructure Automation
 
-[Infrastructure as code - Wikipedia](https://en.wikipedia.org/wiki/Infrastructure_as_code)
+Infrastructure automation contains several related responsibilities:
 
-## Ansible
+| Responsibility | Typical output | Examples |
+| --- | --- | --- |
+| Image building | Immutable machine or container image | Packer, Docker or BuildKit |
+| Provisioning | Cloud and platform resources | Terraform, OpenTofu, cloud-native templates |
+| Configuration management | Host packages, files, and services | Ansible, Chef, Puppet |
+| Orchestration | Desired workload placement and lifecycle | Kubernetes controllers |
+| Policy | Decision about an attempted change | Organization policy, admission control, policy engines |
 
-[User Guide — Ansible Documentation](https://docs.ansible.com/ansible/latest/user_guide/index.html)
+The boundaries can overlap. Choose a source of truth for each resource and avoid two controllers continuously fighting over the same field.
 
-What?
+Prefer immutable replacement when it reduces configuration drift, but retain configuration management for bootstrap, legacy systems, and tasks where replacement is impractical. Make every automation path idempotent where possible, observable, versioned, and recoverable.
 
-Automation language, automation engines.
-
-Terraform
-
-Chef
+Continue with [Infrastructure as Code](/docs/infrastructure/infrastructure-as-code) for state, plans, modules, policy, drift, and break-glass reconciliation.

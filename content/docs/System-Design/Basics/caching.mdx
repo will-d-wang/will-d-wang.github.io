@@ -1,33 +1,25 @@
 ---
-title: Caching
-date: 'January 26, 2022'
-tags: ['System-Design']
+description: Cache placement, keys, freshness, invalidation, stampede protection, consistency, capacity, and failure behavior.
+lastReviewed: "2026-11-07"
 ---
 
-.html
-MySQL Query Cache
-memcached
-Redis
+# Caching
 
-| Name      | Feature                                | Eviction argorithm       |
-| --------- | -------------------------------------- | ------------------------ |
-| Memcached | very large hash table across machines. | Least Recently Used(LRU) |
-|           |                                        |                          |
-|           |                                        |                          |
+A cache trades freshness and operational complexity for lower latency and reduced backend load. Define the source of truth and acceptable staleness before selecting a cache product.
 
-[Memcached vs Redis](https://aws.amazon.com/elasticache/redis-vs-memcached/)
+## Placement and policy
 
-|                                                              | Memcached | Redis |
-| :----------------------------------------------------------: | :-------: | :---: |
-| [Sub-millisecond latency](https://aws.amazon.com/elasticache/redis-vs-memcached/#Sub-millisecond_latency) |    Yes    |  Yes  |
-| [Developer ease of use](https://aws.amazon.com/elasticache/redis-vs-memcached/#Developer_ease_of_use) |    Yes    |  Yes  |
-| [Data partitioning](https://aws.amazon.com/elasticache/redis-vs-memcached/#Data_partitioning) |    Yes    |  Yes  |
-| [Support for a broad set of programming languages](https://aws.amazon.com/elasticache/redis-vs-memcached/#Support_for_a_broad_set_of_programming_languages) |    Yes    |  Yes  |
-| [Advanced data structures](https://aws.amazon.com/elasticache/redis-vs-memcached/#Advanced_data_structures) |     -     |  Yes  |
-| [Multithreaded architecture](https://aws.amazon.com/elasticache/redis-vs-memcached/#Multithreaded_architecture) |    Yes    |   -   |
-| [Snapshots](https://aws.amazon.com/elasticache/redis-vs-memcached/#Snapshots) |     -     |  Yes  |
-| [Replication](https://aws.amazon.com/elasticache/redis-vs-memcached/#Replication) |     -     |  Yes  |
-| [Transactions](https://aws.amazon.com/elasticache/redis-vs-memcached/#Transactions) |     -     |  Yes  |
-| [Pub/Sub](https://aws.amazon.com/elasticache/redis-vs-memcached/#Pub.2FSub) |     -     |  Yes  |
-| [Lua scripting](https://aws.amazon.com/elasticache/redis-vs-memcached/#Lua_scripting) |     -     |  Yes  |
-| [Geospatial support](https://aws.amazon.com/elasticache/redis-vs-memcached/#Geospatial_support) |     -     |  Yes  |
+Caches can live in a browser, CDN, gateway, application process, shared service, or database layer. Each placement changes ownership, key design, invalidation, privacy, and failure behavior.
+
+- **Cache-aside:** application reads the cache, loads misses from the source, and populates results.
+- **Read-through:** cache abstraction loads the source on a miss.
+- **Write-through:** update cache and backing store in the write path.
+- **Write-behind:** acknowledge before asynchronously persisting, increasing loss and ordering risk.
+
+TTL limits staleness but does not guarantee freshness. Event-driven invalidation can be faster but depends on reliable delivery and version ordering. Include tenant, authorization context, representation, and schema version in keys where they affect the response.
+
+## Failure and capacity
+
+Protect the source from stampedes with request coalescing, jittered expiry, prefetch, or stale-while-revalidate. Bound memory and understand eviction behavior. A cache outage should not automatically turn into an uncontrolled surge against the database.
+
+Track hit ratio by workload, miss latency, evictions, memory, hot keys, stale responses, invalidation delay, and backend load. A high global hit ratio can hide a critical path that never hits.

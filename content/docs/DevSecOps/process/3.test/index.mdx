@@ -1,59 +1,28 @@
 ---
-title: 3.Test
-date: '2021-08-09'
-tags: ['DevSecOps', 'Automation', 'Test']
+description: A risk-based testing strategy spanning fast feedback, integration, resilience, security, and production verification.
+lastReviewed: "2026-11-07"
 ---
 
-## Problems
+# Testing Strategy
 
-- How to validate the feature requirements?
-- How to build confidence about our product?
+Testing allocates confidence across layers. The goal is not maximum test count; it is fast, trustworthy evidence about the failures that matter to users and operators.
 
-## Testing Techniques
+| Layer | Best for | Common limitation |
+| --- | --- | --- |
+| Static analysis | Known code patterns, types, policy, and secrets | Cannot establish runtime behavior |
+| Unit and property tests | Local logic, invariants, edge cases | Misses integration and configuration |
+| Contract tests | Compatibility between independently changing services | Requires owned, versioned contracts |
+| Integration tests | Real databases, queues, identity, and provider behavior | Slower and harder to isolate |
+| End-to-end tests | Critical user journeys | Expensive, fragile, and poor at diagnosis |
+| Performance and resilience tests | Saturation, overload, failover, and recovery | Results depend on realistic workload and environment |
+| Security tests | Abuse cases, dependency risk, runtime exposure | Tool findings require triage and context |
 
-- Parametrized testing - Data Driven Testing
-- Behavior Driven testing.
+## Build a portfolio by risk
 
-## Python
+Start with critical journeys and failure modes. Put deterministic checks early, test interfaces at ownership boundaries, and reserve broad end-to-end suites for a small number of valuable journeys. Track flake rate, time to signal, escaped defects, and whether failures identify an owner and next action.
 
-- [Pytest](https://github.com/pytest-dev/pytest) - Plugin-based test framework.
-- [tox](https://tox.readthedocs.io/en/latest/) - automate and standardize testing in Python
-- [Robot Framework](https://robotframework.org/)
-- [pexpect](https://github.com/pexpect/pexpect) - Expect-like module, a better tool for controlling other applications.
-- [paramiko](https://github.com/paramiko/paramiko) - SSH client and server functionality
+Dynamic application security testing evaluates a running system, while static analysis evaluates source or artifacts without exercising the deployed application. Neither replaces threat modeling, authorization tests, dependency controls, or manual analysis of high-risk changes.
 
-## Java Family
+Canary and A/B techniques answer different questions: a canary limits deployment risk; an A/B experiment compares product outcomes. A safe experiment still needs operational abort conditions.
 
-- [JUnit](https://junit.org/junit5/) used for Spring based application with Mockito
-- [Spock for Groovy](https://spockframework.org/)
-- [Selenium](https://github.com/SeleniumHQ/selenium), Selenium IDE, Selenium Python Bindings.
-- [NextNG](https://github.com/cbeust/testng), general testing and Web Automation (Selenium)
-- [Unit Testing Spring Boot](https://reflectoring.io/unit-testing-spring-boot/)
-
-[JUnit 5 vs TestNG](https://stackoverflow.com/questions/38273479/junit-5-vs-testng)
-
-## Dynamic Application Security Analysis (DAST)
->
-> The Dynamic Application Security Analysis (DAST) is performed to identify the possible run-time vulnerabilities or security issues. Unlike static analysis, dynamic analysis is performed on a running project.
-
-### Tools Covered
-
-- [OWASP ZAP: Detecting Vulnerabilities in WebApps](https://github.com/zaproxy/zaproxy)
-- [BDD Security: Behaviour Driven Development](https://github.com/iriusrisk/bdd-security)
-- [Arachini: Automated Vulnerability Scanning](https://github.com/Arachni/arachni)
-- [Nikto: Automatic WebApp Scanning](https://github.com/sullo/nikto)
-- [Radamsa: Automated Fuzzing](https://gitlab.com/akihe/radamsa)
-- [FuzzDB: Fault Injection Testing](https://github.com/fuzzdb-project/fuzzdb)
-
-## Performance test
-
-- [Loadrunner](https://www.microfocus.com/en-us/products/loadrunner-professional/overview)
-- [jmeter](https://jmeter.apache.org/)
-
-## A/B Testing
-
-A/B testing is essentially **an experiment where two or more variants of a page are shown to users at random, and statistical analysis is used to determine which variation performs better for a given conversion goal**.
-
-## Canary Testing
-
-Canary Testing is **a way to reduce risk and validate new software by releasing software to a small percentage of users**.
+Continue with [Quality Assurance](/docs/DevSecOps/process/3.test/qa) and the [deployment stage](/docs/DevSecOps/process/5.deploy).

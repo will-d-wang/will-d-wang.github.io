@@ -1,26 +1,29 @@
 ---
-title: Security
-date: "2021-08-13"
-tags: ["DevSecOps"]
+description: A risk-driven path through threat modeling, identity, secure delivery, testing, vulnerability management, and response.
+lastReviewed: "2026-11-07"
 ---
 
-![DevSecOps - ©PentesterAcademy.com](../DevSecOps/images/DevSecOps.png)
+# Security Engineering
 
-## Reference
+Security engineering protects valuable user and business outcomes against misuse, compromise, and failure. Start with assets, actors, data flows, trust boundaries, and credible threats; then choose controls and evidence proportionate to risk.
 
-- [SDLC](https://www.guru99.com/software-development-life-cycle-tutorial.html)
-- [Agile](https://www.atlassian.com/agile)
-- [DevOps Definition](https://aws.amazon.com/devops/what-is-devops/)
-- [SDLC vs Agile vs DevOps](https://victorops.com/blog/agile-vs-devops)
+## Security lifecycle
 
-## DevSecOps Stages
+```mermaid
+flowchart LR
+    A[Assets and data flows] --> T[Threat model]
+    T --> D[Secure design]
+    D --> C[Code and dependency controls]
+    C --> V[Verification]
+    V --> O[Runtime detection and response]
+    O -. incidents and change .-> T
+```
 
-- Threat Model
-- Automated Code Review(ACR)
-- Sensitive Information Scan
-- Static Application Security Testing(SAST)
-- Dynamic Application Security Testing(DAST)
-- Software Composition Analysis
-- Vulnerability Management
-- Compliance as Code
-- Secret Management
+## Curated notes
+
+- **[Threat Modeling](/docs/Security/threat_model):** identify threats, mitigations, assumptions, and residual risk.
+- **[OAuth 2.0](/docs/Security/OAuth):** reason about delegated authorization, tokens, clients, and redirect boundaries.
+- **[Automated Code Review](/docs/Security/automated_code_review):** combine deterministic checks with human review.
+- **[Dynamic Security Testing](/docs/Security/dynamic_application_security_testing):** test a running system without confusing scanner output for complete assurance.
+
+Security controls should be owned, observable, and connected to a response. The [infrastructure security and compliance note](/docs/infrastructure/security-and-compliance) covers control evidence, exceptions, and continuous assurance.

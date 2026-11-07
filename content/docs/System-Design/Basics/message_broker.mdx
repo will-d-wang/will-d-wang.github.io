@@ -1,31 +1,27 @@
 ---
-title: Message Broker
-date: 'January 29, 2022'
-tags: ['System-Design']
+description: Asynchronous messaging, delivery semantics, ordering, idempotency, backpressure, retries, dead letters, and replay.
+lastReviewed: "2026-11-07"
 ---
 
-## Problem statement
+# Messaging and Queues
 
-Is there anyone to pickup the phone? Otherwise, we need to have a voicemail.
+Messaging decouples producers and consumers in time and rate. It can absorb bursts and isolate availability, while introducing backlog, duplicate delivery, ordering, schema, and operational concerns.
 
-If the server cannot accept the request right away, we need to have a **broker** to store the message first.
+## Define the contract
 
-## [RabbitMQ - AMQP](https://www.erlang-solutions.com/blog/an-introduction-to-rabbitmq-what-is-rabbitmq/)
+- event or command meaning, schema owner, and compatibility rules;
+- partition or routing key and the ordering boundary it creates;
+- delivery acknowledgement and redelivery behavior;
+- retention, replay, and deletion requirements;
+- consumer idempotency and deduplication strategy;
+- retry limits, delay, poison-message handling, and dead-letter ownership.
 
-## [ZMQ - TCP socket](http://wiki.zeromq.org/docs:introduction)
+“Exactly once” is usually scoped to a particular broker or transaction boundary. End-to-end effects still require idempotency, unique operation identifiers, transactional outbox or equivalent coordination, and reconciliation.
 
-https://www.educba.com/zeromq-vs-rabbitmq/
+## Operate backlog
 
-### Architecture of ZeroMQ
+Measure oldest-message age, arrival and processing rates, retry volume, partition skew, consumer lag, failures, and dead-letter growth. Queue length alone is ambiguous because acceptable length depends on throughput and service objectives.
 
-#### ![Architecture of ZeroMQ](https://cdn.educba.com/academy/wp-content/uploads/2020/02/Z-vs-R.png.webp)
+Apply backpressure before backlog exceeds recovery capacity. Scale consumers only while downstream systems can absorb the work. Preserve replay safety and data retention when changing schemas or consumer behavior.
 
-#### Components of RabbitMQ
-
-![Components of RabbitMQ](https://cdn.educba.com/academy/wp-content/uploads/2020/02/Z-vs-R-01.png.webp)
-
-### Head to Head Comparison Between ZeroMQ vs RabbitMQ
-
-![ZeroMQ-vs-RabbitMQ](https://cdn.educba.com/academy/wp-content/uploads/2020/02/ZeroMQ-vs-RabbitMQ.jpg.webp)
-
-## Kafka
+Choose a work queue, pub/sub broker, or durable event log from delivery, ordering, replay, throughput, latency, routing, and ownership requirements—not from product category alone.

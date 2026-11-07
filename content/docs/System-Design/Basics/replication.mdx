@@ -1,27 +1,26 @@
 ---
-date: 'January 29, 2022'
-tags: ['System-Design']
+description: Replication goals, consistency, lag, quorum, failover, split brain, durability, and recovery.
+lastReviewed: "2026-11-07"
 ---
+
 # Replication
 
-Master-Slave
+Replication keeps multiple copies of data or service state for availability, durability, read locality, or throughput. It does not automatically provide all four, and it is not a backup.
 
-Master-Master
+## Design choices
 
-Service tier architecture
+- **Leader-based:** one leader orders writes and followers replicate; failover must prevent two leaders from accepting conflicting writes.
+- **Multi-leader:** multiple sites accept writes; conflict detection and resolution become part of the application contract.
+- **Leaderless or quorum:** clients or coordinators read and write multiple replicas; quorum settings, repair, and conflict semantics determine behavior.
 
-Load balancer:
-active-active
-active-passive
+Synchronous replication can reduce acknowledged data loss while increasing write latency and sensitivity to coordination failure. Asynchronous replication lowers write latency but creates lag and a non-zero recovery point during failover.
 
-## Partition
+## Operational questions
 
-DNS:
-Geography based load balancing.
-Amazon Avalability Zone.
+- Which failures can the replica topology survive?
+- What does a client observe after writing and reading through another replica?
+- How are stale replicas detected, repaired, and prevented from becoming leaders?
+- What happens during a network partition or failed failover?
+- How are lag, durability, and data divergence measured?
 
-TCP:
-80 - Web
-443 - SSL
-23 - SSH
-VPN
+Backups provide a point-in-time copy isolated from live replication and destructive actions. Test restoration and application-level correctness independently of replica failover.

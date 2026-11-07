@@ -1,61 +1,21 @@
 ---
-date: "August 8, 2021"
-tags: ["study", "Cloud"]
+description: A provider-neutral way to compare AWS, Azure, and Google Cloud foundations and managed services.
+lastReviewed: "2026-11-07"
 ---
 
-# Cloud Study
+# Cloud Provider Notes
 
-## [Google Cloud Platform (GCP)](https://en.wikipedia.org/wiki/Google_Cloud_Platform)
+Cloud architecture should begin with workload, risk, operational, and economic requirements. Product names differ, but the enduring decisions are organization boundaries, identity, networking, compute, data, observability, recovery, policy, and cost allocation.
 
-Launched on April 7, 2008 as App Engine.
+| Capability | AWS | Azure | Google Cloud |
+| --- | --- | --- | --- |
+| Organization boundary | Organizations and accounts | Tenant, management groups, subscriptions | Organization, folders, and projects |
+| Workforce identity | IAM Identity Center and federation | Microsoft Entra ID | Cloud Identity and federation |
+| Virtual network | VPC | Virtual Network | VPC |
+| Managed Kubernetes | EKS | AKS | GKE |
+| Object storage | S3 | Blob Storage | Cloud Storage |
+| Audit events | CloudTrail | Activity Log | Cloud Audit Logs |
 
-## [AWS](https://en.wikipedia.org/wiki/Amazon_Web_Services)
+The table is a discovery map, not a claim that similarly named services have identical semantics. Evaluate quotas, failure behavior, identity integration, network topology, data guarantees, regional availability, support, and pricing in the specific provider.
 
-Founded in July 2002, it has more than 200 products and services.
-
-## [Azure](https://en.wikipedia.org/wiki/Microsoft_Azure)
-
-"Azure was introduced as Professional Developers Conference (PDC) in October 2008. It was officially launched as Windows Azure in Feb, 2010, renamed into
-Microsoft Azure on Mar.25, 2014."
-
-My favorite functionaliites include Resource Group Concept and Working log
-for each service.
-
-## Comparison
-
-[Amazon Maintains Lead in the Cloud Market](https://www.statista.com/chart/18819/worldwide-market-share-of-leading-cloud-infrastructure-service-providers/)
-
-[Cloud Market Share: A Look at the Cloud Ecosystem](https://kinsta.com/blog/cloud-market-share/)
-
-## Network Security
-
-How to remove public IP from VMs? Users need to use Tunnels via cloud CLI and servers. Here are the cloud service for tunnelling.
-
-### AWS System Manager Session Manager(SSM)
-
-[Port Forwarding Using AWS System Manager Session Manager](https://aws.amazon.com/blogs/aws/new-port-forwarding-using-aws-system-manager-sessions-manager/)
-
-### Azure Bastion
-
-[Configure Bastion for native client connections](https://learn.microsoft.com/en-us/azure/bastion/native-client)
-
-### GCP Identity-Aware Proxy(IAP)
-
-- [Using IAP for TCP forwarding](https://cloud.google.com/iap/docs/using-tcp-forwarding)
-- [Connect to Linux VMs using Identity-Aware Proxy](https://cloud.google.com/compute/docs/connect/ssh-using-iap)
-
-## Tools
-
-[Terraform](https://www.terraform.io/) to manage the cloud resources and their states.
-
-## References
-
-[EP70: Cloud Services Cheat Sheet](https://blog.bytebytego.com/p/ep70-cloud-services-cheat-sheet)
-
-## Public Cloud Cheat sheet
-
-![Cloud Comparison Cheat Sheet](./imgs/cloud_comparison_cheat_sheet.jpg)
-
-## Monitoring Cheat sheet
-
-![Cloud Monitoring Cheat Sheet](./imgs/cloud_monitoring_cheat_sheet.jpg)
+Continue with [AWS](/docs/DevSecOps/Cloud/AWS), [Azure](/docs/DevSecOps/Cloud/Azure), [Google Cloud](/docs/DevSecOps/Cloud/GCP), and the [Infrastructure Engineering path](/docs/infrastructure).

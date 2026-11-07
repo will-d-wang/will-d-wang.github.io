@@ -1,46 +1,40 @@
 ---
-date: '2021-08-08'
-tags: ['DevSecOps', 'tools']
+description: Container image construction, runtime isolation, security boundaries, reproducibility, and operational debugging.
+lastReviewed: "2026-11-07"
 ---
+
 # Docker
 
-[A Docker Tutorial for Beginners](https://docker-curriculum.com/#webapps-with-docker)
+A container image packages a filesystem and process configuration. A container runtime starts that image with kernel isolation and resource controls. Containers improve portability; they do not create a complete security boundary or remove host, network, storage, and identity dependencies.
 
-[Docker cleanup](https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430)
+## Build images deliberately
 
-## Dockerfile
+```dockerfile
+FROM python:3.12-slim AS runtime
+WORKDIR /app
+COPY app.py .
+USER 10001
+EXPOSE 8080
+ENTRYPOINT ["python", "app.py"]
+```
 
-### Multistage build for production and development images
+- Pin base images by digest when reproducibility and provenance require it.
+- Keep the build context small with `.dockerignore`.
+- Use multi-stage builds to exclude compilers, source, caches, and credentials.
+- Run as a non-root user and use a read-only filesystem where the application supports it.
+- Put configuration outside the image and deliver secrets through a purpose-built mechanism.
+- Record image provenance and scan both packages and application dependencies.
 
-[Best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+`EXPOSE` documents an intended port; it does not publish the port or create a firewall rule. `HEALTHCHECK` describes container health, but an orchestrator may use its own probe model. `CMD` supplies default arguments; `ENTRYPOINT` defines the executable when used in exec form.
 
-### Keywords/commands
+## Runtime boundaries
 
-- .dockerignore:  file ignore files in the context
-- From  : a new build stage and sets the base image.
-- RUN   : Execute commands in a new year on top of current image.
-- CMD   : the defaults for an executing container.
-  - exec, shell, Entrypoint default form.
-- ENTRYPOINT : exec or shell form.
+Containers share the host kernel. Namespaces isolate views of processes, networks, mounts, and users; cgroups control resource use; capabilities and security profiles restrict kernel operations. Avoid privileged containers and mounting the container runtime socket because both can collapse the host boundary.
 
-- LABEL : Add metadata to a image.
-- EXPOSE: container listens on ports and protocols. Default TCP.
-- ENV : environment variable in the following commands.
+Set CPU and memory constraints from measured behavior. Understand whether an out-of-memory condition kills one process, a container, or causes node pressure. Persist state in managed volumes or external services with defined backup and recovery.
 
-- ADD   :  Add files from the source new files, directories or remote file URLs
-- COPY  : takes in a src and destination
-- [Add or COPY](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#add-or-copy)
+## Diagnose systematically
 
-- VOLUME: create a mount point and marks it as externally mounted volume in the host
-- USER: set user access group.
-- WORKDIR: set the working directory for RUN, CMD, ENTRYPOINT, COPY and ADD.
-- ARG: intention - update dockerfile if this arguments changed.
-- ONBUILD: a trigger instruction to be executed at a later time
-- STOPSIGNAL: system call signal that will be sent to the container to exit
-- HEALTHCHECK: detect cases such as a web server that is stuck in an infinite
-  loop and unable to handle new connections
-- SHELL: Change default shell.
+Inspect image identity, configuration, process state, logs, exit code, health, resource use, mounts, network, DNS, and credentials. Reproduce with the same immutable image before changing it interactively. A debugging shell is useful evidence gathering, not a production configuration mechanism.
 
-## Docker commands
-
-- BUILD : use Dockerfile and a context(PATH or URL the set of files)
+The [service lab](/labs/build-and-operate-a-service) builds and runs a minimal image before loading it into Kubernetes.

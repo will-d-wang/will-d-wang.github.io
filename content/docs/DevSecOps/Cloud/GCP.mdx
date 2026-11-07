@@ -1,26 +1,17 @@
 ---
-date: 'August 8, 2023'
-tags: ['cloud']
+description: Google Cloud organization, project, identity, network, compute, data, security, observability, recovery, and cost decisions.
+lastReviewed: "2026-11-07"
 ---
 
-# GCP
+# Google Cloud Foundation Map
 
-## VM
+Start with the organization, folders, projects, organization policies, workforce federation, service accounts, and billing accounts. Use projects to contain identity policy, quotas, costs, APIs, and workload lifecycle.
 
-[Computer Engine](https://cloud.google.com/compute?hl=en)
+- **Identity:** Cloud IAM, workforce and workload identity federation, service accounts, and break-glass access.
+- **Network:** global VPCs, subnets, Shared VPC, Cloud DNS, Cloud Load Balancing, Private Service Connect, Cloud NAT, and controlled egress.
+- **Compute:** Compute Engine, Cloud Run, Cloud Functions, and GKE.
+- **Data:** Cloud Storage, Persistent Disk, Cloud SQL, Spanner, Bigtable, Memorystore, and Pub/Sub.
+- **Security and evidence:** Cloud Audit Logs, Organization Policy, Security Command Center, Cloud KMS, Secret Manager, and central log sinks.
+- **Operations and cost:** Cloud Monitoring, Cloud Logging, Backup and DR, budgets, labels, and billing export.
 
-## Network
-
-[VPC networks](https://cloud.google.com/vpc/docs/vpc)
-
-## Storage
-
-[Cloud Storage](https://cloud.google.com/storage/?hl=en#section-1)
-
-## Security
-
-[Identity and Access Management (IAM)](https://cloud.google.com/security/products/iam)
-[Identity-Aware Proxy](https://cloud.google.com/security/products/iap?hl=en)
-
-How to use k8s with jenkins?
-[Jenkins-on-k8s](https://cloud.google.com/solutions/jenkins-on-kubernetes-engine)
+Document project creation, service-account impersonation, network ownership, key administration, regional data requirements, service quotas, restoration tests, and foundation-policy changes.

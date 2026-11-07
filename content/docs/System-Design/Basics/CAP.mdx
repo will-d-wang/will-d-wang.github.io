@@ -1,61 +1,26 @@
 ---
-date: 'January 29, 2022'
-tags: ['System-Design']
+description: A precise way to use CAP and PACELC when reasoning about distributed data systems.
+lastReviewed: "2026-11-07"
 ---
 
-# CAP Theorem
+# Consistency, Availability, and Network Partitions
 
-[IBM CAP doc](https://www.ibm.com/cloud/learn/cap-theorem)
+CAP describes a distributed system's behavior when communication is partitioned. During a partition, a replicated operation cannot guarantee both linearizable consistency and that every request receives a non-error response. Outside a partition, systems still make latency and consistency tradeoffs, often summarized by PACELC.
 
-## 1. Consistency
+## Terms
 
-### Weak consistency
+- **Consistency in CAP:** operations appear to execute atomically in a single global order, commonly discussed as linearizability.
+- **Availability in CAP:** every request to a non-failing node eventually receives a non-error response, even if the response cannot include the latest write.
+- **Partition tolerance:** the system continues operating despite lost or delayed messages between groups of nodes.
 
-After a W, R may or may not see it: VoIP, video chat, realtime.
+Real distributed systems must expect partitions, so design focuses on which operations preserve consistency, which remain available, and how conflicting or delayed state is repaired. The choice can differ by operation: account balance updates may reject work while a product catalog serves stale data.
 
-Memcached
+## Questions for a design
 
-### Eventual Consistency - Data is replicated asynchronously
+- Which invariants must never be violated?
+- Can an operation wait, fail, or return stale data during loss of coordination?
+- How are conflicts detected and resolved?
+- What consistency does a client observe across retries, sessions, and regions?
+- How does the system recover after partitions heal?
 
-Highly available systems with NoSQLDB: after a W, R will eventually see it: Email or DNS.
-
-### Strong consistency - transaction based systems
-
-After W, R will see it: file systems and RDBMSes.
-
-[Google I/O 2009 - Transactions Across Datacenters.. - YouTube](https://www.youtube.com/watch?v=srOgpXECblk)
-
-## 2. Availability
-
-### Fail-over
-
-### Active-passive (master-slave) failover
-
-### Active-active (master-master) failover
-
-Potential data loss
-
-## 3. Replication
-
-[Database.](https://github.com/donnemartin/system-design-primer#database)
-
-[Master-Slave](https://github.com/donnemartin/system-design-primer#master-slave-replication)
-[Master-Master](https://github.com/donnemartin/system-design-primer#master-master-replication)
-
-## 4. DBs
-
-DB types:
-
-* CP
-* AP
-* CA
-
-[System Properties Comparison Cassandra vs. CouchDB vs. MongoDB](https://db-engines.com/en/system/Cassandra%3BCouchDB%3BMongoDB)
-
-[SQL vs. NoSQL Databases: What's the Difference?](https://www.ibm.com/cloud/blog/sql-vs-nosql)
-
-| Name      | Type    | Features                                                     | Tech   |
-| --------- | ------- | ------------------------------------------------------------ | ------ |
-| MongoDB   | **CP**a | BSON(Binary JSON) doc, single-master arch,  SQL query via Connector | C++    |
-| Cassandra | c**AP** | wide-column, master-less arch, repair functionality, SQL-like support | Java   |
-| CouchDB   | c**AP** | JSON                                                         | Erlang |
+Avoid classifying an entire database permanently as “CP” or “AP.” Configuration, topology, operation type, consistency level, and failure state determine behavior. Also avoid equating SQL with consistency or NoSQL with availability; products in both groups support different transaction, replication, and scaling models.

@@ -1,9 +1,25 @@
 ---
-title: 7. Monitor
-date: '2021-08-08'
-tags: ['DevSecOps', 'Ops']
+description: Telemetry design, user-focused signals, burn-rate alerting, diagnosis, and operational feedback.
+lastReviewed: "2026-11-07"
 ---
 
-## Problems
+# Monitoring and Observability
 
-- How to Monitor our solutions and report bugs?
+Monitoring evaluates known conditions; observability helps operators explain unexpected behavior from system outputs. Both should begin with decisions rather than dashboards.
+
+## Signal layers
+
+1. **User outcome:** availability, correctness, latency, freshness, or completion of a critical journey.
+2. **Service behavior:** request rate, errors, duration, queue age, and dependency performance.
+3. **Resource pressure:** CPU, memory, storage, connection pools, quotas, and saturation.
+4. **Change and control events:** deployments, configuration, identity, policy, and feature exposure.
+
+Logs, metrics, traces, profiles, and audit events answer different questions. Propagate correlation context across service boundaries and define retention from operational, security, and cost requirements.
+
+## Alert on action
+
+Page when a human must act now to protect a user outcome. Use error-budget burn across multiple windows to distinguish a fast outage from a slow regression. Create tickets for conditions that need work but do not require interruption. Every page needs an owner, impact statement, diagnostic entry point, and safe mitigation.
+
+Avoid alerting on every infrastructure threshold. High CPU may be healthy; low CPU may accompany a complete traffic-routing failure. Validate the user journey and connect symptoms to likely constraints.
+
+Continue with the [SRE path](/docs/sre) for SLOs, incident command, toil, capacity, and reliability governance.

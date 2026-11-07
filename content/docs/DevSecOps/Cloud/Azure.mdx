@@ -1,23 +1,17 @@
 ---
-date: 'August 8, 2023'
-tags: ['study']
+description: Azure tenant, subscription, identity, network, compute, data, security, observability, recovery, and cost decisions.
+lastReviewed: "2026-11-07"
 ---
 
-# Azure
+# Azure Foundation Map
 
-## VM
+Start with the Microsoft Entra tenant, management groups, subscriptions, resource groups, policy, centralized identity, and billing scopes. Use subscriptions to contain policy, quotas, costs, and administrative boundaries.
 
-[VM](https://learn.microsoft.com/en-us/azure/virtual-machines/)
+- **Identity:** Entra ID, managed identities, role-based access control, privileged identity management, and break-glass access.
+- **Network:** Virtual Networks, subnets, network security groups, Private Link, Azure Firewall, DNS, Bastion, and Virtual WAN or hub-and-spoke connectivity.
+- **Compute:** Virtual Machines, App Service, Functions, Container Apps, and AKS.
+- **Data:** Blob Storage, Managed Disks, Azure SQL, Cosmos DB, Cache for Redis, and Service Bus.
+- **Security and evidence:** Activity Log, Policy, Defender for Cloud, Key Vault, and central log retention.
+- **Operations and cost:** Azure Monitor, Log Analytics, Backup, Site Recovery, budgets, tags, and cost allocation.
 
-## Network
-
-[VPC networks](https://azure.microsoft.com/en-ca/products/virtual-network)
-
-## Storage
-
-[Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/)
-
-## Security
-
-[Identity and Access Management (IAM)](https://www.microsoft.com/en-ca/security/business/identity-access/microsoft-entra-id#overview)
-[Azure Bastion](https://learn.microsoft.com/en-us/azure/bastion/)
+Document region pairing assumptions, identity dependencies, private connectivity, key ownership, service quotas, restoration tests, and policy-exception governance.

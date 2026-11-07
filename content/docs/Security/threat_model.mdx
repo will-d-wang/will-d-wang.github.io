@@ -1,31 +1,29 @@
 ---
-title: Threat Model
-date: "2021-08-13"
-tags: ["DevSecOps", "Security"]
+description: A practical method for modeling assets, actors, data flows, trust boundaries, threats, mitigations, and residual risk.
+lastReviewed: "2026-11-07"
 ---
 
-## Threat Model
+# Threat Modeling
 
-[Threats](https://cybermap.kaspersky.com/)
+A threat model is a shared explanation of how a system can be misused or compromised and what the design does about it. It should change architecture and tests, not end as a diagram stored for an audit.
 
-![STRIDE](./stride.png)
+## Work through the model
 
-![DREAD](https://wildcardcorp.com/image-repository/dread.png)
+1. Define the system, critical user journeys, sensitive assets, and unacceptable outcomes.
+2. Draw processes, data stores, external entities, data flows, administrative paths, and trust boundaries.
+3. Identify actors and threats. STRIDE can prompt questions about spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege.
+4. Connect each material threat to prevention, detection, response, and recovery.
+5. Record assumptions, residual risk, an accountable owner, and a review trigger.
 
-## Tools
+## Questions that expose design risk
 
-[Threatspec](https://github.com/threatspec/threatspec)
+- Which identity can cross each boundary, and where is authorization evaluated?
+- Can untrusted input reach an interpreter, query, template, deserializer, or command?
+- Which control planes can modify production, credentials, policy, or evidence?
+- What happens when a dependency lies, times out, becomes compromised, or returns stale data?
+- Can an attacker make the system fail open, exhaust a shared resource, or erase audit history?
+- How are tenants separated, and which shared components create correlated risk?
 
-## References
+Risk scoring can help prioritize, but a numeric score does not replace a clear scenario and impact statement. Revisit the model when data use, trust boundaries, dependencies, deployment authority, or recovery design changes.
 
-[Threat Modeling](https://wildcardcorp.com/security/threat-modeling)
-
-[Threat Modeling: 12 Available Methods](https://insights.sei.cmu.edu/blog/threat-modeling-12-available-methods/)
-
-[Advanced threat modeling](https://owasp.org/www-pdf-archive/AdvancedThreatModeling.pdf)
-
-[Threat modeling of connected cars using STRIDE](https://alissaknight.medium.com/threat-modeling-of-connected-cars-using-stride-e8184764eb0a)
-
-[Threat modeling for web apps](https://www.netsparker.com/blog/web-security/threat-modeling/)
-
-[Five steps to successful threat modeling](https://semiengineering.com/five-steps-to-successful-threat-modeling/)
+The OWASP [Threat Modeling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html) provides a practical reference.

@@ -1,6 +1,22 @@
 ---
-title: DAST
-summary:  Dynamic application security testing
-date: '2021-08-13'
-tags: ['DevSecOps', 'CI']
+description: Scope, operation, limitations, and safe use of dynamic security testing against a running application.
+lastReviewed: "2026-11-07"
 ---
+
+# Dynamic Application Security Testing
+
+Dynamic application security testing (DAST) sends requests to a running system and looks for observable vulnerability behavior. It can find deployment and runtime issues that source analysis misses, but it sees the application from the identities and paths made available to the scanner.
+
+## Design the test
+
+1. Define the authorized target, environment, time window, data handling, and stop conditions.
+2. Provide representative authenticated roles and seed discoverable application state.
+3. Separate passive observation from active tests that mutate data or consume resources.
+4. Correlate findings with application, gateway, identity, and audit logs.
+5. Reproduce material findings manually and record evidence before prioritizing remediation.
+
+DAST has limited visibility into unreachable code, authorization paths it cannot access, business-logic abuse, and internal service relationships. Combine it with threat modeling, code review, dependency analysis, API contract tests, and targeted manual testing.
+
+Run destructive checks only in an approved environment. Rate-limit scans, prevent real customer data exposure, and ensure cleanup. A recurring scan is useful when new routes, deployments, and configuration changes are automatically brought into scope.
+
+OWASP ZAP provides an open-source baseline for web application scanning; use its official documentation and tune rules to the application rather than treating a default report as complete assurance.

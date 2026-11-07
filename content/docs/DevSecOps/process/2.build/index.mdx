@@ -1,43 +1,30 @@
 ---
-title: 2.Build
-date: '2021-08-09'
-tags: ['DevSecOps']
+description: Reproducible builds, dependency controls, artifact identity, provenance, and build-system performance.
+lastReviewed: "2026-11-07"
 ---
 
-## Problems
+# Build Systems
 
-- How to reduce the duplicate efforts of build?
-- How to build in parallel to shorten build time?
-- How to better organize the build code?
+A build transforms reviewed source into an identifiable artifact. A mature build answers four questions: what inputs were used, which trusted process ran, whether the result is reproducible enough to investigate, and which evidence follows the artifact into release.
 
-## Definition
+## Build contract
 
->A build system is mainly used to compile the source code into a deployable/usable form. However, it can also help in managing the following:
->
-> - Builds
-> - Documentation
-> - Dependencies
-> - Releases
+- Pin toolchains and dependencies through lock files or equivalent constraints.
+- Isolate builds from undeclared host state and restrict network access where practical.
+- Cache by declared inputs; treat cache poisoning as a supply-chain risk.
+- Generate immutable version identifiers, dependency inventory, and provenance.
+- Keep credentials out of build output, logs, layers, and untrusted pull-request jobs.
+- Promote one artifact across environments instead of rebuilding per environment.
 
-### Java Family
+## Improve performance safely
 
-### Gradle
+Measure queue time, checkout, dependency resolution, compilation, tests, upload, and retry separately. Parallelize independent work and use content-addressed caching, but preserve deterministic failure reporting. A faster build that intermittently returns stale or incomplete results lengthens the real feedback loop.
 
-### Maven
+## Review questions
 
-- [What's Maven?](http://maven.apache.org/what-is-maven.html)
+- Can the same commit produce materially different artifacts?
+- Can unreviewed code access signing or production credentials?
+- Which dependency or base image can change without a source change?
+- Can an operator trace a production artifact to source, builder, checks, and approval?
 
-### SBT Scala
-
-## C Family
-
-### GNU Make
-
-- [What's GNU Make](https://www.gnu.org/software/make/)
-- [Makefile tutorials](https://www.tutorialspoint.com/makefile/index.htm)
-  
-### CMake
-
-## Why is it important in DevSecOps?
-
-> The project build phase compiles/transforms the source code into a deployable form (e.g. binary, package) by using/integrating the libraries/dependent packages, etc. It is important to check if the build system, dependency packages/libraries being used, are not vulnerable to known attacks and are updated to the latest security fixes.
+The [DevOps path](/docs/devops) places the build inside the full delivery value stream.

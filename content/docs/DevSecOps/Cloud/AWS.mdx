@@ -1,23 +1,17 @@
 ---
-date: 'August 8, 2023'
-tags: ['study']
+description: AWS organization, identity, network, compute, data, security, observability, recovery, and cost decisions.
+lastReviewed: "2026-11-07"
 ---
 
-# AWS
+# AWS Foundation Map
 
-## VM
+Start with Organizations, account boundaries, organizational units, service control policies, centralized identity, and billing. Use accounts to contain privileges, quotas, costs, and failures rather than placing every environment in one account.
 
-[EC2](https://aws.amazon.com/ec2/)
+- **Identity:** IAM roles, federation, IAM Identity Center, workload roles, and break-glass access.
+- **Network:** VPCs, subnets, route tables, security groups, network ACLs, Transit Gateway, Route 53, and controlled egress.
+- **Compute:** EC2, Auto Scaling, Lambda, ECS, and EKS according to workload ownership and isolation.
+- **Data:** S3, EBS, RDS, DynamoDB, ElastiCache, and managed streaming with explicit consistency and recovery requirements.
+- **Security and evidence:** CloudTrail, Config, GuardDuty, Security Hub, KMS, organization policy, and central log retention.
+- **Operations and cost:** CloudWatch, Systems Manager, Backup, budgets, allocation tags, and unit-cost reporting.
 
-## Network
-
-[VPC networks](https://aws.amazon.com/vpc/)
-
-## Storage
-
-[S3 Storage](https://aws.amazon.com/s3/)
-
-## Security
-
-[Identity and Access Management (IAM)](https://aws.amazon.com/iam/)
-[AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/)
+Document region strategy, cross-account access, key ownership, service quotas, backup restoration, and the path for changing foundational policy.

@@ -1,12 +1,29 @@
 ---
-title: OAuth
-date: '2021-08-13'
-tags: ['DevSecOps', 'Security']
+description: Delegated authorization, authentication boundaries, flows, tokens, clients, redirect URIs, and operational controls.
+lastReviewed: "2026-11-07"
 ---
 
-OAuth is widely used by third party grant access.
+# OAuth 2.0 and OpenID Connect
 
-FLAG companies provide the service.
+OAuth 2.0 delegates authorization: a client obtains limited access to a resource on behalf of a user or itself. OpenID Connect adds an identity layer for authentication. Treating an access token as proof of user identity without validating the correct protocol and claims creates security gaps.
 
-[OAuth token expire time](https://www.oauth.com/oauth2-servers/access-tokens/access-token-lifetime/)
-[OAuth 2.0 Sample code](https://developer.byu.edu/docs/consume-api/use-api/oauth-20/oauth-20-python-sample-code)
+## Main roles
+
+- **Resource owner:** the user or entity granting access.
+- **Client:** the application requesting access.
+- **Authorization server:** authenticates, obtains consent where applicable, and issues tokens.
+- **Resource server:** validates access tokens and enforces scopes and resource authorization.
+
+For browser and native applications, use Authorization Code with PKCE. Avoid the implicit grant and resource-owner password grant. Machine workloads typically use client credentials or workload federation when no user is involved.
+
+## Review checklist
+
+- Register exact redirect URIs and protect authorization responses with `state` and PKCE.
+- Validate issuer, audience, signature, expiry, and protocol-specific claims.
+- Keep access tokens short lived and scope them to the intended resource and action.
+- Rotate refresh tokens where supported and detect reuse.
+- Store browser credentials using a design that accounts for cross-site scripting and cross-site request forgery.
+- Separate login session, ID token, access token, and application authorization decisions.
+- Revoke or contain credentials and sessions when a client, user, or signing key is compromised.
+
+Use the current [OAuth 2.0 Security Best Current Practice](https://www.rfc-editor.org/rfc/rfc9700) and provider documentation when implementing a flow.

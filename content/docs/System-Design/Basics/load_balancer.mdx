@@ -1,82 +1,25 @@
 ---
-date: 'January 29, 2022'
-tags: ['System-Design']
+description: Load-balancing layers, health, algorithms, connection behavior, failure isolation, and operational tradeoffs.
+lastReviewed: "2026-11-07"
 ---
 
-# Load Balancer(LB)
+# Load Balancing
 
-LB can be applied in any layer above IP network.
+Load balancing distributes requests or connections across eligible backends. It can improve capacity and availability, but it also becomes part of the request path and must have its own redundancy, capacity, health, and observability design.
 
-## scalability
+## Layers and decisions
 
-### Vertical(hardware) Scaling
+- **DNS and global traffic management:** choose a region or edge using policy and health, subject to caching and propagation delay.
+- **Layer 4 balancing:** route connections using IP and port with limited application awareness.
+- **Layer 7 balancing:** inspect HTTP or another application protocol for host, path, header, identity, or content routing.
+- **Client-side balancing:** let a client choose from discovered endpoints, shifting policy and failure handling into clients.
 
-CPU: L2 Cache
-Disk:
-SATA
-SAS
-SSD
+Algorithms include round robin, least connections, weighted distribution, hashing, and latency-aware selection. The correct choice depends on request cost, connection duration, cache locality, and backend capacity.
 
-PATA
+## Health and failure
 
-RAM:
+Use readiness to remove a backend before sending traffic and graceful draining to protect in-flight work. A shallow health endpoint may report success while a critical dependency is broken; a deep check can remove every backend during a shared dependency failure. Choose checks based on the failure you want routing to contain.
 
-### Horizontal scalling
+Retries need budgets and deadlines because a balancer can multiply load during failure. Track request rate, errors, duration, active connections, rejected work, backend distribution, retry volume, and saturation.
 
-<b>Cheaper hardware </b>
-
-Distributed backend server.
-Load balancer
-
-#### DNS return IP of load balancer
-
-BIND:
-heuristic:
-round roubin policy.
-
-Caching:
-TTL 1 hrs.
-
-Storing sessions in load balancer.
-File server with the same session
-
-#### RAID drive
-
-RIAD0 : strip write for performance
-RAID1: two drives redundancy.
-RIAD10: Striping and redundancy 4 drives.
-RAID5:One drive can die
-RAID6:Any two drives can die.
-
-Robustness and redundancy.
-
-#### How to solve Downtime problem?
-
-replication issue.
-
-## Software
-
-ELB
-HAProxy
-LVS
-
-## Hardware
-
-Barracuda
-Cisco
-Citrix
-100K
-F5
-
-## Sticky Sessions
-
-Layer 7 load balancing
-
-## Shared Storage
-
-FC, ISCSI, MySQL, NFS.
-
-## Cookies in Load balancer
-
-Storing the ID of the server in cookies
-Store big random number in the load balancer.
+Sticky sessions can preserve locality but create uneven load and complicated failover. Prefer externally managed session state when the user contract permits it.

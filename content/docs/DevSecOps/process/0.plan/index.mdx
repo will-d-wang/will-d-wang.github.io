@@ -1,16 +1,21 @@
 ---
-date: 'August 8, 2021'
-tags: ['DevSecOps']
+description: Planning product outcomes, architecture, data, threats, controls, operability, and measurable acceptance criteria.
+lastReviewed: "2026-11-07"
 ---
 
-# 0 Plan
+# Plan Secure Delivery
 
-## Problems
+Planning connects a product outcome to architecture, risk, and evidence before implementation makes change expensive.
 
-- What business features could meet the market?
-- What engineer internal features could improve the efficiency mostly?
-- What innovations could we have in this release time frame?
-- What security policies?
-- What technology stack should we use?
+## Questions to resolve
 
-## Threat Model Policies
+- Which users and critical journeys are in scope, and how will success be measured?
+- What data is collected, where does it move, and which retention or residency rules apply?
+- Which trust boundaries, identities, dependencies, and abuse cases shape the threat model?
+- What reliability, latency, capacity, recovery, and cost objectives apply?
+- Who owns delivery, operation, incident response, and eventual retirement?
+- Which acceptance criteria can be verified automatically, and which require judgment?
+
+Record architecture decisions with alternatives, consequences, and revisit triggers. Decompose work into small, independently verifiable changes. Include telemetry, rollback or migration, documentation, and operational readiness in the definition of done.
+
+Continue with [Threat Modeling](/docs/Security/threat_model) and the [Code stage](/docs/DevSecOps/process/1.code).

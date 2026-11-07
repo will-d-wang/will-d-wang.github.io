@@ -1,37 +1,29 @@
 ---
-title: System Design
-date: 'December 30, 2022'
-tags: ['System Design', 'book']
+description: A decision framework for designing reliable, scalable, secure, operable, and economically sustainable systems.
+lastReviewed: "2026-11-07"
 ---
 
-[System design](https://medium.com/the-andela-way/system-design-in-software-development-f360ce6fcbb9)
+# Systems Architecture
 
-Tushar Roy
+System design connects product requirements to technical boundaries and operating consequences. A strong design explains what must be true, which alternatives were considered, how the system fails, and how the organization will operate it over time.
 
-System Design Introduction For Interview.
+## Design sequence
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UzLMhqg3_Wc" frameborder="0" allowfullscreen></iframe>
+1. Clarify users, critical journeys, scale, latency, consistency, durability, security, compliance, and cost constraints.
+2. Define APIs, data ownership, trust boundaries, and the simplest architecture that can meet the requirements.
+3. Estimate traffic, storage, working set, fan-out, and growth to identify likely constraints.
+4. Model failure domains, overload, partial failure, recovery, and safe change.
+5. Choose data, messaging, caching, and compute components from their guarantees and operating model.
+6. Define observability, SLOs, capacity, deployment, migration, and ownership.
+7. Record tradeoffs, rejected alternatives, and conditions that should trigger redesign.
 
-[Youtube system design](http://highscalability.com/)
+## Curated concepts
 
-Language specific questions, concurrency , parallellism
+- **[Consistency and CAP](/docs/System-Design/Basics/CAP):** reason about behavior during network partitions rather than labeling products with one acronym.
+- **[Load Balancing](/docs/System-Design/Basics/load_balancer):** distribute work while preserving health, fairness, and failure isolation.
+- **[Caching](/docs/System-Design/Basics/caching):** trade freshness, hit rate, invalidation complexity, and failure behavior.
+- **[Replication](/docs/System-Design/Basics/replication):** distinguish availability, durability, read scaling, and recovery.
+- **[Messaging](/docs/System-Design/Basics/message_broker):** design delivery semantics, ordering, idempotency, backpressure, and replay.
+- **[Web Application Architecture](/docs/System-Design/web_app_architecture/0.web_architecture):** connect edge, application, data, and asynchronous processing.
 
-## Framework
-
-Backend: django, spring,
-
-FrontEnd: react, vue
-
-redis, celery: asynchronous task queue
-
-[Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
-
-## Resources
-
-[system-design-primer](https://github.com/donnemartin/system-design-primer)
-
-[Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview)
-
-[Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems](https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
-
-[Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
+The remaining folders contain retained course and interview study notes. They are useful references but are separated from the curated architecture path in navigation.

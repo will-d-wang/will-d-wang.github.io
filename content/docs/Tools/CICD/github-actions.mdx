@@ -1,11 +1,46 @@
 ---
-title: Github Actions
-date: '2021-09-30'
-tags: ['DevSecOps', 'CI']
+description: Workflow structure, reusable delivery contracts, permissions, untrusted code, artifacts, and deployment identity.
+lastReviewed: "2026-11-07"
 ---
 
+# GitHub Actions
 
-[Setting an environment variable](https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions)
-[How do I set an env var with a bash expression in GitHub Actions?](https://stackoverflow.com/questions/57968497/how-do-i-set-an-env-var-with-a-bash-expression-in-github-actions)
+GitHub Actions executes workflows in response to repository events. The important design boundary is trust: a workflow can run unreviewed code, read repository data, create artifacts, and sometimes acquire deployment authority.
 
-[Creating dependent jobs](https://docs.github.com/en/actions/learn-github-actions/managing-complex-workflows#creating-dependent-jobs)
+## Minimal workflow
+
+```yaml
+name: verify
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+```
+
+## Security and delivery controls
+
+- Declare minimal `GITHUB_TOKEN` permissions and raise them only for the job that needs them.
+- Treat pull requests from forks and dependency automation as untrusted input.
+- Never expose deployment secrets to a job that executes unreviewed code.
+- Pin third-party actions to reviewed commit SHAs where the threat model requires stronger immutability.
+- Prefer OpenID Connect and short-lived cloud credentials over stored access keys.
+- Protect environments and require review for high-risk production changes.
+- Build once, identify the artifact, preserve provenance, and promote the same artifact.
+
+Reusable workflows can standardize a delivery contract, but version them and provide migrations. A central workflow that changes every repository without compatibility testing creates organization-wide blast radius.
+
+Measure queue time, time to first useful failure, flake rate, artifact availability, deployment outcome, and recovery. Continue with the [DevOps path](/docs/devops) for the larger delivery architecture.

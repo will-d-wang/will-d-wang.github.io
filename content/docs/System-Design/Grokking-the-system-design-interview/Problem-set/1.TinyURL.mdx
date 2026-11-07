@@ -1,9 +1,13 @@
 ---
 date: 'January 29, 2022'
 tags: ['System-Design']
+description: "Archived study notes about TinyURL, retained for reference."
+status: archived
 ---
 
 # TinyURL
+
+> **Archive note:** This study note is retained for historical reference and is not part of the curated Learn path.
 
 [System Design : Scalable URL shortener service like TinyURL](https://medium.com/@sandeep4.verma/system-design-scalable-url-shortener-service-like-tinyurl-106f30f23a82)
 
@@ -125,7 +129,9 @@ last_login_time: datatime
 
 ### DB Type
 
-No relationship between objects.  No-SQL for availability and horizontal scalability.
+The access pattern has limited relational joins. Choose a data store from the
+required consistency, availability, partitioning, latency, and operating model;
+the SQL or NoSQL label alone does not determine scalability.
 
 [DynamoDB](https://en.wikipedia.org/wiki/Amazon_DynamoDB), [Cassandra](https://en.wikipedia.org/wiki/Apache_Cassandra) or [Riak](https://en.wikipedia.org/wiki/Riak)
 

@@ -1,72 +1,25 @@
 ---
-date: 'January 30, 2022'
-tags: ['System-Design']
+description: Failure domains, redundancy, failover, graceful degradation, recovery objectives, and validation of highly available systems.
+lastReviewed: "2026-11-07"
 ---
-# High Availability
 
-## Fault tolerance
+# High Availability and Fault Tolerance
 
-*Fault tolerance* is the ability of the system to stay up despite taking hits.
+Availability is the degree to which a service is usable according to its user contract. Fault tolerance is the ability to continue operating through specified failures. Horizontal scaling can add capacity, but it only improves availability when replicas do not share the same failure mode and traffic can reach healthy capacity.
 
-### Failure reasons
+## Design from failure domains
 
-- Software crashes
+Map process, node, rack or zone, cluster, region, identity, network, data, dependency, and control-plane failures. Place redundant components across the boundaries the service is expected to survive.
 
-- Hardware Failures
+- **Active/passive:** simpler conflict model but requires detection, promotion, routing, and capacity readiness.
+- **Active/active:** uses capacity continuously but requires data and request behavior that is safe under concurrent operation.
+- **Graceful degradation:** preserves a critical journey while disabling optional or expensive capability.
+- **Cell architecture:** limits customers and deployments affected by one fault.
 
-- Human errors [This is an interesting read](https://thenextweb.com/google/2017/08/28/google-japan-internet-blackout/).
+Replication is not backup. Replicas can reproduce corruption or deletion. Define a recovery point objective (RPO), recovery time objective (RTO), retention, isolation from destructive access, and a verified restoration process.
 
-- Planned Downtown: maintenance operations, software, hardware upgrade.
+## Validate the design
 
-**Fail soft**:A few of the *instances/nodes*, out of several, running the service
-go offline & bounce back all the time. In case of these internal failures, the
-system could work at a reduced level but it will not go down entirely.
+Test failure detection, failover, capacity after loss, dependency behavior, data correctness, and the path back to normal operation. Exercise regional and identity failures, not only process restarts. Record observed recovery time and unresolved manual dependencies.
 
-**Highly Available Fault-Tolerant Service.**
-
-the entire massive service is architecturally broken down into smaller loosely
-coupled services called the **micro-services**
-
-![micro-service-scale.jpeg](./micro-service-scale.jpeg)
-
-## Redundancy
-
-### Active-Passive HA Mode
-
-![high-availability.jpeg](./high-availability.jpeg)
-
-GPS, aircrafts, communication satellites which have zero downtime. The availability
-of these systems is ensured by making the components redundant.
-
-### Single point failure: Distributed systems
-
-### Monitoring & Automation - to cut down human errors
-
-## Replication
-
-### ***Active-Active High Availability***
-
-![HA-replication.jpeg](./HA-replication.jpeg)
-
-### Geographical Distribution of Workload
-
-## High Availability Clustering
-
-A *High Availability cluster* also known as the *Fail-Over cluster* contains a
-set of nodes running in conjunction with each other that ensures high availability
-of the service. ***Heartbeat** network* monitors the health.
-
-A single state across all the nodes in a cluster is achieved with the help of a
-shared distributed memory & a distributed co-ordination service like the ***Zookeeper***.
-
-![HA-cluster.jpeg](./HA-cluster.jpeg)
-
-e.g. Jenkins master and clients.
-
-*Disk mirroring/RAID Redundant Array Of Independent Disks*, redundant network
-connections, redundant electrical power
-
-Which of the following statements is true in context to scalability & high availability?
-
-Scaling an application horizontally means getting rid of single points of failure
-& that means the application also becomes highly available.
+An availability target should correspond to user need and an error-budget policy, not a generic desire for more nines.
