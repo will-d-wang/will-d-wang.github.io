@@ -1,0 +1,45 @@
+---
+description: Study the event loop, durable state, plugin boundaries, and human decisions in Agent Autoloop.
+---
+
+# Study: Agent Autoloop
+
+[Agent Autoloop](https://github.com/KKKKhazix/agent-autoloop) is a self-hosted project for coordinating command-line agents such as Claude Code and Codex. Its [English README](https://github.com/KKKKhazix/agent-autoloop/blob/main/README.en.md) describes a loop that accepts an event, chooses an agent and working directory by rule, runs one round, and records the result.
+
+When the agent needs a decision, the loop sends a card and resumes after a person answers. This page is a study of that design, based on the project's documentation; it is not an independent test of the software.
+
+## Trace one piece of work
+
+1. **Event:** A schedule, issue, or alert enters through an event source.
+2. **Rule:** Configuration selects the agent, task, and working directory.
+3. **Round:** The agent runs and places its result in its final reply.
+4. **Decision or finish:** A completed task ends; a question becomes a card, and the agent process exits while waiting.
+5. **Resume:** A human answer starts the next round of the same conversation.
+
+This flow separates the long-lived coordination state from the short-lived agent process. The [README's workflow section](https://github.com/KKKKhazix/agent-autoloop/blob/main/README.en.md#how-a-piece-of-work-flows) is the source for these steps.
+
+## Design choices to examine
+
+- **Durable state:** The project says it stores an append-only event log and indexes in SQLite. Ask which writes must be committed before a caller receives success, and how the loop reconstructs state after a restart.
+- **Plugin boundaries:** Event sources, agent adapters, notification channels, and delivery actions are separate extensions. Trace which component owns credentials and which component decides what an agent may do.
+- **Human decisions:** A card represents a choice that should wait for a person. Look at how the project records the question, avoids running the agent while waiting, and resumes the same conversation after an answer.
+- **Loop control:** The documented hop limit stops chains of agent-emitted events from continuing indefinitely. Examine what gets recorded when that limit is reached.
+- **External input:** The README describes a separation between untrusted event data and the rule that selects an agent and working directory. Check where that boundary is enforced in the code.
+
+These are claims and design descriptions from the [upstream README](https://github.com/KKKKhazix/agent-autoloop/blob/main/README.en.md#four-kernel-mechanisms), not measurements made for this site.
+
+## A small study exercise
+
+Read the [installation and `try` walkthrough](https://github.com/KKKKhazix/agent-autoloop/blob/main/README.en.md#get-started) before running anything. In a disposable local workspace, observe one ask-and-answer cycle: note the event, the chosen rule, the agent's final reply, the waiting card, and the resumed result.
+
+Then use the documented `agent-autoloop why` command to trace the round and compare the trace with your notes. For a new rule, validate its configuration and use the documented dry run before allowing it to dispatch real work.
+
+The project says some webhook templates were tested against local mock services rather than live providers. Keep that distinction in mind when evaluating an integration. See the [plugin and testing notes](https://github.com/KKKKhazix/agent-autoloop/blob/main/README.en.md#plugin-ecosystem-swap-any-of-the-four-sides).
+
+## Questions worth answering
+
+- What state survives a process crash, and what evidence shows that no acknowledged event was lost?
+- How are duplicate events and repeated answers handled?
+- Which actions require a person, and where is that policy defined?
+- What changes when the agent adapter is Claude Code, Codex, or a generic CLI command?
+- How would you test a failed notification channel without running the agent's work twice?

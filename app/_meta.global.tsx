@@ -29,6 +29,7 @@ const AI_ITEMS: MetaRecord = {
   index: "Overview",
   "claude-code": "Claude Code",
   codex: "Codex",
+  "agent-autoloop": "Agent Autoloop Study",
 };
 
 const globalMeta = {
