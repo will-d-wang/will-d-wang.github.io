@@ -2,7 +2,6 @@ export default {
   "0.web_architecture": "Web Architecture Overview",
   "1.scalability": "Scalability and Elasticity",
   "2.high_availabilty": "High Availability",
-  "--archive": { type: "separator", title: "Study archive" },
   "4.db": { title: "Data Architecture Notes", display: "hidden" },
   "5.cache": { title: "Caching Architecture Notes", display: "hidden" },
   "6.message_queues": { title: "Messaging Architecture Notes", display: "hidden" },
