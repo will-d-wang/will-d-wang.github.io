@@ -25,6 +25,12 @@ const DOCS_ITEMS: MetaRecord = {
   projects: "Projects (portfolio)",
 };
 
+const AI_ITEMS: MetaRecord = {
+  index: "Overview",
+  "claude-code": "Claude Code",
+  codex: "Codex",
+};
+
 const globalMeta = {
   index: {
     type: "page",
@@ -43,7 +49,9 @@ const globalMeta = {
   ai: {
     type: "page",
     title: "AI",
+    items: AI_ITEMS,
   },
+  blog: { type: "page", title: "Blog", display: "hidden" },
   labs: {
     type: "page",
     title: "Labs",

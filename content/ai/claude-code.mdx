@@ -1,0 +1,39 @@
+---
+description: A practical guide to Claude Code subagents, with official documentation and a guided exercise.
+---
+
+# Claude Code: subagents
+
+A subagent handles a focused task in its own context and returns a result to the main conversation. This is useful when an investigation or review would produce a lot of intermediate output. Keep quick edits and work that needs constant back-and-forth in the main conversation. The [Claude Code subagents documentation](https://code.claude.com/docs/en/sub-agents) explains the tradeoffs in detail.
+
+## Create a project subagent
+
+Claude Code looks for project agents in `.claude/agents/` and personal agents in `~/.claude/agents/`. A project agent belongs in the repository when the team should share its instructions. Its Markdown file uses frontmatter to define a name, a description, and optional tool limits, followed by the instructions for its job.
+
+Try asking Claude Code:
+
+```text
+Create a project-level code-reviewer subagent in .claude/agents/.
+Let it read and search files, but not edit them. Have it review a
+completed diff for correctness and missing tests, then return findings
+with file paths and a short reason for each finding.
+```
+
+Read the generated agent file before using it. Check that its description fits the task and that its tool access matches the role. The [Claude Academy subagents lesson](https://academy.claude.com/courses/claude-code-101/subagents) walks through this creation flow.
+
+## Delegate a bounded task
+
+Give the subagent a specific question and a result you can review:
+
+```text
+Use the code-reviewer subagent to review the current diff.
+Report concrete bugs and missing tests with file references.
+Do not change files.
+```
+
+Check the returned findings against the actual code, then run the relevant tests yourself. If the task becomes a sequence of decisions that share context, continue it in the main conversation.
+
+## Official manuals
+
+- [Create custom subagents — Claude Code documentation](https://code.claude.com/docs/en/sub-agents)
+- [Subagents — Claude Code 101, Claude Academy](https://academy.claude.com/courses/claude-code-101/subagents)
