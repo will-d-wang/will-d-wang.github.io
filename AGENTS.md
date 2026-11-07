@@ -20,6 +20,13 @@ Personal website / portfolio for Will D. Wang — Nextra 4 (docs theme) on Next.
 - `pnpm check:icons` — validates every icon name used in the data resolves in the registry.
 - Typecheck without pnpm's deps-check: `./node_modules/.bin/tsc --noEmit`.
 
+## Test plan
+
+- Use Node 24 and pnpm 11. Run `pnpm build`; require the icon check, TypeScript check, static export, and Pagefind indexing to finish successfully.
+- Start `pnpm dev` and fetch `/` plus every changed route. Require HTTP 200 and check that the response contains the expected page content. For shared navigation or layout changes, also fetch `/docs/projects` and a blog page.
+- Serve the production export with `python3 -m http.server 3001 --directory out`. Fetch `/` and the corresponding `.html` file for each changed route (for example, `/docs/projects.html`); require HTTP 200 and expected content. Fetch a referenced `/_next/static/` asset and `/_pagefind/pagefind.js` to confirm static assets are served.
+- For visual changes, open the served page in a browser and check the affected section at desktop and mobile widths. Stop the local servers after testing.
+
 ## Architecture
 
 - Home page is `content/index.mdx`, composed of section components in `components/about/`.
