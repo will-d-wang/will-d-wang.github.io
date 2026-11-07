@@ -1,0 +1,86 @@
+---
+description: A field note on connecting release tags, CI/CD, and automated system tests to reduce an on-premises release from days to about two hours.
+---
+
+# Turn release tags into an automated delivery contract
+
+**Project context:** April 2021
+
+I reduced the release time for an on-premises product from multiple days to about two hours by redesigning the path between release tags, CI, CD, backend build and test workflows, and automated system tests.
+
+The important change was not simply making an individual job faster. The existing CI workflow was disconnected from the tagging system, so a release tag did not reliably initiate and identify the complete delivery process. Build, test, deployment, and system-test activities required manual coordination across several tools and handoffs.
+
+## Make the tag the release contract
+
+I redesigned the release tag as the shared identifier that connected the stages. Creating an approved tag started a traceable workflow in which CI built and tested the backend, CD consumed the corresponding release output, and system-test automation verified the candidate. Each stage operated on the same release identity instead of relying on people to reconstruct which build, deployment, and test result belonged together.
+
+```text
+Approved source commit
+          │
+          ▼
+Release tag
+(shared release identity)
+          │
+          ▼
+CI workflow
+├── build backend
+├── run automated tests
+└── publish artifact and evidence
+          │
+          ▼
+CD workflow
+          │
+          ▼
+On-premises release candidate
+          │
+          ▼
+Automated system tests
+          │
+          ▼
+Human audit of release evidence
+          │
+          ▼
+Release
+          │
+          ▼
+Post-release dogfooding
+```
+
+This changed the human role from executing and coordinating every step to reviewing evidence and making the release decision. An engineer audited the build and test results, approved the release, and performed post-release dogfooding. Automation handled the repeatable mechanics; people retained responsibility for judgment and product confidence.
+
+## Why the lead time fell
+
+The earlier process accumulated delay between stages. Even if each command completed quickly, waiting for someone to discover that a stage was ready, transfer the correct version, start the next activity, and reconcile results stretched the release across multiple days.
+
+Connecting the workflow removed those queues and reduced avoidable rework:
+
+- a tag provided one release identity across CI, CD, artifacts, and test evidence;
+- downstream stages started from machine-readable events rather than manual notification;
+- backend build and test work ran as part of the same controlled path;
+- system tests returned evidence to the release decision instead of being coordinated separately;
+- the release audit focused on exceptions and results rather than routine execution.
+
+The resulting end-to-end release completed in about two hours. That measurement represents elapsed release time, not only pipeline runtime: the useful outcome was shortening the path from a release decision to an auditable candidate for the on-premises offering.
+
+## Controls that keep this pattern safe
+
+Event-driven automation increases the importance of the contract around the tag. A production version of this pattern should make the following properties explicit:
+
+| Control | Reason |
+| --- | --- |
+| Protected tag creation | Only an authorized, reviewed commit can initiate a release. |
+| Immutable versioned artifact | CD promotes the output that CI tested instead of rebuilding different bits. |
+| Recorded provenance | The tag, commit, build, artifact, test evidence, approval, and deployment remain traceable. |
+| Clear failure boundaries | A failed build or test stops promotion and identifies the responsible stage. |
+| Repeatable deployment | Retrying a stage does not silently create a different release candidate. |
+| Recovery procedure | Operators know whether to retry, roll forward, or restore the prior version. |
+
+The manual audit was a deliberate control, not unfinished automation. Full autonomy was not the goal; the goal was to automate deterministic work while giving the approver complete, consistent evidence. Post-release dogfooding added a final product-level check, but it did not replace pre-release system testing or a rollback plan.
+
+## What I took from the project
+
+Release performance is often constrained by missing connections rather than slow tools. Optimizing one build step would not have removed multi-day coordination. Establishing a common release identity and an event-driven control flow changed the system boundary and eliminated entire classes of handoff.
+
+The broader lesson is to measure the complete value stream. Record both execution time and queue time, then ask which transitions still depend on a person copying information or deciding what should happen next. Automate those transitions when the rule is deterministic, preserve human review where judgment matters, and make the evidence strong enough that approval is a decision rather than an investigation.
+
+For a reusable framework, continue with [Shorten the CI feedback loop](/field-notes/ci-feedback-loop) and the [DevOps path](/docs/devops).
