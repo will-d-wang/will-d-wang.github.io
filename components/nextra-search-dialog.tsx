@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -21,14 +27,83 @@ type Props = {
   pages?: PageItem[];
 };
 type OnSelect = (url: string) => void;
+const SEARCH_PAGE_SIZE = 8;
+
+const SEARCH_STOP_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "are",
+  "as",
+  "at",
+  "be",
+  "by",
+  "for",
+  "from",
+  "how",
+  "in",
+  "into",
+  "is",
+  "it",
+  "of",
+  "on",
+  "or",
+  "that",
+  "the",
+  "their",
+  "this",
+  "to",
+  "was",
+  "what",
+  "when",
+  "where",
+  "which",
+  "who",
+  "with",
+]);
 
 const activeSearchInstances = new Set<string>();
+const primarySearchListeners = new Set<() => void>();
+const searchResetListeners = new Set<() => void>();
 const openListeners = new Set<React.Dispatch<React.SetStateAction<boolean>>>();
 let globalOpen = false;
+let primarySearchInstance: string | null = null;
+let pagefindPromise: Promise<NonNullable<Window["pagefind"]>> | undefined;
 
 function setGlobalOpen(value: boolean | ((prev: boolean) => boolean)) {
   globalOpen = typeof value === "function" ? value(globalOpen) : value;
   openListeners.forEach((listener) => listener(globalOpen));
+}
+
+function openGlobalSearch() {
+  searchResetListeners.forEach((listener) => listener());
+  setGlobalOpen(true);
+}
+
+function subscribeToPrimarySearch(listener: () => void) {
+  primarySearchListeners.add(listener);
+  return () => primarySearchListeners.delete(listener);
+}
+
+function getPrimarySearchInstance() {
+  return primarySearchInstance;
+}
+
+function registerSearchInstance(instanceId: string) {
+  activeSearchInstances.add(instanceId);
+  if (!primarySearchInstance) {
+    primarySearchInstance = instanceId;
+    primarySearchListeners.forEach((listener) => listener());
+  }
+
+  return () => {
+    activeSearchInstances.delete(instanceId);
+    if (primarySearchInstance === instanceId) {
+      primarySearchInstance =
+        activeSearchInstances.values().next().value ?? null;
+      primarySearchListeners.forEach((listener) => listener());
+    }
+  };
 }
 
 export function NextraSearchDialog({
@@ -39,10 +114,20 @@ export function NextraSearchDialog({
   const [open, setOpenState] = useState(globalOpen);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<PagefindResult[]>([]);
+  const [searchHits, setSearchHits] = useState<PagefindSearchHit[]>([]);
+  const [totalResultCount, setTotalResultCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
   const [error, setError] = useState("");
-  const instanceId = useRef(Math.random().toString()).current;
-  const [isPrimary, setIsPrimary] = useState(false);
+  const searchGeneration = useRef(0);
+  const instanceId = useId();
+  const primaryInstance = useSyncExternalStore(
+    subscribeToPrimarySearch,
+    getPrimarySearchInstance,
+    () => null,
+  );
+  const isPrimary = primaryInstance === instanceId;
 
   useEffect(() => {
     openListeners.add(setOpenState);
@@ -52,24 +137,33 @@ export function NextraSearchDialog({
   }, []);
 
   useEffect(() => {
-    if (activeSearchInstances.size === 0) {
-      setIsPrimary(true);
-    }
-    activeSearchInstances.add(instanceId);
-
-    return () => {
-      activeSearchInstances.delete(instanceId);
+    const resetSearch = () => {
+      setQuery("");
+      setResults([]);
+      setSearchHits([]);
+      setTotalResultCount(0);
+      setLoadingMore(false);
+      setLoadMoreError("");
+      setError("");
+      setLoading(false);
     };
-  }, [instanceId]);
+    searchResetListeners.add(resetSearch);
+    return () => {
+      searchResetListeners.delete(resetSearch);
+    };
+  }, []);
+
+  useEffect(() => registerSearchInstance(instanceId), [instanceId]);
 
   useEffect(() => {
     if (!isPrimary) return;
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setGlobalOpen((open) => !open);
+        if (globalOpen) setGlobalOpen(false);
+        else openGlobalSearch();
       }
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && globalOpen) {
         e.preventDefault();
         setGlobalOpen(false);
       }
@@ -79,40 +173,44 @@ export function NextraSearchDialog({
   }, [isPrimary]);
 
   useEffect(() => {
-    if (!open) {
-      setQuery("");
-      setResults([]);
-      setError("");
-    }
-  }, [open]);
-
-  useEffect(() => {
     let active = true;
+    const generation = ++searchGeneration.current;
     const handleSearch = async (value: string) => {
-      if (!value) {
+      const normalizedQuery = normalizeSearchQuery(value);
+      if (!normalizedQuery) {
         if (!active) return;
         setResults([]);
+        setSearchHits([]);
+        setTotalResultCount(0);
+        setLoadingMore(false);
+        setLoadMoreError("");
         setError("");
         setLoading(false);
         return;
       }
 
       setLoading(true);
+      setResults([]);
+      setSearchHits([]);
+      setTotalResultCount(0);
+      setLoadingMore(false);
+      setLoadMoreError("");
+      setError("");
 
-      if (!window.pagefind) {
-        try {
-          await importPagefind();
-        } catch (err) {
-          if (!active) return;
-          setError("Failed to load search index.");
-          setLoading(false);
-          return;
-        }
+      try {
+        await importPagefind();
+      } catch {
+        if (!active) return;
+        setError("Search is unavailable right now. Please try again shortly.");
+        setLoading(false);
+        return;
       }
 
       try {
         const response =
-          await window.pagefind!.debouncedSearch<PagefindResult>(value);
+          await window.pagefind!.debouncedSearch<PagefindResult>(
+            normalizedQuery,
+          );
         if (!active) return;
         if (!response) {
           setResults([]);
@@ -120,20 +218,17 @@ export function NextraSearchDialog({
           return;
         }
 
-        const data = await Promise.all(response.results.map((o) => o.data()));
+        setSearchHits(response.results);
+        setTotalResultCount(response.results.length);
+        const firstPage = await Promise.all(
+          response.results.slice(0, SEARCH_PAGE_SIZE).map((hit) => hit.data()),
+        );
+        if (!active || generation !== searchGeneration.current) return;
 
-        const processedResults = data.map((newData) => ({
-          ...newData,
-          sub_results: (newData.sub_results || []).map((r) => {
-            const url = r.url.replace(/\.html$/, "").replace(/\.html#/, "#");
-            return { ...r, url };
-          }),
-        }));
-
-        setResults(processedResults);
+        setResults(processPagefindResults(firstPage));
         setLoading(false);
         setError("");
-      } catch (err) {
+      } catch {
         if (!active) return;
         setError("Search failed.");
         setLoading(false);
@@ -149,10 +244,7 @@ export function NextraSearchDialog({
   if (!isPrimary) {
     // For non-primary instances, we still render the trigger, but not the dialog.
     return (
-      <SearchTrigger
-        placeholder={placeholder}
-        onClick={() => setGlobalOpen(true)}
-      />
+      <SearchTrigger placeholder={placeholder} onClick={openGlobalSearch} />
     );
   }
 
@@ -161,31 +253,57 @@ export function NextraSearchDialog({
     router.push(url);
   };
 
-  function SearchContent() {
-    if (!query)
-      return <SearchWelcomePages pages={pages} onSelect={handleResultClick} />;
-    if (error) return <SearchError message={error} />;
-    if (loading) return <SearchLoading />;
-    if (!results || results.length === 0) return <SearchNoResults />;
-    return (
-      <SearchResults
-        results={results}
-        query={query}
-        onSelect={handleResultClick}
-      />
+  const loadMoreResults = async () => {
+    const generation = searchGeneration.current;
+    const nextHits = searchHits.slice(
+      results.length,
+      results.length + SEARCH_PAGE_SIZE,
     );
-  }
+    if (!nextHits.length || loadingMore) return;
+
+    setLoadingMore(true);
+    setLoadMoreError("");
+    try {
+      const nextPage = await Promise.all(nextHits.map((hit) => hit.data()));
+      if (generation !== searchGeneration.current) return;
+      setResults((currentResults) => [
+        ...currentResults,
+        ...processPagefindResults(nextPage),
+      ]);
+    } catch {
+      if (generation === searchGeneration.current) {
+        setLoadMoreError("Could not load more results.");
+      }
+    } finally {
+      if (generation === searchGeneration.current) setLoadingMore(false);
+    }
+  };
+
+  const searchContent = !query.trim() ? (
+    <SearchWelcomePages pages={pages} onSelect={handleResultClick} />
+  ) : error ? (
+    <SearchError message={error} />
+  ) : loading ? (
+    <SearchLoading />
+  ) : results.length === 0 ? (
+    <SearchNoResults />
+  ) : (
+    <SearchResults
+      results={results}
+      query={normalizeSearchQuery(query)}
+      onSelect={handleResultClick}
+    />
+  );
 
   return (
     <>
-      <SearchTrigger
-        placeholder={placeholder}
-        onClick={() => setGlobalOpen(true)}
-      />
+      <SearchTrigger placeholder={placeholder} onClick={openGlobalSearch} />
 
       <CommandDialog
         open={open}
         onOpenChange={setGlobalOpen}
+        title="Search this site"
+        description="Search pages, topics, and notes across the site."
         showCloseButton={false}
         className="search-dialog !max-w-[800px] overflow-hidden !bg-transparent px-2 border-none [&_.bg-popover]:bg-transparent"
       >
@@ -196,9 +314,43 @@ export function NextraSearchDialog({
             onQueryChange={setQuery}
           />
 
-          <CommandList className="h-96" aria-label="Search results list">
-            <SearchContent />
+          <CommandList
+            className="h-auto max-h-[min(60vh,24rem)]"
+            aria-label="Search results list"
+          >
+            {searchContent}
           </CommandList>
+          <div className="flex min-h-10 items-center justify-between border-t px-4 text-xs text-muted-foreground">
+            <span aria-live="polite">
+              {!query.trim()
+                ? "Search pages, notes, and topics"
+                : error
+                  ? "Search could not be completed"
+                  : loading
+                    ? "Searching…"
+                    : loadMoreError ||
+                      (totalResultCount > results.length
+                        ? `Showing ${results.length} of ${totalResultCount} matching pages`
+                        : `${totalResultCount} matching pages`)}
+            </span>
+            {results.length < totalResultCount && !error && (
+              <button
+                type="button"
+                className="rounded px-2 py-1 font-medium text-foreground hover:bg-muted disabled:opacity-50"
+                onClick={loadMoreResults}
+                disabled={loadingMore}
+              >
+                {loadingMore ? "Loading…" : "Load more"}
+              </button>
+            )}
+            <span className="hidden items-center gap-1 sm:inline-flex">
+              <Kbd>↑</Kbd>
+              <Kbd>↓</Kbd>
+              <span>navigate</span>
+              <Kbd>↵</Kbd>
+              <span>open</span>
+            </span>
+          </div>
         </div>
       </CommandDialog>
     </>
@@ -210,15 +362,15 @@ function SearchWelcomePages({
   onSelect,
 }: {
   pages: PageItem[];
-  onSelect?: OnSelect;
+  onSelect: OnSelect;
 }) {
   if (pages.length === 0) {
     return null;
   }
 
   return (
-    <CommandGroup heading="Pages">
-      {pages.map(({ title, url, parent, description }, index) => (
+    <CommandGroup heading="Suggested pages">
+      {pages.slice(0, 6).map(({ title, url, parent, description }, index) => (
         <SearchItem
           key={`${url}-${index}`}
           value={title}
@@ -253,6 +405,7 @@ function SearchInput({
           placeholder={placeholder}
           value={query}
           onValueChange={onQueryChange}
+          aria-label={placeholder}
         />
       </div>
     </div>
@@ -268,7 +421,11 @@ function SearchTrigger({
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
+      aria-haspopup="dialog"
+      aria-expanded={globalOpen}
+      aria-label={`${placeholder} (Command or Control K)`}
       className={cn(
         "inline-flex items-center gap-2 px-3 py-2 text-sm cursor-pointer hover:border-gray-300 dark:hover:border-white/40",
         "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-all outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
@@ -301,7 +458,11 @@ function SearchError({ message }: { message: string }) {
 }
 
 function SearchNoResults() {
-  return <CommandEmpty>No results found.</CommandEmpty>;
+  return (
+    <CommandEmpty>
+      No matches. Try a shorter phrase or different terms.
+    </CommandEmpty>
+  );
 }
 
 function SearchResultItem({
@@ -315,42 +476,38 @@ function SearchResultItem({
   query: string;
   onSelect: OnSelect;
 }) {
-  const cleanExcerpt = (subResult.excerpt || "")
+  const excerpt = (subResult.excerpt || "")
     .replace(/<[^>]*>/g, "")
-    .substring(0, 100);
+    .replace(/\s+/g, " ")
+    .trim();
+  const cleanExcerpt =
+    excerpt.length > 180 ? `${excerpt.slice(0, 180)}…` : excerpt;
 
   return (
     <SearchItem
-      url={subResult.url}
       title={highlightQuery(subResult.title || "", query)}
-      description={<>{highlightQuery(cleanExcerpt, query)}...</>}
-      onSelect={onSelect}
+      description={highlightQuery(cleanExcerpt, query)}
+      onSelect={() => onSelect(subResult.url)}
       value={`${parentTitle} ${subResult.title}`}
     />
   );
 }
 
 function SearchItem({
-  url,
   title,
   description,
   onSelect,
   value,
   parent,
 }: {
-  url?: string;
   parent?: string;
-  title: any | string;
-  description: any | string;
-  onSelect?: OnSelect;
-  value?: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  onSelect: () => void;
+  value: string;
 }) {
   return (
-    <CommandItem
-      onSelect={() => onSelect(url)}
-      value={value}
-      className="cursor-pointer"
-    >
+    <CommandItem onSelect={onSelect} value={value} className="cursor-pointer">
       <div className="flex flex-col gap-1 w-full">
         <div className="flex items-center gap-1">
           {parent && (
@@ -380,7 +537,7 @@ function SearchResults({
     <>
       {results.map((result) => (
         <CommandGroup key={result.url} heading={result.meta.title}>
-          {(result.sub_results || []).map((subResult) => (
+          {result.sub_results.map((subResult) => (
             <SearchResultItem
               key={subResult.url}
               subResult={subResult}
@@ -399,15 +556,32 @@ function escapeRegExp(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function normalizeSearchQuery(query: string) {
+  const words = query.trim().split(/\s+/).filter(Boolean);
+  if (!words.length || query.includes('"')) return query.trim();
+
+  const meaningfulWords = words.filter(
+    (word) =>
+      !SEARCH_STOP_WORDS.has(
+        word.toLowerCase().replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, ""),
+      ),
+  );
+  return (meaningfulWords.length ? meaningfulWords : words).join(" ");
+}
+
 function highlightQuery(text: string, query: string) {
   if (!query) return text;
-  const cleanedQuery = escapeRegExp(query.trim());
-  if (!cleanedQuery) return text;
-  const regex = new RegExp(`(${cleanedQuery})`, "gi");
+  const words = query.replaceAll('"', "").trim().split(/\s+/).filter(Boolean);
+  const meaningfulWords = words.filter(
+    (word) => !SEARCH_STOP_WORDS.has(word.toLowerCase()),
+  );
+  const terms = meaningfulWords.length ? meaningfulWords : words;
+  if (!terms.length) return text;
+  const regex = new RegExp(`(${terms.map(escapeRegExp).join("|")})`, "gi");
   const parts = text.split(regex);
 
   return parts.map((part, index) =>
-    regex.test(part) ? (
+    terms.some((term) => part.toLowerCase() === term.toLowerCase()) ? (
       <mark
         key={index}
         className="bg-primary text-primary-foreground rounded-[3px] font-medium"
@@ -427,9 +601,7 @@ declare global {
         query: string,
         options?: any,
       ) => Promise<{
-        results: Array<{
-          data: () => Promise<T>;
-        }>;
+        results: Array<{ data: () => Promise<T> }>;
       } | null>;
       options: (options: { baseUrl: string }) => Promise<void>;
     };
@@ -438,12 +610,24 @@ declare global {
 
 async function importPagefind() {
   if (window.pagefind) return;
-  window.pagefind = await import(
-    /* webpackIgnore: true */ addBasePath("/_pagefind/pagefind.js")
-  );
-  await window.pagefind.options({
-    baseUrl: "/",
-  });
+  if (!pagefindPromise) {
+    pagefindPromise = (async () => {
+      const pagefind = await import(
+        /* webpackIgnore: true */ addBasePath("/_pagefind/pagefind.js")
+      );
+      await pagefind.options({ baseUrl: "/" });
+      window.pagefind = pagefind;
+      return pagefind;
+    })().catch((error) => {
+      pagefindPromise = undefined;
+      throw error;
+    });
+  }
+  await pagefindPromise;
+}
+
+function normalizePagefindUrl(url: string) {
+  return url.replace(/\.html(?=#|$)/, "");
 }
 
 type PagefindResult = {
@@ -459,3 +643,29 @@ type PagefindResult = {
   }[];
   url: string;
 };
+
+type PagefindSearchHit = {
+  data: () => Promise<PagefindResult>;
+};
+
+function processPagefindResults(data: PagefindResult[]) {
+  return data.map((result) => {
+    const sections = result.sub_results?.length
+      ? result.sub_results
+      : [
+          {
+            title: result.meta.title,
+            excerpt: result.excerpt,
+            url: result.url,
+          },
+        ];
+
+    return {
+      ...result,
+      sub_results: sections.map((section) => ({
+        ...section,
+        url: normalizePagefindUrl(section.url),
+      })),
+    };
+  });
+}
