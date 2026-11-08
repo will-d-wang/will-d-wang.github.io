@@ -39,7 +39,8 @@ Personal website / portfolio for Will D. Wang — Nextra 4 (docs theme) on Next.
 
 - Commit completed changes and push directly to `main`. Create a feature branch or PR only when explicitly requested.
 - Use a `chore:` prefix for config-only commits.
-- Verify runtime changes by driving the app (dev server + fetch), not just by typechecking.
+- Before every commit and before pushing to `main`, test the change locally and confirm it works. For runtime changes, drive the app (dev server + fetch), not just by typechecking; follow the test plan above.
+- Keep the visual presentation polished for Staff and Principal Engineer audiences: prioritize clear hierarchy, restraint, consistency, and generous whitespace; use concrete outcomes and evidence to make technical impact easy to scan.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

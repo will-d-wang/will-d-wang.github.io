@@ -9,25 +9,7 @@ Site Reliability Engineering turns reliability from an aspiration into an operat
 
 ## The reliability control loop
 
-```mermaid
-flowchart TB
-    U[Users and critical journeys] --> E[Edge and API]
-    E --> S[Application services]
-    S --> D[(Data stores)]
-    S --> Q[Queues and dependencies]
-    E -. events .-> T[Telemetry]
-    S -. events .-> T
-    D -. events .-> T
-    Q -. events .-> T
-    T --> I[SLIs]
-    I --> B[SLOs and error budget]
-    B -->|budget healthy| V[Normal delivery]
-    B -->|fast burn| R[Page, mitigate, learn]
-    B -->|budget exhausted| P[Reliability work and release policy]
-    R --> A[Architecture and automation changes]
-    P --> A
-    A --> S
-```
+<ReliabilityControlLoop />
 
 The loop matters more than any monitoring tool. A metric becomes operationally useful when it can change a decision: page an operator, stop a rollout, shed load, spend capacity, or prioritize reliability work.
 
