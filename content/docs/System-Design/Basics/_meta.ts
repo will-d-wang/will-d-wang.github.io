@@ -4,6 +4,7 @@ export default {
   caching: "Caching",
   replication: "Replication",
   message_broker: "Messaging",
+  event_driven_architecture: "Event-Driven Architecture",
   "0.topic_lists": { title: "Concept Map", display: "hidden" },
   kafka: { title: "Kafka Notes", display: "hidden" },
   DB: { title: "Database Notes", display: "hidden" },
