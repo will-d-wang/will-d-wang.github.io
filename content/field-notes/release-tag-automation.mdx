@@ -14,6 +14,8 @@ The important change was not simply making an individual job faster. The existin
 
 I redesigned the release tag as the shared identifier that connected the stages. Creating an approved tag started a traceable workflow in which CI built and tested the backend, CD consumed the corresponding release output, IaC created or updated the cloud environment, and system-test automation verified the deployed candidate.
 
+The tag format should match the release contract: use Semantic Versioning when compatibility promises matter to consumers, or Calendar Versioning when release date and support cadence are the useful signals. See [Release Versioning](/docs/Tools/CICD/versioning) for the tradeoffs and examples.
+
 Each stage operated on the same release identity instead of relying on people to reconstruct which source, build, infrastructure change, deployment, and test result belonged together.
 
 ```text

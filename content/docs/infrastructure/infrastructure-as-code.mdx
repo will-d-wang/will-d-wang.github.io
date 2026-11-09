@@ -44,7 +44,7 @@ State is production data:
 
 A reusable module should encode a stable organizational decision, not wrap every provider argument. Define supported inputs, useful outputs, security defaults, ownership metadata, observability, versioning, and migration policy.
 
-Pin module and provider versions. Use semantic versioning as communication, but inspect the actual plan before upgrading. Test representative consumers, publish upgrade notes, and keep a deprecation window. A module with broad internal coupling can make a simple provider upgrade an organization-wide migration.
+Pin module and provider versions. Use [Semantic Versioning](/docs/Tools/CICD/versioning) as a compatibility signal, but inspect the actual plan before upgrading. Test representative consumers, publish upgrade notes, and keep a deprecation window. A module with broad internal coupling can make a simple provider upgrade an organization-wide migration.
 
 ## Work through a concrete change
 

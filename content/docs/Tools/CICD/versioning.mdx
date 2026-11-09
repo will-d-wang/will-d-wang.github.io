@@ -1,0 +1,51 @@
+---
+description: Choose between Semantic Versioning and Calendar Versioning for releases, APIs, installers, and shared delivery artifacts.
+lastReviewed: "2026-11-08"
+---
+
+# Release Versioning
+
+A version number is part of a release contract. Choose a scheme that tells its consumers what they need to know, then apply it consistently to tags, artifacts, release notes, and deployment evidence.
+
+## Semantic Versioning (SemVer)
+
+SemVer uses `MAJOR.MINOR.PATCH`, for example `3.4.2`. For a declared public API at version `1.0.0` or later:
+
+- **MAJOR** signals an incompatible API change.
+- **MINOR** adds functionality in a backward-compatible way.
+- **PATCH** fixes a backward-compatible defect.
+
+Optional prerelease identifiers such as `3.5.0-rc.1` distinguish candidates from the final release. Build metadata such as `3.5.0+build.184` can record build information without affecting version precedence.
+
+SemVer is useful when downstream consumers use version constraints to decide whether an upgrade is compatible. It depends on a clearly defined public interface and disciplined release notes; a number alone cannot guarantee compatibility. Before `1.0.0`, SemVer allows the public API to change at any time, so consumers should not assume stable compatibility.
+
+## Calendar Versioning (CalVer)
+
+CalVer uses a date-based scheme, with the exact fields chosen by the project. Examples include `2026.11` for a monthly release or `2026.11.08` for a daily release. Some projects add an increment for multiple releases in the same period, such as `2026.11.2`.
+
+CalVer helps users identify release age and can align with a predictable release or support cadence. By itself, a date does not communicate whether an update is backward-compatible, how long a release is supported, or whether migration is required. State those policies separately in release notes and support documentation.
+
+## Choose based on the contract
+
+| Use case | Useful default | What the version communicates |
+| --- | --- | --- |
+| Public library or API with compatibility guarantees | SemVer | The expected compatibility impact of an upgrade |
+| Product released on a regular calendar cadence | CalVer | When the release was produced |
+| Internal build or deployment artifact | Either; keep a commit or build identifier too | A stable reference to the exact artifact |
+| Installer consumed by multiple repositories | The scheme already understood by consumers, until migration is coordinated | A predictable input for existing automation |
+
+For an installer or multi-repository release, first inventory tag parsers, dependency constraints, deployment scripts, and downstream consumers. If changing schemes, publish the mapping between old and new tags, update consumers in a planned sequence, and keep immutable artifacts traceable to the source commit. Avoid changing version format and release behavior in the same step when either change can break automation.
+
+## Apply the version consistently
+
+Use the same release identity across the source tag, build, artifact metadata, deployment, and test evidence. Preserve the source commit and build provenance even when a CalVer release label is used. For SemVer, compare the actual public interface change against the compatibility promise before selecting the next number.
+
+Versioning works alongside, rather than replacing, artifact immutability, protected tag creation, release notes, deprecation policy, and rollback planning. The [release-tag delivery example](/field-notes/release-tag-automation) shows how one tag can connect builds, deployments, and verification.
+
+Further reading: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) and [Calendar Versioning](https://calver.org/).
+
+## Related delivery practices
+
+The [Twelve-Factor App](https://12factor.net/) recommends separating build, release, and run stages. This pairs naturally with versioned, immutable artifacts: build once, attach a release identity, then promote the same artifact through environments. Its configuration, backing-service, and disposability factors also help make deployments reproducible across environments.
+
+The [Manifesto for Software Craftsmanship](https://manifesto.softwarecraftsmanship.org/) emphasizes well-crafted software, productive partnerships, and responding to change. In release engineering, apply that mindset through clear compatibility promises, useful release notes, automated verification, and a migration path consumers can follow.
